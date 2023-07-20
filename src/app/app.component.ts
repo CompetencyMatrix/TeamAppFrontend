@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [],
-  template: `<h1>Hello world!</h1>`,
-  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'home';
+  title = 'TeamApp';
 }
