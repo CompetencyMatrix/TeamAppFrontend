@@ -3,11 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeesComponent } from './features/employees/employees.component';
+import { EmployeeComponent } from './features/employee/employee.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, EmployeesComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent, EmployeeComponent],
+  imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
