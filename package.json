@@ -7,7 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format:test": "prettier \"src/**/*.{ts,html,md,scss,json}\" --list-different",
+    "format:write": "prettier \"src/**/*.{ts,html,md,scss,json}\" --write",
+    "eslint": "eslint . --ext .ts",
+    "lint:fix": "npm run format:write && eslint . --ext .ts --fix"
   },
   "private": true,
   "dependencies": {
