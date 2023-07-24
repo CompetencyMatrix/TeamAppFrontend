@@ -1,0 +1,10 @@
+<article>
+  <h2>{{ employee.name | uppercase }} Details</h2>
+  <div>
+    <label for="name">Employee name: </label>
+    <input id="name" [(ngModel)]="employee.name" placeholder="name" />
+  </div>
+  <div>
+    <p>{{ employee.id }}</p>
+  </div>
+</article>
