@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from './features/employee/employee.component';
 import { FormsModule } from '@angular/forms';
+import { EmployeesListComponent } from './features/employees-list/employees-list.component';
 
 @NgModule({
-  declarations: [AppComponent, EmployeeComponent],
+  declarations: [AppComponent, EmployeeComponent, EmployeesListComponent],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

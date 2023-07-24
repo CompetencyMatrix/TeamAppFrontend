@@ -1,10 +1,18 @@
-<article>
-  <h2>{{ employee.name | uppercase }} Details</h2>
-  <div>
+<article class="employee-form">
+  <h2 class="employee-form__title">
+    {{ employee.name | uppercase }} {{ employee.surname | uppercase }} Details
+  </h2>
+  <div class="employee-form__field">
     <label for="name">Employee name: </label>
     <input id="name" [(ngModel)]="employee.name" placeholder="name" />
   </div>
-  <div>
-    <p>{{ employee.id }}</p>
+  <div class="employee-form__field">
+    <span>ID: {{ employee.id }}</span>
+  </div>
+  <div class="employee-form__field">
+    <span>Hire Date: {{ employee.hireDate }}</span>
+  </div>
+  <div class="employee-form__field">
+    <span>Manager: {{ employee.manager }}</span>
   </div>
 </article>

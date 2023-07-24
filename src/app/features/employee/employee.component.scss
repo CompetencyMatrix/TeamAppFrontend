@@ -1,0 +1,13 @@
+@import '../../../styles';
+
+.employee-form {
+  background-color: $background;
+
+  &__title {
+    color: $primary;
+
+    &:hover {
+      color: $on-background;
+    }
+  }
+}
