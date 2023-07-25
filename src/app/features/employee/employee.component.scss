@@ -1,13 +1,13 @@
-@import '../../../styles';
+@import '../../../colors';
 
 .employee-form {
-  background-color: $background;
+  background-color: $tapp-background;
 
   &__title {
-    color: $primary;
+    color: $tapp-primary;
 
     &:hover {
-      color: $on-background;
+      color: $tapp-primary-light;
     }
   }
 }

@@ -6,9 +6,15 @@ import { AppComponent } from './app.component';
 import { EmployeeComponent } from './features/employee/employee.component';
 import { FormsModule } from '@angular/forms';
 import { EmployeesListComponent } from './features/employees-list/employees-list.component';
+import { EmployeeDetailsComponent } from './features/employee-details/employee-details.component';
 
 @NgModule({
-  declarations: [AppComponent, EmployeeComponent, EmployeesListComponent],
+  declarations: [
+    AppComponent,
+    EmployeeComponent,
+    EmployeesListComponent,
+    EmployeeDetailsComponent,
+  ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
