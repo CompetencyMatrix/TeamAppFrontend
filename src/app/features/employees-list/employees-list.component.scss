@@ -28,6 +28,7 @@
       color: #2c3a41;
       background-color: #e6e6e6;
       left: .2rem;
+      cursor:grab/pointer;
     }
 
     &:active {
@@ -42,6 +43,7 @@
       &:hover {
         background-color: #505050;
         color: white;
+        cursor:grab/pointer;
       }
 
 

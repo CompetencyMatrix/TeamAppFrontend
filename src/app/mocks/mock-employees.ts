@@ -1,6 +1,6 @@
-import { Employee } from '../models/employee';
+import { EmployeeInterface } from '../models/employee';
 
-export const EMPLOYEES: Employee[] = [
+export const EMPLOYEES: EmployeeInterface[] = [
   {
     id: '1212',
     name: 'Dr. Nice',

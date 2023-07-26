@@ -13,15 +13,7 @@
   </li>
 </ul>
 
-<!--make this template-->
-<div *ngIf="selectedEmployee">
-  <h2>{{ selectedEmployee.name | uppercase }} Details</h2>
-  <div>id: {{ selectedEmployee.id }}</div>
-  <div>
-    <label for="hero-name">Hero name: </label>
-    <input
-      id="hero-name"
-      [(ngModel)]="selectedEmployee.name"
-      placeholder="name" />
-  </div>
-</div>
+<app-employee-details
+  [selectedEmployee]="selectedEmployee"></app-employee-details>
+
+<app-employee-form [editedEmployee]="selectedEmployee"></app-employee-form>

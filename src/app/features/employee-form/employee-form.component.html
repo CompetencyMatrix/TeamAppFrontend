@@ -1,0 +1,29 @@
+<form [formGroup]="employeeForm" class="employee-form" (ngSubmit)="onSubmit()">
+  <h2 class="employee-form__title">
+    <span *ngIf="editedEmployee; else newEmployeeBlock">
+      Edit
+      {{ editedEmployee.name | uppercase }}
+      {{ editedEmployee.surname | uppercase }}'s</span
+    >
+    <ng-template #newEmployeeBlock><span>Enter New Employee</span></ng-template>
+    Details:
+  </h2>
+
+  <label for="firstName"> First Name: </label>
+  <input id="firstName" formControlName="firstName" type="text" />
+
+  <label for="surname"> Surname: </label>
+  <input id="surname" formControlName="surname" type="text" />
+
+  <label for="hireDate"> Hire Date: </label>
+  <input id="hireDate" formControlName="hireDate" type="date" />
+
+  <label for="skills"> Skills: </label>
+  <input id="skills" formControlName="skills" type="text" />
+
+  <label for="manager"> Manager: </label>
+  <input id="manager" formControlName="manager" type="text" />
+
+  <p *ngIf="!employeeForm.valid">Complete the form to enable button.</p>
+  <button type="submit" [disabled]="!employeeForm.valid">Submit</button>
+</form>

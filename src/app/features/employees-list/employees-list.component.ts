@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Employee } from '../../models/employee';
+import { EmployeeInterface } from '../../models/employee';
 import { EMPLOYEES } from '../../mocks/mock-employees';
 
 @Component({
@@ -8,10 +8,11 @@ import { EMPLOYEES } from '../../mocks/mock-employees';
   styleUrls: ['./employees-list.component.scss'],
 })
 export class EmployeesListComponent {
-  employees = EMPLOYEES;
-  selectedEmployee?: Employee;
+  employees: EmployeeInterface[] = EMPLOYEES;
+  selectedEmployee?: EmployeeInterface;
 
-  onSelect(employee: Employee): void {
+  onSelect(employee: EmployeeInterface): void {
+    console.log(this.selectedEmployee);
     this.selectedEmployee = employee;
   }
 }

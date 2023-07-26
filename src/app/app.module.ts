@@ -3,19 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeComponent } from './features/employee/employee.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeesListComponent } from './features/employees-list/employees-list.component';
 import { EmployeeDetailsComponent } from './features/employee-details/employee-details.component';
+import { EmployeeFormComponent } from './features/employee-form/employee-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent,
     EmployeesListComponent,
     EmployeeDetailsComponent,
+    EmployeeFormComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

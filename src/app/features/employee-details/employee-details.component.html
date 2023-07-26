@@ -1,0 +1,20 @@
+<article *ngIf="selectedEmployee" class="employee-form">
+  <h2 class="employee-form__title">
+    {{ selectedEmployee.name | uppercase }}
+    {{ selectedEmployee.surname | uppercase }} Details
+  </h2>
+  <div class="employee-form__field">
+    <!--    TODO: remove inputs from here-->
+    <label for="name">Employee name: </label>
+    <input id="name" [(ngModel)]="selectedEmployee.name" placeholder="name" />
+  </div>
+  <div class="employee-form__field">
+    <span>ID: {{ selectedEmployee.id }}</span>
+  </div>
+  <div class="employee-form__field">
+    <span>Hire Date: {{ selectedEmployee.hireDate }}</span>
+  </div>
+  <div class="employee-form__field">
+    <span>Manager: {{ selectedEmployee.manager }}</span>
+  </div>
+</article>
