@@ -12,14 +12,15 @@ export class EmployeeListComponent {
   employees: EmployeeDTOInterface[] = EMPLOYEES;
   selectedEmployee?: EmployeeDTOInterface;
 
-  unselectEmployee() {
+  unselectEmployee(): void {
     this.selectedEmployee = undefined;
   }
+
   onSelect(employee: EmployeeDTOInterface): void {
     this.selectedEmployee = employee;
   }
 
-  onEmployeeFormSubmit(submittedEmployee: EmployeeDTOInterface) {
+  onEmployeeFormSubmit(submittedEmployee: EmployeeDTOInterface): void {
     const foundEmployee = this.employees.find(
       (e: EmployeeDTOInterface) => e.id === submittedEmployee.id
     );
@@ -33,13 +34,13 @@ export class EmployeeListComponent {
     this.selectedEmployee = undefined;
   }
 
-  private addNewEmployee(submittedEmployee: EmployeeDTOInterface) {
+  private addNewEmployee(submittedEmployee: EmployeeDTOInterface): void {
     this.employees.push({
       ...submittedEmployee,
       id: uuid(),
     });
   }
-  private editEmployee(submittedEmployee: EmployeeDTOInterface) {
+  private editEmployee(submittedEmployee: EmployeeDTOInterface): void {
     const foundEmployee = this.employees.find(
       (e: EmployeeDTOInterface) => e.id === submittedEmployee.id
     );

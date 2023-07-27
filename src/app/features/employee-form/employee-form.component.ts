@@ -60,7 +60,7 @@ export class EmployeeFormComponent {
     }
   }
 
-  editEmployee(newEmployee: EmployeeDTOInterface) {
+  editEmployee(newEmployee: EmployeeDTOInterface): void {
     this.editEmployeeEvent.emit(newEmployee);
   }
 

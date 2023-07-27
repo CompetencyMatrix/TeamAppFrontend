@@ -67,9 +67,9 @@
     Complete the form to enable the button.
   </p>
   <button
-    [disabled]="!employeeForm.valid"
+    [disabled]="employeeForm.invalid"
     type="submit"
-    [title]="employeeForm.valid ? '' : 'The form is invalid'">
+    [title]="employeeForm.invalid ? 'The form is invalid' : ''">
     Submit
   </button>
   <button type="button" (click)="onResetForm()">Reset</button>
