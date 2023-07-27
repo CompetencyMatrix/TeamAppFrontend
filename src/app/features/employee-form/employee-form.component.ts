@@ -17,6 +17,7 @@ import { EMPLOYEES } from '../../mocks/mock-employees';
 })
 export class EmployeeFormComponent {
   @Input() editedEmployee?: EmployeeDTOInterface;
+  @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
   skills: string[] = ['Angular', 'Java', 'Python', 'C++'];
   projects: string[] = ['JJIT', 'OSMG', 'WW2D'];
   otherEmployees: EmployeeDTOInterface[];
@@ -59,12 +60,11 @@ export class EmployeeFormComponent {
     );
   }
 
-  @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
   editEmployee(newEmployee: EmployeeDTOInterface) {
     this.editEmployeeEvent.emit(newEmployee);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.editEmployee({
       ...this.employeeForm.getRawValue(),
       hireDate: new Date(this.employeeForm.value['hireDate']),
@@ -72,7 +72,7 @@ export class EmployeeFormComponent {
     this.employeeForm.reset();
   }
 
-  onResetForm() {
+  onResetForm(): void {
     if (this.editedEmployee) {
       this.employeeForm.patchValue({
         ...this.editedEmployee,
