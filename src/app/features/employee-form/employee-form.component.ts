@@ -48,4 +48,12 @@ export class EmployeeFormComponent {
     this.editEmployee(this.employeeForm.getRawValue());
     this.employeeForm.reset();
   }
+
+  onResetForm() {
+    if (this.editedEmployee) {
+      this.employeeForm.patchValue(this.editedEmployee);
+    } else {
+      this.employeeForm.reset();
+    }
+  }
 }

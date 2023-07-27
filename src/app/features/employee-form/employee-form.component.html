@@ -32,4 +32,5 @@
 
   <p *ngIf="!employeeForm.valid">Complete the form to enable button.</p>
   <button [disabled]="!employeeForm.valid" type="submit">Submit</button>
+  <button type="button" (click)="onResetForm()">Reset</button>
 </form>
