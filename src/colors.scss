@@ -1,11 +1,21 @@
+//container - light
+//on-container - dark
+//on-primary
 
-$tapp-primary: #1976d2;
-$tapp-primary-light: #42a5f5;
-$tapp-primary-dark: #1565c0;
-$tapp-secondary: #9c27b0;
-$tapp-secondary-light: #ba68c8;
-$tapp-secondary-dark: #7b1fa2;
+$tapp-primary: #6750A4;
+$tapp-on-primary: #FFFFFF;
+$tapp-primary-light: #EADDFF;
+$tapp-primary-dark: #21005D;
 
-//Light theme
-$tapp-background: #cecece;
-$tapp-on-background: #2d2d2d;
+$tapp-secondary: #625B71;
+$tapp-on-secondary: #FFFFFF;
+$tapp-secondary-light: #E8DEF8;
+$tapp-secondary-dark: #1D192B;
+
+$tapp-tertiary: #7D5260;
+$tapp-on-tertiary: #FFFFFF;
+$tapp-tertiary-light: #FFD8E4;
+$tapp-tertiary-dark: #410E0B;
+
+$tapp-background: #FFFBFE;
+$tapp-on-background: #1C1B1F;

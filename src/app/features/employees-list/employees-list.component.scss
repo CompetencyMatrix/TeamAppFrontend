@@ -16,7 +16,7 @@
     cursor: pointer;
     position: relative;
     left: 0;
-    background-color: #EEE;
+    background-color: $tapp-background;
     margin: 1rem;
     padding: 0;
     border-radius: 4px;
@@ -24,32 +24,33 @@
     align-items: stretch;
     height: 3.6rem;
 
+    //TODO: Use colors from stylesheet everywhere
     &:hover {
-      color: #2c3a41;
-      background-color: #e6e6e6;
+      color: $tapp-primary;
+      background-color: $tapp-background;
       left: .2rem;
-      cursor:grab/pointer;
+      cursor: grab/pointer;
     }
 
     &:active {
-      background-color: #525252;
-      color: #fafafa;
+      color: $tapp-primary-light;
+      background-color: $tapp-primary-dark;
     }
 
     &--selected {
-      background-color: black;
-      color: white;
+      color: $tapp-on-primary;
+      background-color:$tapp-primary;
 
       &:hover {
-        background-color: #505050;
-        color: white;
-        cursor:grab/pointer;
+        background-color: $tapp-secondary-light;
+        color: $tapp-secondary-dark;
+        cursor: grab/pointer;
       }
 
 
       &:active {
-        background-color: black;
-        color: white;
+        background-color: $tapp-secondary;
+        color: $tapp-on-secondary;
       }
     }
   }
@@ -57,10 +58,9 @@
   &__id {
     display: inline-block;
     font-size: small;
-    color: white;
-    padding: 1.4rem 1.4rem 1.4rem 1.4rem;
-    background-color: #405061;
-    //line-height: 2rem;
+    color: $tapp-tertiary-light;
+    padding: 1.4rem;
+    background-color: $tapp-tertiary-dark;
     margin-right: 1.6rem;
     border-radius: 4px 0 0 4px;
   }
