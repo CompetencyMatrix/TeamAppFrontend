@@ -11,7 +11,7 @@ import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { EMPLOYEES } from '../../mocks/mock-employees';
 import { SKILLS } from '../../mocks/mock-skills';
 import { PROJECTS } from '../../mocks/mock-projects';
-import { ProjectDTO } from '../../models/DTO/projectDTO';
+import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
 
 @Component({
   selector: 'app-employee-form',
@@ -21,8 +21,8 @@ import { ProjectDTO } from '../../models/DTO/projectDTO';
 export class EmployeeFormComponent {
   @Input() editedEmployee?: EmployeeDTOInterface;
   @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
-  skills: string[] = SKILLS;
-  projects: ProjectDTO[] = PROJECTS;
+  skills: string[] = this.getSkills();
+  projects: ProjectDTOInterface[] = this.getProjects();
   otherEmployees: EmployeeDTOInterface[];
   employeeForm: FormGroup;
 
@@ -36,21 +36,20 @@ export class EmployeeFormComponent {
       projects: [''],
       manager: [''],
     });
-    this.otherEmployees = this.getEmployees().filter(
-      (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
-    );
+    // TODO: should I initialize it with undefined, since It will be anyway overwritten in NgOnInit()?
+    this.otherEmployees = this.getOtherEmployees();
   }
 
+  // TODO: Unresolved Warnings about lifecycle here
   ngOnInit(): void {
+    this.otherEmployees = this.getOtherEmployees();
     if (this.editedEmployee) {
       this.employeeForm.patchValue(this.editedEmployee);
-      this.otherEmployees = this.getEmployees().filter(
-        (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
-      );
     }
   }
 
   ngOnChanges(): void {
+    this.otherEmployees = this.getOtherEmployees();
     if (this.editedEmployee) {
       this.employeeForm.patchValue({
         ...this.editedEmployee,
@@ -59,9 +58,6 @@ export class EmployeeFormComponent {
     } else {
       this.employeeForm.reset();
     }
-    this.otherEmployees = this.getEmployees().filter(
-      (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
-    );
   }
 
   editEmployee(newEmployee: EmployeeDTOInterface) {
@@ -86,9 +82,27 @@ export class EmployeeFormComponent {
       this.employeeForm.reset();
     }
   }
-  // TODO: symuluje zapytanie do backendu
-  private getEmployees() {
+
+  getOtherEmployees(): EmployeeDTOInterface[] {
+    if (this.editedEmployee === undefined) {
+      return this.getEmployees();
+    }
+    return this.getEmployees().filter(
+      (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
+    );
+  }
+
+  // TODO: 3 ponizej symulują zapytanie do backendu
+  private getEmployees(): EmployeeDTOInterface[] {
     // TODO: czy mogę tak zrobic,czy powinienem od rodzica jakos liste pobierac employees - imo po prostu z backendu by sie to bralo zapytaniem
     return EMPLOYEES;
+  }
+
+  private getSkills(): string[] {
+    return SKILLS;
+  }
+
+  private getProjects(): ProjectDTOInterface[] {
+    return PROJECTS;
   }
 }

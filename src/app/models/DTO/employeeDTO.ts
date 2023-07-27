@@ -1,4 +1,4 @@
-import { ProjectDTO } from './projectDTO';
+import { ProjectDTOInterface } from './projectDTO';
 
 export interface EmployeeDTOInterface {
   id: string;
@@ -6,6 +6,6 @@ export interface EmployeeDTOInterface {
   surname: string;
   hireDate: Date;
   skills?: string[];
-  projects: ProjectDTO[];
+  projects: ProjectDTOInterface[];
   manager?: string;
 }

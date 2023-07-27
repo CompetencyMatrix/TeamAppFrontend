@@ -16,11 +16,12 @@
   }
   &__projects {
     display: inline-flex;
+
     &__project {
       border-style: solid;
       border-radius: 6px;
       padding: 4px;
-      margin-bottom: 4px;
+      margin: 8px 0;
       border-color: $tapp-tertiary-dark;
       background-color: $tapp-tertiary-light;
     }

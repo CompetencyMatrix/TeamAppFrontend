@@ -1,6 +1,6 @@
-import { ProjectDTO } from '../models/DTO/projectDTO';
+import { ProjectDTOInterface } from '../models/DTO/projectDTO';
 
-export const PROJECTS: ProjectDTO[] = [
+export const PROJECTS: ProjectDTOInterface[] = [
   {
     id: '123456',
     name: 'JJIT',

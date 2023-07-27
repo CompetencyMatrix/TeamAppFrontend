@@ -33,9 +33,7 @@
     <label for="skills"> Skills: </label>
     <ng-select
       [items]="skills"
-      type="text"
       [searchable]="true"
-      bindLabel="status"
       id="skills"
       formControlName="skills"
       [multiple]="true">
@@ -44,12 +42,10 @@
 
   <div class="employee-form__field">
     <label for="manager"> Manager: </label>
-    <ng-select
-      [items]="otherEmployees"
-      type="text"
-      [searchable]="true"
-      id="manager"
-      formControlName="manager">
+    <ng-select [searchable]="true" id="manager" formControlName="manager">
+      <ng-option *ngFor="let manager of otherEmployees" [value]="manager.name">
+        {{ manager.name }}
+      </ng-option>
     </ng-select>
   </div>
 
