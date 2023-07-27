@@ -1,4 +1,5 @@
 import { EmployeeDTOInterface } from '../models/DTO/employeeDTO';
+import { PROJECTS } from './mock-projects';
 
 export const EMPLOYEES: EmployeeDTOInterface[] = [
   {
@@ -7,6 +8,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[0], PROJECTS[1]],
     manager: 'Marcello',
   },
   {
@@ -15,6 +17,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[0], PROJECTS[1]],
     manager: 'Marcello',
   },
   {
@@ -23,6 +26,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[2], PROJECTS[3]],
     manager: 'Marcello',
   },
   {
@@ -31,6 +35,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[3], PROJECTS[4]],
     manager: 'Marcello',
   },
   {
@@ -39,6 +44,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[4], PROJECTS[1]],
     manager: 'Marcello',
   },
   {
@@ -47,6 +53,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[0], PROJECTS[1]],
     manager: 'Marcello',
   },
   {
@@ -55,6 +62,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[5], PROJECTS[3]],
     manager: 'Marcello',
   },
   {
@@ -63,6 +71,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[2], PROJECTS[0]],
     manager: 'Marcello',
   },
   {
@@ -71,6 +80,7 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: ['cvc', 'milling'],
+    projects: [PROJECTS[0], PROJECTS[1]],
     manager: 'Marcello',
   },
 ];

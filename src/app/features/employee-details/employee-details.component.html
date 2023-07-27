@@ -1,4 +1,7 @@
-<article *ngIf="selectedEmployee" class="employee-form">
+<article
+  *ngIf="selectedEmployee"
+  xmlns="http://www.w3.org/1999/html"
+  class="employee-details">
   <h2 class="employee-details__title">
     {{ selectedEmployee.name | uppercase }}
     {{ selectedEmployee.surname | uppercase }} Details
@@ -8,17 +11,30 @@
     <input [(ngModel)]="selectedEmployee.name" id="name" placeholder="name" />
   </div>
   <div class="employee-details__field">
-    <span>ID: {{ selectedEmployee.id }}</span>
+    <p>ID: {{ selectedEmployee.id }}</p>
   </div>
   <div class="employee-details__field">
-    <span
-      >Hire Date: {{ selectedEmployee.hireDate | date: 'dd-MMM-YYYY' }}</span
-    >
+    <p>Hire Date: {{ selectedEmployee.hireDate | date: 'dd-MMM-YYYY' }}</p>
   </div>
   <div class="employee-details__field">
-    <span>Manager: {{ selectedEmployee.manager }}</span>
+    <p>Manager: {{ selectedEmployee.manager }}</p>
   </div>
   <div class="employee-details__field">
-    <span>Skills: {{ selectedEmployee.skills }}</span>
+    <p>Skills: {{ selectedEmployee.skills }}</p>
+  </div>
+  <div class="employee-details__field employee-details__projects">
+    <div>
+      Projects:
+      <div
+        *ngFor="let project of selectedEmployee.projects"
+        class="employee-details__projects__project">
+        <div class="employee-details__projects__project__name">
+          Name: {{ project.name }}
+        </div>
+        <div class="employee-details__projects__project__deadline">
+          Deadline: {{ project.deadline | date: 'dd-MM-YYYY' }}
+        </div>
+      </div>
+    </div>
   </div>
 </article>

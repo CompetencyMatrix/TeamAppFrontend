@@ -44,10 +44,25 @@
 
   <div class="employee-form__field">
     <label for="manager"> Manager: </label>
+    <ng-select
+      [items]="otherEmployees"
+      type="text"
+      [searchable]="true"
+      id="manager"
+      formControlName="manager">
+    </ng-select>
+  </div>
 
-    <ng-select [searchable]="true" id="manager" formControlName="manager">
-      <ng-option *ngFor="let manager of otherEmployees" [value]="manager.name">
-        {{ manager.name }}
+  <div class="employee-form__field">
+    <label for="projects"> Projects: </label>
+
+    <ng-select
+      [searchable]="true"
+      id="projects"
+      formControlName="projects"
+      [multiple]="true">
+      <ng-option *ngFor="let project of projects" [value]="project">
+        {{ project.name }}
       </ng-option>
     </ng-select>
   </div>

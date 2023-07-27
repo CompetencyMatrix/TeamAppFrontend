@@ -9,6 +9,9 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { EMPLOYEES } from '../../mocks/mock-employees';
+import { SKILLS } from '../../mocks/mock-skills';
+import { PROJECTS } from '../../mocks/mock-projects';
+import { ProjectDTO } from '../../models/DTO/projectDTO';
 
 @Component({
   selector: 'app-employee-form',
@@ -18,8 +21,8 @@ import { EMPLOYEES } from '../../mocks/mock-employees';
 export class EmployeeFormComponent {
   @Input() editedEmployee?: EmployeeDTOInterface;
   @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
-  skills: string[] = ['Angular', 'Java', 'Python', 'C++'];
-  projects: string[] = ['JJIT', 'OSMG', 'WW2D'];
+  skills: string[] = SKILLS;
+  projects: ProjectDTO[] = PROJECTS;
   otherEmployees: EmployeeDTOInterface[];
   employeeForm: FormGroup;
 
@@ -30,6 +33,7 @@ export class EmployeeFormComponent {
       surname: [''],
       hireDate: [''],
       skills: [''],
+      projects: [''],
       manager: [''],
     });
     this.otherEmployees = this.getEmployees().filter(
