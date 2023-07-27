@@ -1,0 +1,20 @@
+<h2>Employees</h2>
+<ul class="employee-list">
+  <li *ngFor="let employee of employees" class="employee-list__element">
+    <button
+      class="employee-list__button"
+      (click)="onSelect(employee)"
+      [class.employee-list__button--selected]="employee === selectedEmployee"
+      type="button">
+      <span class="employee-list__id">{{ employee.id }}</span>
+      <span class="employee-list__name">{{ employee.name }}</span>
+    </button>
+  </li>
+</ul>
+<button (click)="unselectEmployee()">New Employee</button>
+<app-employee-details
+  [selectedEmployee]="selectedEmployee"></app-employee-details>
+
+<app-employee-form
+  [editedEmployee]="selectedEmployee"
+  (editEmployeeEvent)="onEmployeeFormSubmit($event)"></app-employee-form>

@@ -4,11 +4,11 @@ import { EMPLOYEES } from '../../mocks/mock-employees';
 import { v4 as uuid } from 'uuid';
 
 @Component({
-  selector: 'app-employees-list',
-  templateUrl: './employees-list.component.html',
-  styleUrls: ['./employees-list.component.scss'],
+  selector: 'app-employee-list',
+  templateUrl: './employee-list.component.html',
+  styleUrls: ['./employee-list.component.scss'],
 })
-export class EmployeesListComponent {
+export class EmployeeListComponent {
   employees: EmployeeDTOInterface[] = EMPLOYEES;
   selectedEmployee?: EmployeeDTOInterface;
 
@@ -31,7 +31,6 @@ export class EmployeesListComponent {
       this.addNewEmployee(submittedEmployee);
     }
     this.selectedEmployee = undefined;
-    //   TODO: undefined
   }
 
   private addNewEmployee(submittedEmployee: EmployeeDTOInterface) {

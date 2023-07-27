@@ -22,7 +22,6 @@ export class EmployeeFormComponent {
   otherEmployees: EmployeeDTOInterface[];
   employeeForm: FormGroup;
 
-  //TODO: Why values are never set using this initialization - always after onChanges
   constructor(private formBuilder: FormBuilder) {
     this.employeeForm = this.formBuilder.group({
       id: [{ value: '', disabled: true }],
@@ -48,7 +47,6 @@ export class EmployeeFormComponent {
 
   ngOnChanges(): void {
     if (this.editedEmployee) {
-      console.log('OnChanges');
       this.employeeForm.patchValue({
         ...this.editedEmployee,
         hireDate: this.editedEmployee.hireDate.toISOString().slice(0, 10),
@@ -67,7 +65,6 @@ export class EmployeeFormComponent {
   }
 
   onSubmit() {
-    console.log('OnSubmit');
     this.editEmployee({
       ...this.employeeForm.getRawValue(),
       hireDate: new Date(this.employeeForm.value['hireDate']),
@@ -77,12 +74,15 @@ export class EmployeeFormComponent {
 
   onResetForm() {
     if (this.editedEmployee) {
-      this.employeeForm.patchValue(this.editedEmployee);
+      this.employeeForm.patchValue({
+        ...this.editedEmployee,
+        hireDate: this.editedEmployee.hireDate.toISOString().slice(0, 10),
+      });
     } else {
       this.employeeForm.reset();
     }
   }
-  // tODO: symuluje zapytanie do backendu
+  // TODO: symuluje zapytanie do backendu
   private getEmployees() {
     // TODO: czy mogę tak zrobic,czy powinienem od rodzica jakos liste pobierac employees - imo po prostu z backendu by sie to bralo zapytaniem
     return EMPLOYEES;
