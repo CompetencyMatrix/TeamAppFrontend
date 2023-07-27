@@ -10,5 +10,9 @@ export class EmployeeComponent {
   employee: Employee = {
     id: '123DAF',
     name: 'Gregory',
+    surname: 'Checkins',
+    hireDate: '12.10.2001',
+    skills: ['SCSS', 'Kotlin', 'Rust'],
+    manager: 'Marek',
   };
 }
