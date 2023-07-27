@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
+import { EMPLOYEES } from '../../mocks/mock-employees';
 
 @Component({
   selector: 'app-employee-form',
@@ -17,6 +18,8 @@ export class EmployeeFormComponent {
   @Input() editedEmployee?: EmployeeDTOInterface;
   skills: string[] = ['Angular', 'Java', 'Python', 'C++'];
   projects: string[] = ['JJIT', 'OSMG', 'WW2D'];
+  otherEmployees: EmployeeDTOInterface[];
+
   employeeForm: FormGroup;
 
   //TODO: Why values are never set using this initialization - always after onChanges
@@ -29,6 +32,9 @@ export class EmployeeFormComponent {
       skills: [this.editedEmployee?.skills || ''],
       manager: [this.editedEmployee?.manager || ''],
     });
+    this.otherEmployees = this.getEmployees().filter(
+      (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
+    );
   }
 
   ngOnChanges(): void {
@@ -38,6 +44,9 @@ export class EmployeeFormComponent {
     } else {
       this.employeeForm.reset();
     }
+    this.otherEmployees = this.getEmployees().filter(
+      (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
+    );
   }
 
   @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
@@ -57,5 +66,10 @@ export class EmployeeFormComponent {
     } else {
       this.employeeForm.reset();
     }
+  }
+  // tODO: symuluje zapytanie do backendu
+  private getEmployees() {
+    // TODO: czy mogę tak zrobic,czy powinienem od rodzica jakos liste pobierac employees - imo po prostu z backendu by sie to bralo zapytaniem
+    return EMPLOYEES;
   }
 }

@@ -8,32 +8,50 @@
     <ng-template #newEmployeeBlock><span>Enter New Employee</span></ng-template>
     Details:
   </h2>
-  <label for="id"> ID: </label>
-  <input formControlName="id" id="id" type="text" />
+
+  <div class="employee-form__field">
+    <label for="id"> ID: </label>
+    <input formControlName="id" id="id" type="text" />
+  </div>
 
   <!--  TODO: should [(ngModel)] be added here so that changes in name are reflected in current value in the form -->
-  <label for="name"> First Name: </label>
-  <input formControlName="name" id="name" type="text" />
+  <div class="employee-form__field">
+    <label for="name"> First Name: </label>
+    <input formControlName="name" id="name" type="text" />
+  </div>
 
-  <label for="surname"> Surname: </label>
-  <input formControlName="surname" id="surname" type="text" />
+  <div class="employee-form__field">
+    <label for="surname"> Surname: </label>
+    <input formControlName="surname" id="surname" type="text" />
+  </div>
 
-  <label for="hireDate"> Hire Date: </label>
-  <input formControlName="hireDate" id="hireDate" type="date" />
+  <div class="employee-form__field">
+    <label for="hireDate"> Hire Date: </label>
+    <input formControlName="hireDate" id="hireDate" type="date" />
+  </div>
 
-  <label for="skills"> Skills: </label>
-  <ng-select
-    [items]="skills"
-    type="text"
-    [searchable]="true"
-    bindLabel="status"
-    id="skills"
-    formControlName="skills"
-    [multiple]="true">
-  </ng-select>
+  <div class="employee-form__field">
+    <label for="skills"> Skills: </label>
+    <ng-select
+      [items]="skills"
+      type="text"
+      [searchable]="true"
+      bindLabel="status"
+      id="skills"
+      formControlName="skills"
+      [multiple]="true">
+    </ng-select>
+  </div>
 
-  <label for="manager"> Manager: </label>
-  <input formControlName="manager" id="manager" type="text" />
+  <div class="employee-form__field">
+    <label for="manager"> Manager: </label>
+
+    <ng-select [searchable]="true" id="manager" formControlName="manager">
+      <ng-option *ngFor="let manager of otherEmployees" [value]="manager.name">
+        {{ manager.name }}
+      </ng-option>
+    </ng-select>
+  </div>
 
   <p *ngIf="!employeeForm.valid" class="employee-form__hint">
     Complete the form to enable the button.
