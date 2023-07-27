@@ -13,21 +13,13 @@ export class EmployeeFormComponent {
   PROJECTS: string[] = ['JJIT', 'OSMG', 'WW2D'];
   employeeForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {
-    // this.employeeForm = this.editedEmployee != undefined? this.formBuilder.group() : this.formBuilder.group();
     this.employeeForm = this.formBuilder.group({
-      id: this.editedEmployee?.id || '',
-      name:
-        this.editedEmployee != undefined
-          ? this.editedEmployee.name
-          : ['', Validators.required],
-      surname: this.editedEmployee?.surname || [''],
-      hireDate: this.editedEmployee?.hireDate
-        ? this.editedEmployee.hireDate
-        : [''],
-      skills:
-        this.editedEmployee != undefined ? this.editedEmployee.skills : [''],
-      manager:
-        this.editedEmployee != undefined ? this.editedEmployee.manager : [''],
+      id: [{ value: this.editedEmployee?.id || '', disabled: true }],
+      name: [this.editedEmployee?.name || '', Validators.required],
+      surname: [this.editedEmployee?.surname || ''],
+      hireDate: [this.editedEmployee?.hireDate || ''],
+      skills: [this.editedEmployee?.skills || ''],
+      manager: [this.editedEmployee?.manager || ''],
     });
   }
 
