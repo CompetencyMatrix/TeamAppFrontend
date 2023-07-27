@@ -49,7 +49,10 @@ export class EmployeeFormComponent {
   ngOnChanges(): void {
     if (this.editedEmployee) {
       console.log('OnChanges');
-      this.employeeForm.patchValue(this.editedEmployee);
+      this.employeeForm.patchValue({
+        ...this.editedEmployee,
+        hireDate: this.editedEmployee.hireDate.toISOString().slice(0, 10),
+      });
     } else {
       this.employeeForm.reset();
     }
@@ -65,7 +68,10 @@ export class EmployeeFormComponent {
 
   onSubmit() {
     console.log('OnSubmit');
-    this.editEmployee(this.employeeForm.getRawValue());
+    this.editEmployee({
+      ...this.employeeForm.getRawValue(),
+      hireDate: new Date(this.employeeForm.value['hireDate']),
+    });
     this.employeeForm.reset();
   }
 

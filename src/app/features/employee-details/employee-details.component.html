@@ -12,7 +12,9 @@
     <span>ID: {{ selectedEmployee.id }}</span>
   </div>
   <div class="employee-details__field">
-    <span>Hire Date: {{ selectedEmployee.hireDate }}</span>
+    <span
+      >Hire Date: {{ selectedEmployee.hireDate | date: 'dd-MMM-YYYY' }}</span
+    >
   </div>
   <div class="employee-details__field">
     <span>Manager: {{ selectedEmployee.manager }}</span>
