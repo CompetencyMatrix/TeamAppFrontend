@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { EmployeeInterface } from '../../models/employee';
-import { EmployeesListComponent } from '../employees-list/employees-list.component';
+import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 
 @Component({
   selector: 'app-employee-details',
@@ -8,5 +7,5 @@ import { EmployeesListComponent } from '../employees-list/employees-list.compone
   styleUrls: ['./employee-details.component.scss'],
 })
 export class EmployeeDetailsComponent {
-  @Input() selectedEmployee?: EmployeeInterface;
+  @Input() selectedEmployee?: EmployeeDTOInterface;
 }

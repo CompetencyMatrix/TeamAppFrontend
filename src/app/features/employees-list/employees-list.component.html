@@ -1,12 +1,13 @@
 <h2>Employees</h2>
+<!--TODO: change name from plural to singular employee-list-->
 <ul class="employees-list">
-  <!--    do if else for classes-->
-  <li class="employees-list__element" *ngFor="let employee of employees">
+  <!--   TODO:  do if else for classes-->
+  <li *ngFor="let employee of employees" class="employees-list__element">
     <button
       class="employees-list__button"
+      (click)="onSelect(employee)"
       [class.employees-list__button--selected]="employee === selectedEmployee"
-      type="button"
-      (click)="onSelect(employee)">
+      type="button">
       <span class="employees-list__id">{{ employee.id }}</span>
       <span class="employees-list__name">{{ employee.name }}</span>
     </button>
@@ -16,4 +17,6 @@
 <app-employee-details
   [selectedEmployee]="selectedEmployee"></app-employee-details>
 
-<app-employee-form [editedEmployee]="selectedEmployee"></app-employee-form>
+<app-employee-form
+  [editedEmployee]="selectedEmployee"
+  (editEmployeeEvent)="onEmployeeFormSubmit($event)"></app-employee-form>

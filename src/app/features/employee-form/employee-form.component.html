@@ -1,4 +1,4 @@
-<form [formGroup]="employeeForm" class="employee-form" (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" [formGroup]="employeeForm" class="employee-form">
   <h2 class="employee-form__title">
     <span *ngIf="editedEmployee; else newEmployeeBlock">
       Edit
@@ -8,22 +8,24 @@
     <ng-template #newEmployeeBlock><span>Enter New Employee</span></ng-template>
     Details:
   </h2>
+  <label for="id"> ID: </label>
+  <input formControlName="id" id="id" type="text" disabled />
 
-  <label for="firstName"> First Name: </label>
-  <input id="firstName" formControlName="firstName" type="text" />
+  <label for="name"> First Name: </label>
+  <input formControlName="name" id="name" type="text" />
 
   <label for="surname"> Surname: </label>
-  <input id="surname" formControlName="surname" type="text" />
+  <input formControlName="surname" id="surname" type="text" />
 
   <label for="hireDate"> Hire Date: </label>
-  <input id="hireDate" formControlName="hireDate" type="date" />
+  <input formControlName="hireDate" id="hireDate" type="date" />
 
   <label for="skills"> Skills: </label>
-  <input id="skills" formControlName="skills" type="text" />
+  <input formControlName="skills" id="skills" type="text" />
 
   <label for="manager"> Manager: </label>
-  <input id="manager" formControlName="manager" type="text" />
+  <input formControlName="manager" id="manager" type="text" />
 
   <p *ngIf="!employeeForm.valid">Complete the form to enable button.</p>
-  <button type="submit" [disabled]="!employeeForm.valid">Submit</button>
+  <button [disabled]="!employeeForm.valid" type="submit">Submit</button>
 </form>

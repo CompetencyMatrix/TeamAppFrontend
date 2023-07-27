@@ -1,6 +1,6 @@
-import { EmployeeInterface } from '../models/employee';
+import { EmployeeDTOInterface } from '../models/DTO/employeeDTO';
 
-export const EMPLOYEES: EmployeeInterface[] = [
+export const EMPLOYEES: EmployeeDTOInterface[] = [
   {
     id: '1212',
     name: 'Dr. Nice',

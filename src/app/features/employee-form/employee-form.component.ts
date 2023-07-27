@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { EmployeeInterface } from '../../models/employee';
-import { Validators } from '@angular/forms';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 
 @Component({
   selector: 'app-employee-form',
@@ -9,30 +8,38 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./employee-form.component.scss'],
 })
 export class EmployeeFormComponent {
-  @Input() editedEmployee?: EmployeeInterface;
+  @Input() editedEmployee?: EmployeeDTOInterface;
+  SKILLS: string[] = ['Angular', 'Java', 'Python', 'C++'];
+  PROJECTS: string[] = ['JJIT', 'OSMG', 'WW2D'];
+  employeeForm: FormGroup;
+  constructor(private formBuilder: FormBuilder) {
+    // this.employeeForm = this.editedEmployee != undefined? this.formBuilder.group() : this.formBuilder.group();
+    this.employeeForm = this.formBuilder.group({
+      id: this.editedEmployee?.id || '',
+      name:
+        this.editedEmployee != undefined
+          ? this.editedEmployee.name
+          : ['', Validators.required],
+      surname: this.editedEmployee?.surname || [''],
+      hireDate: this.editedEmployee?.hireDate
+        ? this.editedEmployee.hireDate
+        : [''],
+      skills:
+        this.editedEmployee != undefined ? this.editedEmployee.skills : [''],
+      manager:
+        this.editedEmployee != undefined ? this.editedEmployee.manager : [''],
+    });
+  }
 
-  skills = ['Angular', 'Java', 'Python', 'C++'];
-  constructor(private formBuilder: FormBuilder) {}
+  @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
+  editEmployee(newEmployee: EmployeeDTOInterface) {
+    this.editEmployeeEvent.emit(newEmployee);
+  }
 
-  employeeForm = this.formBuilder.group({
-    // TODO: can i define type here without long employeeForm: FormGroup<FormControl<string>, FormControl<........ >>  = this.fb.group({
-    //TODO 2: Can this be initialized clever
-    firstName:
-      this.editedEmployee != undefined
-        ? this.editedEmployee.name
-        : ['', Validators.required],
-    surname:
-      this.editedEmployee != undefined ? this.editedEmployee.surname : [''],
-    hireDate:
-      this.editedEmployee != undefined ? this.editedEmployee.hireDate : [''],
-    skills:
-      this.editedEmployee != undefined ? this.editedEmployee.skills : [''],
-    manager:
-      this.editedEmployee != undefined ? this.editedEmployee.manager : [''],
-  });
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.editedEmployee);
     console.warn(this.employeeForm.value);
+    this.editEmployee(this.employeeForm.getRawValue());
   }
 }
