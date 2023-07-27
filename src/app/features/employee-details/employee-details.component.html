@@ -1,4 +1,4 @@
-<article *ngIf="selectedEmployee" class="employee-details">
+<article *ngIf="selectedEmployee" class="employee-form">
   <h2 class="employee-details__title">
     {{ selectedEmployee.name | uppercase }}
     {{ selectedEmployee.surname | uppercase }} Details
@@ -16,5 +16,8 @@
   </div>
   <div class="employee-details__field">
     <span>Manager: {{ selectedEmployee.manager }}</span>
+  </div>
+  <div class="employee-details__field">
+    <span>Skills: {{ selectedEmployee.skills }}</span>
   </div>
 </article>

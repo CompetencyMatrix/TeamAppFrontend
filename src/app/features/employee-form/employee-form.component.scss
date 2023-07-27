@@ -1,0 +1,12 @@
+@import '../../../colors';
+
+.employee-form__hint {
+  font-size: 1rem;
+  color: $tapp-tertiary;
+  border-color: $tapp-tertiary-dark;
+  border-style: groove;
+  width: fit-content;
+  padding: 4px;
+  border-radius: 9px;
+  border-width: 0.5px;
+}

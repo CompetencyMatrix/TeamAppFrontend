@@ -1,7 +1,4 @@
-<form
-  (ngSubmit)="onSubmit()"
-  [formGroup]="employeeForm"
-  class="employee-details">
+<form (ngSubmit)="onSubmit()" [formGroup]="employeeForm" class="employee-form">
   <h2 class="employee-form__title">
     <span *ngIf="editedEmployee; else newEmployeeBlock">
       Edit
@@ -25,12 +22,27 @@
   <input formControlName="hireDate" id="hireDate" type="date" />
 
   <label for="skills"> Skills: </label>
-  <input formControlName="skills" id="skills" type="text" />
+  <ng-select
+    [items]="skills"
+    type="text"
+    [searchable]="true"
+    bindLabel="status"
+    id="skills"
+    formControlName="skills"
+    [multiple]="true">
+  </ng-select>
 
   <label for="manager"> Manager: </label>
   <input formControlName="manager" id="manager" type="text" />
 
-  <p *ngIf="!employeeForm.valid">Complete the form to enable button.</p>
-  <button [disabled]="!employeeForm.valid" type="submit">Submit</button>
+  <p *ngIf="!employeeForm.valid" class="employee-form__hint">
+    Complete the form to enable the button.
+  </p>
+  <button
+    [disabled]="!employeeForm.valid"
+    type="submit"
+    [title]="employeeForm.valid ? '' : 'The form is invalid'">
+    Submit
+  </button>
   <button type="button" (click)="onResetForm()">Reset</button>
 </form>

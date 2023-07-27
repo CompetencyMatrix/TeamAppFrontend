@@ -15,8 +15,8 @@ import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 })
 export class EmployeeFormComponent {
   @Input() editedEmployee?: EmployeeDTOInterface;
-  SKILLS: string[] = ['Angular', 'Java', 'Python', 'C++'];
-  PROJECTS: string[] = ['JJIT', 'OSMG', 'WW2D'];
+  skills: string[] = ['Angular', 'Java', 'Python', 'C++'];
+  projects: string[] = ['JJIT', 'OSMG', 'WW2D'];
   employeeForm: FormGroup;
 
   //TODO: Why values are never set using this initialization - always after onChanges
@@ -33,6 +33,7 @@ export class EmployeeFormComponent {
 
   ngOnChanges(): void {
     if (this.editedEmployee) {
+      console.log('OnChanges');
       this.employeeForm.patchValue(this.editedEmployee);
     } else {
       this.employeeForm.reset();
@@ -45,6 +46,7 @@ export class EmployeeFormComponent {
   }
 
   onSubmit() {
+    console.log('OnSubmit');
     this.editEmployee(this.employeeForm.getRawValue());
     this.employeeForm.reset();
   }

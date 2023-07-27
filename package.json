@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@ng-select/ng-select": "^11.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uuid": "^9.0.0",
@@ -50,6 +51,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-multiselect-dropdown": "^0.3.9",
     "prettier": "^3.0.0",
     "prettier-eslint": "^15.0.1",
     "typescript": "~5.1.3"
