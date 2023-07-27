@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   OnChanges,
+  OnInit,
   EventEmitter,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,22 +20,30 @@ export class EmployeeFormComponent {
   skills: string[] = ['Angular', 'Java', 'Python', 'C++'];
   projects: string[] = ['JJIT', 'OSMG', 'WW2D'];
   otherEmployees: EmployeeDTOInterface[];
-
   employeeForm: FormGroup;
 
   //TODO: Why values are never set using this initialization - always after onChanges
   constructor(private formBuilder: FormBuilder) {
     this.employeeForm = this.formBuilder.group({
-      id: [{ value: this.editedEmployee?.id || '', disabled: true }],
-      name: [this.editedEmployee?.name || '', Validators.required],
-      surname: [this.editedEmployee?.surname || ''],
-      hireDate: [this.editedEmployee?.hireDate || ''],
-      skills: [this.editedEmployee?.skills || ''],
-      manager: [this.editedEmployee?.manager || ''],
+      id: [{ value: '', disabled: true }],
+      name: ['', Validators.required],
+      surname: [''],
+      hireDate: [''],
+      skills: [''],
+      manager: [''],
     });
     this.otherEmployees = this.getEmployees().filter(
       (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
     );
+  }
+
+  ngOnInit(): void {
+    if (this.editedEmployee) {
+      this.employeeForm.patchValue(this.editedEmployee);
+      this.otherEmployees = this.getEmployees().filter(
+        (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
+      );
+    }
   }
 
   ngOnChanges(): void {

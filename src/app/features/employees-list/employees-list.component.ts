@@ -30,6 +30,8 @@ export class EmployeesListComponent {
     } else {
       this.addNewEmployee(submittedEmployee);
     }
+    this.selectedEmployee = undefined;
+    //   TODO: undefined
   }
 
   private addNewEmployee(submittedEmployee: EmployeeDTOInterface) {

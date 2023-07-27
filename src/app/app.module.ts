@@ -8,6 +8,7 @@ import { EmployeesListComponent } from './features/employees-list/employees-list
 import { EmployeeDetailsComponent } from './features/employee-details/employee-details.component';
 import { EmployeeFormComponent } from './features/employee-form/employee-form.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   imports: [
     BrowserModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+    }),
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,

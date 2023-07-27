@@ -5,5 +5,4 @@ export interface EmployeeDTOInterface {
   hireDate: string;
   skills?: string[];
   manager?: string;
-  //TODO: manager?: Employee; add projects
 }
