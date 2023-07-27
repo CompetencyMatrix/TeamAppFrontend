@@ -1,4 +1,7 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="employeeForm" class="employee-form">
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="employeeForm"
+  class="employee-details">
   <h2 class="employee-form__title">
     <span *ngIf="editedEmployee; else newEmployeeBlock">
       Edit
@@ -9,8 +12,9 @@
     Details:
   </h2>
   <label for="id"> ID: </label>
-  <input formControlName="id" id="id" type="text" [readOnly]="true" />
+  <input formControlName="id" id="id" type="text" />
 
+  <!--  TODO: should [(ngModel)] be added here so that changes in name are reflected in current value in the form -->
   <label for="name"> First Name: </label>
   <input formControlName="name" id="name" type="text" />
 

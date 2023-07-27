@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { EMPLOYEES } from '../../mocks/mock-employees';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-employees-list',
@@ -11,8 +12,10 @@ export class EmployeesListComponent {
   employees: EmployeeDTOInterface[] = EMPLOYEES;
   selectedEmployee?: EmployeeDTOInterface;
 
+  unselectEmployee() {
+    this.selectedEmployee = undefined;
+  }
   onSelect(employee: EmployeeDTOInterface): void {
-    console.log(this.selectedEmployee);
     this.selectedEmployee = employee;
   }
 
@@ -20,16 +23,20 @@ export class EmployeesListComponent {
     const foundEmployee = this.employees.find(
       (e: EmployeeDTOInterface) => e.id === submittedEmployee.id
     );
+
     if (foundEmployee) {
       this.editEmployee(submittedEmployee);
+      this.selectedEmployee = submittedEmployee;
     } else {
       this.addNewEmployee(submittedEmployee);
     }
   }
 
   private addNewEmployee(submittedEmployee: EmployeeDTOInterface) {
-    // TODO: use crypto or other UUID generator
-    this.employees.push({ ...submittedEmployee, id: '132' });
+    this.employees.push({
+      ...submittedEmployee,
+      id: uuid(),
+    });
   }
   private editEmployee(submittedEmployee: EmployeeDTOInterface) {
     const foundEmployee = this.employees.find(

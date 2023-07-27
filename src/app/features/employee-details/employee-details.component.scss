@@ -1,13 +1,13 @@
 @import '../../../colors';
 
-.employee-form {
+.employee-details {
   background-color: $tapp-secondary-light;
   border-radius: 2rem;
   padding: 2rem;
   width: fit-content;
 
   &__title {
-    color: $tapp-on-background;
+    color: $tapp-secondary;
 
     &:hover {
       color: $tapp-secondary-dark;
