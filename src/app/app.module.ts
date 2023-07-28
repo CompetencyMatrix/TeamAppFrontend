@@ -3,19 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeComponent } from './features/employee/employee.component';
-import { FormsModule } from '@angular/forms';
-import { EmployeesListComponent } from './features/employees-list/employees-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployeeListComponent } from './features/employee-list/employee-list.component';
 import { EmployeeDetailsComponent } from './features/employee-details/employee-details.component';
+import { EmployeeFormComponent } from './features/employee-form/employee-form.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent,
-    EmployeesListComponent,
+    EmployeeListComponent,
     EmployeeDetailsComponent,
+    EmployeeFormComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+    }),
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    NgSelectModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,76 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="employeeForm" class="employee-form">
+  <h2 class="employee-form__title">
+    <span *ngIf="editedEmployee; else newEmployeeBlock">
+      Edit
+      {{ editedEmployee.name | uppercase }}
+      {{ editedEmployee.surname | uppercase }}'s</span
+    >
+    <ng-template #newEmployeeBlock><span>Enter New Employee</span></ng-template>
+    Details:
+  </h2>
+
+  <div class="employee-form__field">
+    <label for="id"> ID: </label>
+    <input formControlName="id" id="id" type="text" />
+  </div>
+
+  <div class="employee-form__field">
+    <label for="name"> First Name: </label>
+    <input formControlName="name" id="name" type="text" />
+  </div>
+
+  <div class="employee-form__field">
+    <label for="surname"> Surname: </label>
+    <input formControlName="surname" id="surname" type="text" />
+  </div>
+
+  <div class="employee-form__field">
+    <label for="hireDate"> Hire Date: </label>
+    <input formControlName="hireDate" id="hireDate" type="date" />
+  </div>
+
+  <div class="employee-form__field">
+    <label for="skills"> Skills: </label>
+    <ng-select
+      [items]="skills"
+      [searchable]="true"
+      id="skills"
+      formControlName="skills"
+      [multiple]="true">
+    </ng-select>
+  </div>
+
+  <div class="employee-form__field">
+    <label for="manager"> Manager: </label>
+    <ng-select [searchable]="true" id="manager" formControlName="manager">
+      <ng-option *ngFor="let manager of otherEmployees" [value]="manager.name">
+        {{ manager.name }}
+      </ng-option>
+    </ng-select>
+  </div>
+
+  <div class="employee-form__field">
+    <label for="projects"> Projects: </label>
+
+    <ng-select
+      [searchable]="true"
+      id="projects"
+      formControlName="projects"
+      [multiple]="true">
+      <ng-option *ngFor="let project of projects" [value]="project">
+        {{ project.name }}
+      </ng-option>
+    </ng-select>
+  </div>
+
+  <p *ngIf="!employeeForm.valid" class="employee-form__hint">
+    Complete the form to enable the button.
+  </p>
+  <button
+    [disabled]="employeeForm.invalid"
+    type="submit"
+    [title]="employeeForm.invalid ? 'The form is invalid' : ''">
+    Submit
+  </button>
+  <button type="button" (click)="onResetForm()">Reset</button>
+</form>

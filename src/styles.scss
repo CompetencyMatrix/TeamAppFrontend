@@ -1,4 +1,7 @@
 /* Application-wide Styles */
+@import 'colors';
+//TODO: can we use such themes from imported libraries
+@import '~@ng-select/ng-select/themes/default.theme.css';
 
 //App styles
 body {
@@ -12,20 +15,25 @@ body {
 
 //Default styles:
 h1 {
-  color: #369;
+  color: $tapp-secondary-dark;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
-h2, h3 {
+
+h2,
+h3 {
   color: #444;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
 
-body, input[type="text"], button {
+body,
+input[type='text'],
+button {
   color: #333;
   font-family: Cambria, Georgia, serif;
 }
+
 button {
   background-color: #eee;
   border: none;
@@ -38,10 +46,12 @@ button {
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
+
 button:hover {
   background-color: black;
   color: white;
 }
+
 button:disabled {
   background-color: #eee;
   color: #aaa;
@@ -52,4 +62,3 @@ button:disabled {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
-
