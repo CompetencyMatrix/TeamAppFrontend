@@ -3,36 +3,52 @@
   xmlns="http://www.w3.org/1999/html"
   class="employee-details">
   <h2 class="employee-details__title">
-    {{ selectedEmployee.name | uppercase }}
-    {{ selectedEmployee.surname | uppercase }} Details
+    {{
+      'employee.details.title'
+        | translate
+          : {
+              person:
+                selectedEmployee.name + ' ' + selectedEmployee.surname
+                | uppercase
+            }
+    }}
   </h2>
   <div class="employee-details__field">
-    <label for="name">Employee name: </label>
+    <label for="name">{{ 'employee.details.name' | translate }}: </label>
     <input [(ngModel)]="selectedEmployee.name" id="name" placeholder="name" />
   </div>
   <div class="employee-details__field">
-    <p>ID: {{ selectedEmployee.id }}</p>
+    <p>{{ 'employee.details.id' | translate }}: {{ selectedEmployee.id }}</p>
   </div>
   <div class="employee-details__field">
-    <p>Hire Date: {{ selectedEmployee.hireDate | date: 'dd-MMM-YYYY' }}</p>
+    <p>
+      {{ 'employee.details.hire.date' | translate }}:
+      {{ selectedEmployee.hireDate | date: 'dd-MMM-YYYY' }}
+    </p>
   </div>
   <div class="employee-details__field">
-    <p>Manager: {{ selectedEmployee.manager }}</p>
+    <p>
+      {{ 'employee.details.manager' | translate }}:
+      {{ selectedEmployee.manager }}
+    </p>
   </div>
   <div class="employee-details__field">
-    <p>Skills: {{ selectedEmployee.skills }}</p>
+    <p>
+      {{ 'employee.details.skills' | translate }}: {{ selectedEmployee.skills }}
+    </p>
   </div>
   <div class="employee-details__field employee-details__projects">
     <div>
-      Projects:
+      {{ 'employee.details.projects.title' | translate }}:
       <div
         *ngFor="let project of selectedEmployee.projects"
         class="employee-details__projects__project">
         <div class="employee-details__projects__project__name">
-          Name: {{ project.name }}
+          {{ 'employee.details.projects.name' | translate }}: {{ project.name }}
         </div>
         <div class="employee-details__projects__project__deadline">
-          Deadline: {{ project.deadline | date: 'dd-MM-YYYY' }}
+          {{ 'employee.details.projects.deadline' | translate }}:
+          {{ project.deadline | date: 'dd-MM-YYYY' }}
         </div>
       </div>
     </div>

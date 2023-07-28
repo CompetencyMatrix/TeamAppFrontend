@@ -1,0 +1,37 @@
+{
+  "teamapp": {
+    "title": "TeamApp"
+  },
+  "employee.list": {
+    "title": "Pracownicy",
+    "new.employee.button": "Nowy Pracownik"
+  },
+  "employee.details": {
+    "title": "{{person}} - Dane",
+    "id": "ID",
+    "name": "Imię Pracownika",
+    "hire.date": "Data Zatrudnienia",
+    "manager": "Menedżer",
+    "skills": "Umiejętności",
+    "projects": {
+      "title": "Projekty",
+      "name": "Nazwa",
+      "deadline": "Termin"
+    }
+  },
+  "employee.form": {
+    "title": "{{person}} - Edycja Danych",
+    "add.title": "Wprowadź Dane Nowego Pracownika",
+    "id": "ID",
+    "firstname": "Imię",
+    "surname": "Nazwisko",
+    "hire.date": "Data Zatrudnienia",
+    "manager": "Menedżer",
+    "skills": "Umiejętności",
+    "projects": "Projekty",
+    "invalid.hint": "Uzupełnij formularz, by móc zatwierdzić.",
+    "submit.button": "Zatwierdź",
+    "reset.button": "Zresetuj"
+  }
+}
+
