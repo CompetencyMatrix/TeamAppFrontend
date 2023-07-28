@@ -42,6 +42,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     });
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
+    translate.use('en');
   }
 
   setLanguage(value: string): void {
