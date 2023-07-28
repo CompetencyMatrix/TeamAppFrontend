@@ -18,7 +18,7 @@ import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss'],
 })
-export class EmployeeFormComponent {
+export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() editedEmployee?: EmployeeDTOInterface;
   @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
   skills: string[] = this.getSkills();
@@ -40,7 +40,6 @@ export class EmployeeFormComponent {
     this.otherEmployees = this.getOtherEmployees();
   }
 
-  // TODO: Unresolved Warnings about lifecycle here
   ngOnInit(): void {
     this.otherEmployees = this.getOtherEmployees();
     if (this.editedEmployee) {
