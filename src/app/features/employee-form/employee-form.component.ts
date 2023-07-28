@@ -12,6 +12,7 @@ import { EMPLOYEES } from '../../mocks/mock-employees';
 import { SKILLS } from '../../mocks/mock-skills';
 import { PROJECTS } from '../../mocks/mock-projects';
 import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-employee-form',
@@ -23,10 +24,13 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
   skills: string[] = this.getSkills();
   projects: ProjectDTOInterface[] = this.getProjects();
-  otherEmployees: EmployeeDTOInterface[];
+  otherEmployees: EmployeeDTOInterface[] = [];
   employeeForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    public translate: TranslateService
+  ) {
     this.employeeForm = this.formBuilder.group({
       id: [{ value: '', disabled: true }],
       name: ['', Validators.required],
@@ -36,8 +40,12 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       projects: [''],
       manager: [''],
     });
-    // TODO: should I initialize it with undefined, since It will be anyway overwritten in NgOnInit()?
-    this.otherEmployees = this.getOtherEmployees();
+    translate.addLangs(['en', 'pl']);
+    translate.setDefaultLang('en');
+  }
+
+  setLanguage(value: string): void {
+    this.translate.use(value);
   }
 
   ngOnInit(): void {
