@@ -34,5 +34,9 @@
       "submit.button": "Submit",
       "reset.button": "Reset"
     }
+  },
+  "messages": {
+    "title": "Messages",
+    "clear.button": "Clear messages"
   }
 }
