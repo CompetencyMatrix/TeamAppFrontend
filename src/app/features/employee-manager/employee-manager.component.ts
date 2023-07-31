@@ -33,11 +33,15 @@ export class EmployeeManagerComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  selectEmployee(newEmployee: EmployeeDTOInterface): void {
+  selectEmployee(newEmployee: EmployeeDTOInterface | undefined): void {
     // TODO: add translation pipe here
-    this.messageService.add(
-      `Employee-Manager: Selected employee ${newEmployee.name} ${newEmployee.surname}`
-    );
+    if (newEmployee === undefined) {
+      this.messageService.add(`Employee-Manager: Adding New Employee`);
+    } else {
+      this.messageService.add(
+        `Employee-Manager: Selected employee ${newEmployee.name} ${newEmployee.surname}`
+      );
+    }
     this.selectedEmployee = newEmployee;
     this.setOtherEmployees();
   }
