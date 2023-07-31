@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
-import { retry } from 'rxjs';
 
 @Component({
   selector: 'app-employee-details',
@@ -9,5 +8,5 @@ import { retry } from 'rxjs';
 })
 export class EmployeeDetailsComponent {
   @Input() selectedEmployee?: EmployeeDTOInterface;
-  protected readonly retry = retry;
+  protected readonly Boolean = Boolean;
 }

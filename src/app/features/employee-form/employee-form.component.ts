@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
-import { EMPLOYEES } from '../../mocks/mock-employees';
 import { SKILLS } from '../../mocks/mock-skills';
 import { PROJECTS } from '../../mocks/mock-projects';
 import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
@@ -20,10 +19,11 @@ import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
 })
 export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() editedEmployee?: EmployeeDTOInterface;
+  @Input() allEmployees?: EmployeeDTOInterface[];
   @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
   skills: string[] = this.getSkills();
   projects: ProjectDTOInterface[] = this.getProjects();
-  otherEmployees: EmployeeDTOInterface[];
+  otherEmployees: EmployeeDTOInterface[] = [];
   employeeForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
@@ -36,19 +36,17 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       projects: [''],
       manager: [''],
     });
-    // TODO: should I initialize it with undefined, since It will be anyway overwritten in NgOnInit()?
-    this.otherEmployees = this.getOtherEmployees();
   }
 
   ngOnInit(): void {
-    this.otherEmployees = this.getOtherEmployees();
+    this.setOtherEmployees();
     if (this.editedEmployee) {
       this.employeeForm.patchValue(this.editedEmployee);
     }
   }
 
   ngOnChanges(): void {
-    this.otherEmployees = this.getOtherEmployees();
+    this.setOtherEmployees();
     if (this.editedEmployee) {
       this.employeeForm.patchValue({
         ...this.editedEmployee,
@@ -82,21 +80,24 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     }
   }
 
+  setOtherEmployees(): void {
+    this.otherEmployees = this.getOtherEmployees();
+  }
+
   getOtherEmployees(): EmployeeDTOInterface[] {
-    if (this.editedEmployee === undefined) {
-      return this.getEmployees();
+    if (this.allEmployees === undefined) {
+      return [];
+    } else {
+      if (this.editedEmployee === undefined) {
+        return this.allEmployees;
+      }
+      return this.allEmployees.filter(
+        (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
+      );
     }
-    return this.getEmployees().filter(
-      (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
-    );
   }
 
-  // TODO: 3 ponizej symulują zapytanie do backendu
-  private getEmployees(): EmployeeDTOInterface[] {
-    // TODO: czy mogę tak zrobic,czy powinienem od rodzica jakos liste pobierac employees - imo po prostu z backendu by sie to bralo zapytaniem
-    return EMPLOYEES;
-  }
-
+  // TODO: 2 ponizej symulują zapytanie do backendu
   private getSkills(): string[] {
     return SKILLS;
   }
@@ -104,4 +105,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   private getProjects(): ProjectDTOInterface[] {
     return PROJECTS;
   }
+
+  protected readonly Boolean = Boolean;
 }

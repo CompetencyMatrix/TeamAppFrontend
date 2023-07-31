@@ -1,36 +1,44 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="employeeForm" class="employee-form">
   <h2 class="employee-form__title">
     <span *ngIf="editedEmployee; else newEmployeeBlock">
-      Edit
-      {{ editedEmployee.name | uppercase }}
-      {{ editedEmployee.surname | uppercase }}'s</span
+      {{
+        'employee.form.edit.title'
+          | translate
+            : {
+                person:
+                  [editedEmployee.name, editedEmployee.surname]
+                    .filter(Boolean)
+                    .join(' ') | uppercase
+              }
+      }}</span
     >
-    <ng-template #newEmployeeBlock><span>Enter New Employee</span></ng-template>
-    Details:
+    <ng-template #newEmployeeBlock
+      ><span>{{ 'employee.form.add.title' | translate }}</span></ng-template
+    >:
   </h2>
 
   <div class="employee-form__field">
-    <label for="id"> ID: </label>
+    <label for="id"> {{ 'employee.form.id' | translate }}: </label>
     <input formControlName="id" id="id" type="text" />
   </div>
 
   <div class="employee-form__field">
-    <label for="name"> First Name: </label>
+    <label for="name"> {{ 'employee.form.firstname' | translate }}: </label>
     <input formControlName="name" id="name" type="text" />
   </div>
 
   <div class="employee-form__field">
-    <label for="surname"> Surname: </label>
+    <label for="surname"> {{ 'employee.form.surname' | translate }}: </label>
     <input formControlName="surname" id="surname" type="text" />
   </div>
 
   <div class="employee-form__field">
-    <label for="hireDate"> Hire Date: </label>
+    <label for="hireDate"> {{ 'employee.form.hire.date' | translate }}: </label>
     <input formControlName="hireDate" id="hireDate" type="date" />
   </div>
 
   <div class="employee-form__field">
-    <label for="skills"> Skills: </label>
+    <label for="skills"> {{ 'employee.form.skills' | translate }}: </label>
     <ng-select
       [items]="skills"
       [searchable]="true"
@@ -41,7 +49,7 @@
   </div>
 
   <div class="employee-form__field">
-    <label for="manager"> Manager: </label>
+    <label for="manager"> {{ 'employee.form.manager' | translate }}: </label>
     <ng-select [searchable]="true" id="manager" formControlName="manager">
       <ng-option *ngFor="let manager of otherEmployees" [value]="manager.name">
         {{ manager.name }}
@@ -50,7 +58,7 @@
   </div>
 
   <div class="employee-form__field">
-    <label for="projects"> Projects: </label>
+    <label for="projects"> {{ 'employee.form.projects' | translate }}: </label>
 
     <ng-select
       [searchable]="true"
@@ -64,13 +72,16 @@
   </div>
 
   <p *ngIf="!employeeForm.valid" class="employee-form__hint">
-    Complete the form to enable the button.
+    {{ 'employee.form.invalid.hint' | translate }}
   </p>
   <button
     [disabled]="employeeForm.invalid"
     type="submit"
     [title]="employeeForm.invalid ? 'The form is invalid' : ''">
-    Submit
+    {{ 'employee.form.submit.button' | translate }}
   </button>
-  <button type="button" (click)="onResetForm()">Reset</button>
+  <button type="button" (click)="onResetForm()">
+    {{ 'employee.form.reset.button' | translate }}
+  </button>
 </form>
+<app-language-switch></app-language-switch>

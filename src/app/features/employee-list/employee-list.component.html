@@ -1,4 +1,4 @@
-<h2>Employees</h2>
+<h2>{{ 'employee.list.title' | translate }}</h2>
 <ul class="employee-list">
   <li *ngFor="let employee of employees" class="employee-list__element">
     <button
@@ -11,10 +11,14 @@
     </button>
   </li>
 </ul>
-<button (click)="unselectEmployee()">New Employee</button>
+<button (click)="unselectEmployee()">
+  {{ 'employee.list.new.employee.button' | translate }}
+</button>
 <app-employee-details
   [selectedEmployee]="selectedEmployee"></app-employee-details>
 
 <app-employee-form
   [editedEmployee]="selectedEmployee"
-  (editEmployeeEvent)="onEmployeeFormSubmit($event)"></app-employee-form>
+  (editEmployeeEvent)="updateList($event)">
+  [allEmployees]="employees"></app-employee-form
+>
