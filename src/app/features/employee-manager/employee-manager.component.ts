@@ -6,6 +6,8 @@ import { PROJECTS } from '../../mocks/mock-projects';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
 import { MessageService } from '../../core/services/message/message.service';
+import { SkillService } from '../../core/services/skill/skill.service';
+import { ProjectService } from '../../core/services/project/project.service';
 
 @Component({
   selector: 'app-employee-manager',
@@ -22,10 +24,14 @@ export class EmployeeManagerComponent implements OnInit {
   ngOnInit(): void {
     this.getAllEmployees();
     this.setOtherEmployees();
+    this.getSkills();
+    this.getProjects();
   }
 
   constructor(
     private employeeService: EmployeeService,
+    private skillService: SkillService,
+    private projectService: ProjectService,
     private messageService: MessageService
   ) {}
 
@@ -95,5 +101,19 @@ export class EmployeeManagerComponent implements OnInit {
       .subscribe(
         (employees: EmployeeDTOInterface[]) => (this.allEmployees = employees)
       );
+  }
+
+  private getProjects(): void {
+    this.projectService
+      .getProjects()
+      .subscribe(
+        (projects: ProjectDTOInterface[]) => (this.projects = projects)
+      );
+  }
+
+  private getSkills(): void {
+    this.skillService
+      .getSkills()
+      .subscribe((skills: string[]) => (this.skills = skills));
   }
 }

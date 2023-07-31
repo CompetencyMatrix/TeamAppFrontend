@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
+import { MessageService } from '../message/message.service';
+import { Observable, of } from 'rxjs';
+import { SKILLS } from '../../../mocks/mock-skills';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SkillService {
+  constructor(private messageService: MessageService) {}
 
-  constructor() { }
+  getSkills(): Observable<string[]> {
+    const skills = of(SKILLS);
+    this.messageService.add('SkillService: fetched Skills.');
+    return skills;
+  }
 }

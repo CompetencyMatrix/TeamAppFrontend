@@ -12,7 +12,7 @@ export class EmployeeService {
 
   getEmployees(): Observable<EmployeeDTOInterface[]> {
     const employees: Observable<EmployeeDTOInterface[]> = of(EMPLOYEES);
-    this.messageService.add('EmployeeService: fetched employees');
+    this.messageService.add('EmployeeService: fetched employees.');
     return employees;
   }
 }
