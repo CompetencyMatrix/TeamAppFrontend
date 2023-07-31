@@ -9,7 +9,7 @@ import { v4 as uuid } from 'uuid';
   styleUrls: ['./employee-list.component.scss'],
 })
 export class EmployeeListComponent {
-  employees: EmployeeDTOInterface[] = EMPLOYEES;
+  employees: EmployeeDTOInterface[] = this.getEmployees();
   selectedEmployee?: EmployeeDTOInterface;
 
   unselectEmployee(): void {
@@ -51,5 +51,9 @@ export class EmployeeListComponent {
         submittedEmployee
       );
     }
+  }
+
+  getEmployees(): EmployeeDTOInterface[] {
+    return EMPLOYEES;
   }
 }
