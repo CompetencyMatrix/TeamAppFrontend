@@ -6,7 +6,9 @@
           | translate
             : {
                 person:
-                  editedEmployee.name + ' ' + editedEmployee.surname | uppercase
+                  [editedEmployee.name, editedEmployee.surname]
+                    .filter(Boolean)
+                    .join(' ') | uppercase
               }
       }}</span
     >

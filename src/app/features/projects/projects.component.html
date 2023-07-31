@@ -1,0 +1,14 @@
+<div class="projects">
+  <div>
+    {{ 'employee.details.projects.title' | translate }}:
+    <div *ngFor="let project of projects" class="projects__project">
+      <div class="projects__project__name">
+        {{ 'employee.details.projects.name' | translate }}: {{ project.name }}
+      </div>
+      <div class="projects__project__deadline">
+        {{ 'employee.details.projects.deadline' | translate }}:
+        {{ project.deadline | date: 'dd-MM-YYYY' }}
+      </div>
+    </div>
+  </div>
+</div>

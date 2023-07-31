@@ -2,35 +2,37 @@
   "teamapp": {
     "title": "TeamApp"
   },
-  "employee.list": {
-    "title": "Employees",
-    "new.employee.button": "New Employee"
-  },
-  "employee.details": {
-    "title": "{{person}} Details",
-    "id": "ID",
-    "name": "Employee name",
-    "hire.date": "Hire Date",
-    "manager": "Manager",
-    "skills": "Skills",
-    "projects": {
-      "title": "Projects",
-      "name": "Name",
-      "deadline": "Deadline"
+  "employee": {
+    "list": {
+      "title": "Employees",
+      "new.employee.button": "New Employee"
+    },
+    "details": {
+      "title": "{{person}} Details",
+      "id": "ID",
+      "name": "Employee name",
+      "hire.date": "Hire Date",
+      "manager": "Manager",
+      "skills": "Skills",
+      "projects": {
+        "title": "Projects",
+        "name": "Name",
+        "deadline": "Deadline"
+      }
+    },
+    "form": {
+      "edit.title": "Edit {{person}}'s Details",
+      "add.title": "Enter New Employee Details",
+      "id": "ID",
+      "firstname": "First name",
+      "surname": "Surname",
+      "hire.date": "Hire Date",
+      "manager": "Manager",
+      "skills": "Skills",
+      "projects": "Projects",
+      "invalid.hint": "Complete the form to enable the button.",
+      "submit.button": "Submit",
+      "reset.button": "Reset"
     }
-  },
-  "employee.form": {
-    "edit.title": "Edit {{person}}'s Details",
-    "add.title": "Enter New Employee Details",
-    "id": "ID",
-    "firstname": "First name",
-    "surname": "Surname",
-    "hire.date": "Hire Date",
-    "manager": "Manager",
-    "skills": "Skills",
-    "projects": "Projects",
-    "invalid.hint": "Complete the form to enable the button.",
-    "submit.button": "Submit",
-    "reset.button": "Reset"
   }
 }

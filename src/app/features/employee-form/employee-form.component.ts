@@ -40,9 +40,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       projects: [''],
       manager: [''],
     });
-    translate.addLangs(['en', 'pl']);
-    translate.setDefaultLang('en');
-    translate.use('en');
   }
 
   setLanguage(value: string): void {
@@ -116,4 +113,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   private getProjects(): ProjectDTOInterface[] {
     return PROJECTS;
   }
+
+  protected readonly Boolean = Boolean;
 }

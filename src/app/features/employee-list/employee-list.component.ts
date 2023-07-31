@@ -20,7 +20,7 @@ export class EmployeeListComponent {
     this.selectedEmployee = employee;
   }
 
-  onEmployeeFormSubmit(submittedEmployee: EmployeeDTOInterface): void {
+  updateList(submittedEmployee: EmployeeDTOInterface): void {
     const foundEmployee = this.employees.find(
       (e: EmployeeDTOInterface) => e.id === submittedEmployee.id
     );

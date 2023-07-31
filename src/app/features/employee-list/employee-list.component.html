@@ -19,5 +19,6 @@
 
 <app-employee-form
   [editedEmployee]="selectedEmployee"
-  [allEmployees]="employees"
-  (editEmployeeEvent)="onEmployeeFormSubmit($event)"></app-employee-form>
+  (editEmployeeEvent)="updateList($event)">
+  [allEmployees]="employees"></app-employee-form
+>

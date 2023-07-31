@@ -8,8 +8,9 @@
         | translate
           : {
               person:
-                selectedEmployee.name + ' ' + selectedEmployee.surname
-                | uppercase
+                [selectedEmployee.name, selectedEmployee.surname]
+                  .filter(Boolean)
+                  .join(' ') | uppercase
             }
     }}
   </h2>
@@ -37,20 +38,5 @@
       {{ 'employee.details.skills' | translate }}: {{ selectedEmployee.skills }}
     </p>
   </div>
-  <div class="employee-details__field employee-details__projects">
-    <div>
-      {{ 'employee.details.projects.title' | translate }}:
-      <div
-        *ngFor="let project of selectedEmployee.projects"
-        class="employee-details__projects__project">
-        <div class="employee-details__projects__project__name">
-          {{ 'employee.details.projects.name' | translate }}: {{ project.name }}
-        </div>
-        <div class="employee-details__projects__project__deadline">
-          {{ 'employee.details.projects.deadline' | translate }}:
-          {{ project.deadline | date: 'dd-MM-YYYY' }}
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-projects [projects]="selectedEmployee.projects"></app-projects>
 </article>
