@@ -11,7 +11,6 @@ import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { SKILLS } from '../../mocks/mock-skills';
 import { PROJECTS } from '../../mocks/mock-projects';
 import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-employee-form',
@@ -27,10 +26,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   otherEmployees: EmployeeDTOInterface[] = [];
   employeeForm: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public translate: TranslateService
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     this.employeeForm = this.formBuilder.group({
       id: [{ value: '', disabled: true }],
       name: ['', Validators.required],
@@ -40,10 +36,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       projects: [''],
       manager: [''],
     });
-  }
-
-  setLanguage(value: string): void {
-    this.translate.use(value);
   }
 
   ngOnInit(): void {

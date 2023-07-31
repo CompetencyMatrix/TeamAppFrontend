@@ -12,6 +12,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ProjectsComponent } from './features/projects/projects.component';
+import { LanguageSwitchComponent } from './features/language-switch/language-switch.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -24,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EmployeeDetailsComponent,
     EmployeeFormComponent,
     ProjectsComponent,
+    LanguageSwitchComponent,
   ],
   imports: [
     BrowserModule,
