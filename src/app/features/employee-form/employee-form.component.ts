@@ -6,10 +6,8 @@ import {
   OnInit,
   EventEmitter,
 } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
-import { SKILLS } from '../../mocks/mock-skills';
-import { PROJECTS } from '../../mocks/mock-projects';
 import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
 
 @Component({

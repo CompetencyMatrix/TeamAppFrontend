@@ -1,8 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { v4 as uuid } from 'uuid';
-import { SKILLS } from '../../mocks/mock-skills';
-import { PROJECTS } from '../../mocks/mock-projects';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
 import { MessageService } from '../../core/services/message/message.service';
@@ -18,8 +16,8 @@ export class EmployeeManagerComponent implements OnInit {
   allEmployees: EmployeeDTOInterface[] = [];
   otherEmployees: EmployeeDTOInterface[] = [];
   selectedEmployee?: EmployeeDTOInterface;
-  skills: string[] = SKILLS;
-  projects: ProjectDTOInterface[] = PROJECTS;
+  skills: string[] = [];
+  projects: ProjectDTOInterface[] = [];
 
   ngOnInit(): void {
     this.getAllEmployees();

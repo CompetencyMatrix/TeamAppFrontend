@@ -1,4 +1,4 @@
-@import "../../../colors";
+@import '../../../colors';
 
 .message-list {
   &__message {
@@ -7,7 +7,7 @@
     color: $tapp-alert-good-dark;
     text-align: center;
     padding: 0.6rem;
-    margin-bottom: .7rem;
+    margin-bottom: 0.7rem;
     border-radius: 1rem;
     border-color: $tapp-alert-good-dark;
     border-width: 0.1rem;
@@ -19,6 +19,5 @@
   }
 
   &__clear-button {
-
   }
 }
