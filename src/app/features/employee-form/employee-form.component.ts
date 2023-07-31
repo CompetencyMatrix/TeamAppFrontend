@@ -20,7 +20,6 @@ import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
 // TODO: I wasn't sure if this component should be smart or dumb - it is the only one that needs skills and projects, but in future other ones may need them also so maybe its best to pass them from the main - manager component - as it is done now (they used to be set here from mocks without input)
 export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() employeeToEdit?: EmployeeDTOInterface;
-  // TODO: initalization of those lists or allow undefined "name?"
   @Input() allowedManagers: EmployeeDTOInterface[] = [];
   @Input() skills: string[] = [];
   @Input() projects: ProjectDTOInterface[] = [];
@@ -84,35 +83,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       this.employeeForm.reset();
     }
   }
-  //
-  // setAllowedManagers(): void {
-  //   this.allowedManagers = this.getOtherEmployees();
-  // }
-
-  // TODO: Czy taka funkcja mogłaby być w serwisie? Czy proszenie serwisu o podanie listy wszystkich pracownikow pomniejszonej o jednego konkretnego za kazdym razem kiedy zachodzi event select w liscie bedzie kosztowne?
-  //  Czy można to zrobić w jakiś sposób Lazy - tak aby dopiero kiedy ktos bedzie chcial wybrać managera to wywołało się faktyczne wykonanie operacji w serwisie?
-  // TU wlasnie Observable sie zrobi?
-  // getOtherEmployees(): EmployeeDTOInterface[] {
-  //   if (this.allEmployees === undefined) {
-  //     return [];
-  //   } else {
-  //     if (this.employeeToEdit === undefined) {
-  //       return this.allEmployees;
-  //     }
-  //     return this.allEmployees.filter(
-  //       (e: EmployeeDTOInterface) => e.id != this.employeeToEdit?.id
-  //     );
-  //   }
-  // }
-
-  // // TODO: 2 ponizej symulują zapytanie do backendu
-  // private getSkills(): string[] {
-  //   return SKILLS;
-  // }
-  //
-  // private getProjects(): ProjectDTOInterface[] {
-  //   return PROJECTS;
-  // }
 
   protected readonly Boolean = Boolean;
 }

@@ -8,13 +8,12 @@ import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 })
 export class EmployeeListComponent {
   // TODO : czy to powinno być nullowalne ("nazwa?") czy lepiej inicjować pustą listą
-  @Input() employees?: EmployeeDTOInterface[];
+  @Input() employees: EmployeeDTOInterface[] = [];
   selectedEmployee?: EmployeeDTOInterface;
+  // TODO: czy trzymanie selectedEmployee nie jest błędne, jesli chcialem traktować ten komponent jako dumb
   @Output() selectEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
 
   onSelectEmployee(employee: EmployeeDTOInterface): void {
-    // TODO check if comparison of employees work or should i do :
-    // this.selectedEmployee.id != employee.id
     if (
       this.selectedEmployee === undefined ||
       this.selectedEmployee != employee
