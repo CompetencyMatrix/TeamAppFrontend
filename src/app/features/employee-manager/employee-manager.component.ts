@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { v4 as uuid } from 'uuid';
-import { EMPLOYEES } from '../../mocks/mock-employees';
 import { SKILLS } from '../../mocks/mock-skills';
 import { PROJECTS } from '../../mocks/mock-projects';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
+import { MessageService } from '../../core/services/message/message.service';
 
 @Component({
   selector: 'app-employee-manager',
@@ -24,9 +24,16 @@ export class EmployeeManagerComponent implements OnInit {
     this.setOtherEmployees();
   }
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private messageService: MessageService
+  ) {}
 
   selectEmployee(newEmployee: EmployeeDTOInterface): void {
+    // TODO: add translation pipe here
+    this.messageService.add(
+      `Employee-Manager: Selected employee ${newEmployee.name} ${newEmployee.surname}`
+    );
     this.selectedEmployee = newEmployee;
     this.setOtherEmployees();
   }

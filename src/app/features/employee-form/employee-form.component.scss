@@ -3,8 +3,9 @@
 .employee-form {
   &__hint {
     font-size: 1rem;
-    color: $tapp-tertiary;
-    border-color: $tapp-tertiary-dark;
+    color: $tapp-alert-on-warn;
+    background-color: $tapp-alert-warn;
+    border-color: $tapp-alert-warn;
     border-style: groove;
     width: fit-content;
     padding: 4px;

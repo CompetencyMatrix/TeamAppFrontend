@@ -14,6 +14,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ProjectsComponent } from './features/projects/projects.component';
 import { LanguageSwitchComponent } from './features/language-switch/language-switch.component';
 import { EmployeeManagerComponent } from './features/employee-manager/employee-manager.component';
+import { MessagesComponent } from './features/messages/messages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -28,6 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectsComponent,
     LanguageSwitchComponent,
     EmployeeManagerComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
