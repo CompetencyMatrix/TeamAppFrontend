@@ -47,8 +47,9 @@
       },
       "employee": {
         "fetched.employees": "SerwisPracowników: pobrano pracowników.",
-        "add.new":  "Zarządca-Pracowników: Dodawanie Nowego Pracownika.",
-        "select" : "Zarządca-Pracowników: Wybrano pracownika {{newEmployee.name}} {{newEmployee.surname}}"
+        "add.new":  "Zarządca-Pracowników: Dodawanie Nowego Pracownika: {{employee.name}} {{employee.surname}}",
+        "edit":  "Zarządca-Pracowników: Edytowanie Pracownika {{employee.name}} {{employee.surname}}",
+        "select" : "Zarządca-Pracowników: Wybrano pracownika {{employee.name}} {{employee.surname}}"
       }
     }
   }

@@ -34,12 +34,10 @@ export class EmployeeManagerComponent implements OnInit {
   ) {}
 
   selectEmployee(newEmployee: EmployeeDTOInterface | undefined): void {
-    // TODO: add translation pipe here
     if (newEmployee === undefined) {
-      this.messageService.addByKey('messages.service.employee.add.new');
     } else {
       this.messageService.addByKey('messages.service.employee.select', {
-        newEmployee: newEmployee,
+        employee: newEmployee,
       });
     }
     this.selectedEmployee = newEmployee;
@@ -61,12 +59,24 @@ export class EmployeeManagerComponent implements OnInit {
   }
 
   private addNewEmployee(submittedEmployee: EmployeeDTOInterface): void {
+    // TODO: changed to Synchronus - should it stay like this and why?
+    this.messageService.addByKeySynchronus(
+      'messages.service.employee.add.new',
+      {
+        employee: submittedEmployee,
+      }
+    );
     this.allEmployees.push({
       ...submittedEmployee,
+      // TODO: ID: to be set in database
       id: uuid(),
     });
   }
   private editEmployee(submittedEmployee: EmployeeDTOInterface): void {
+    console.log(submittedEmployee);
+    this.messageService.addByKey('messages.service.employee.edit', {
+      employee: submittedEmployee,
+    });
     const foundEmployee = this.allEmployees.find(
       (e: EmployeeDTOInterface) => e.id === submittedEmployee.id
     );

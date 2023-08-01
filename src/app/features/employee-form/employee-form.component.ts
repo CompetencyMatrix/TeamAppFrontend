@@ -50,11 +50,18 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   buildForm(): FormGroup {
     return this.formBuilder.group({
       id: [{ value: '', disabled: true }],
-      name: ['', Validators.required],
-      surname: [''],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.pattern('^[a-zA-Z]+$'),
+        ],
+      ],
+      surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       hireDate: [''],
-      skills: [''],
-      projects: [''],
+      skills: [{ value: [] }],
+      projects: [{ value: [] }],
       manager: [''],
     });
   }
@@ -64,6 +71,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit(): void {
+    // TODO: form is not initalized correctly? - nulls
+    console.log(this.employeeForm);
     this.updateEmployee({
       ...this.employeeForm.getRawValue(),
       hireDate: new Date(this.employeeForm.value['hireDate']),

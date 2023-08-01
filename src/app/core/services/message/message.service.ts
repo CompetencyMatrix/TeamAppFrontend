@@ -14,6 +14,13 @@ export class MessageService {
       .get(messageKey, interpolateParams)
       .subscribe((message: string) => this.add(message));
   }
+
+  addByKeySynchronus(
+    messageKey: string,
+    interpolateParams?: object | undefined
+  ): void {
+    this.add(this.translate.instant(messageKey, interpolateParams));
+  }
   add(message: string) {
     this.messages.push(message);
   }
