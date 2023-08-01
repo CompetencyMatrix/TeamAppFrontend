@@ -11,7 +11,7 @@ export class SkillService {
 
   getSkills(): Observable<string[]> {
     const skills = of(SKILLS);
-    this.messageService.add('SkillService: fetched Skills.');
+    this.messageService.addByKey('messages.service.skill.fetched.skills');
     return skills;
   }
 }

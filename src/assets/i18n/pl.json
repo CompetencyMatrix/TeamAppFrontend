@@ -37,6 +37,19 @@
   },
   "messages": {
     "title": "Wiadomości",
-    "clear.button": "Wyczyść wiadomości"
+    "clear.button": "Wyczyść wiadomości",
+    "service":{
+      "skill":{
+        "fetched.skills": "SerwisUmiejętności: pobrano umiejętności."
+      },
+      "project": {
+        "fetched.projects": "SerwisProjektów: pobrano projekty."
+      },
+      "employee": {
+        "fetched.employees": "SerwisPracowników: pobrano pracowników.",
+        "add.new":  "Zarządca-Pracowników: Dodawanie Nowego Pracownika.",
+        "select" : "Zarządca-Pracowników: Wybrano pracownika {{newEmployee.name}} {{newEmployee.surname}}"
+      }
+    }
   }
 }

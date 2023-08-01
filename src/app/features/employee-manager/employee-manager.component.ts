@@ -36,11 +36,11 @@ export class EmployeeManagerComponent implements OnInit {
   selectEmployee(newEmployee: EmployeeDTOInterface | undefined): void {
     // TODO: add translation pipe here
     if (newEmployee === undefined) {
-      this.messageService.add(`Employee-Manager: Adding New Employee`);
+      this.messageService.addByKey('messages.service.employee.add.new');
     } else {
-      this.messageService.add(
-        `Employee-Manager: Selected employee ${newEmployee.name} ${newEmployee.surname}`
-      );
+      this.messageService.addByKey('messages.service.employee.select', {
+        newEmployee: newEmployee,
+      });
     }
     this.selectedEmployee = newEmployee;
     this.setOtherEmployees();
@@ -78,11 +78,6 @@ export class EmployeeManagerComponent implements OnInit {
       );
     }
   }
-
-  // TODO: Czy taka funkcja mogłaby być w serwisie?
-  //  Czy wołanie do serwisu o podanie listy wszystkich pracownikow pomniejszonej o jednego konkretnego za kazdym razem kiedy zachodzi event select w liscie bedzie bardziej kosztowne niż trzymanie takiej listy na stałe?
-  //  Czy można to zrobić w jakiś sposób Lazy - tak aby dopiero kiedy ktos bedzie chcial wybrać managera to wywołało się faktyczne wykonanie operacji w serwisie?
-  // TU wlasnie Observable sie zrobi?
 
   private setOtherEmployees(): void {
     if (this.allEmployees === undefined) {

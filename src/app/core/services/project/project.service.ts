@@ -10,9 +10,10 @@ import { PROJECTS } from '../../../mocks/mock-projects';
 export class ProjectService {
   constructor(private messageService: MessageService) {}
 
+  // TODO: pewnie powinno być Lazy
   getProjects(): Observable<ProjectDTOInterface[]> {
     const projects: Observable<ProjectDTOInterface[]> = of(PROJECTS);
-    this.messageService.add('ProjectService: fetched projects.');
+    this.messageService.addByKey('messages.service.project.fetched.projects');
     return projects;
   }
 }

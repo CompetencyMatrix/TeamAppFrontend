@@ -8,7 +8,7 @@
       "new.employee.button": "New Employee"
     },
     "details": {
-      "title": "{{person}} Details",
+      "title": "{{person}}'s Details",
       "id": "ID",
       "name": "Employee name",
       "hire.date": "Hire Date",
@@ -37,6 +37,19 @@
   },
   "messages": {
     "title": "Messages",
-    "clear.button": "Clear messages"
+    "clear.button": "Clear messages",
+    "service":{
+      "skill":{
+        "fetched.skills": "SkillService: fetched Skills."
+      },
+      "project": {
+        "fetched.projects": "ProjectService: fetched projects."
+      },
+      "employee": {
+        "fetched.employees": "EmployeeService: fetched employees.",
+        "add.new":  "Employee-Manager: Adding New Employee",
+        "select" : "Employee-Manager: Selected employee {{newEmployee.name}} {{newEmployee.surname}}"
+      }
+    }
   }
 }
