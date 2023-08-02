@@ -73,7 +73,6 @@ export class EmployeeManagerComponent implements OnInit {
     });
   }
   private editEmployee(submittedEmployee: EmployeeDTOInterface): void {
-    console.log(submittedEmployee);
     this.messageService.addByKey('messages.service.employee.edit', {
       employee: submittedEmployee,
     });

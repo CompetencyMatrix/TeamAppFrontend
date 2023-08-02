@@ -15,6 +15,10 @@ import { ProjectsComponent } from './features/projects/projects.component';
 import { LanguageSwitchComponent } from './features/language-switch/language-switch.component';
 import { EmployeeManagerComponent } from './features/employee-manager/employee-manager.component';
 import { MessagesComponent } from './features/messages/messages.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -38,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     NgSelectModule,
     HttpClientModule,
+    MatSlideToggleModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -46,6 +51,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       defaultLanguage: 'en',
     }),
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

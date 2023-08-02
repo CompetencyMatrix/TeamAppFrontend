@@ -7,11 +7,8 @@
   padding: 0;
   width: 30rem;
 
-  &__element {
-    display: flex;
-  }
-
   &__button {
+    display: flex;
     flex: 1;
     cursor: pointer;
     position: relative;

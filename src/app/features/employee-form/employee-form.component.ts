@@ -27,10 +27,12 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   employeeForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
+    // TODO: remove \/
     this.employeeForm = this.buildForm();
   }
 
   ngOnInit(): void {
+    this.employeeForm = this.buildForm();
     if (this.employeeToEdit) {
       this.employeeForm.patchValue(this.employeeToEdit);
     }
@@ -59,9 +61,10 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         ],
       ],
       surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      hireDate: [''],
-      skills: [{ value: [] }],
-      projects: [{ value: [] }],
+      hireDate: [new Date()],
+      avatarUrl: ['../../../assets/img/avatar-default.jpg'],
+      skills: [[]],
+      projects: [[]],
       manager: [''],
     });
   }
@@ -72,7 +75,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   onSubmit(): void {
     // TODO: form is not initalized correctly? - nulls
-    console.log(this.employeeForm);
+    console.log(this.employeeForm.getRawValue());
+
     this.updateEmployee({
       ...this.employeeForm.getRawValue(),
       hireDate: new Date(this.employeeForm.value['hireDate']),

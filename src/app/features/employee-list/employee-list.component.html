@@ -1,16 +1,18 @@
 <h2>{{ 'employee.list.title' | translate }}</h2>
-<ul class="employee-list">
-  <li *ngFor="let employee of employees" class="employee-list__element">
-    <button
-      class="employee-list__button"
-      (click)="onSelectEmployee(employee)"
-      [class.employee-list__button--selected]="employee === selectedEmployee"
-      type="button">
-      <span class="employee-list__id">{{ employee.id }}</span>
-      <span class="employee-list__name">{{ employee.name }}</span>
-    </button>
-  </li>
-</ul>
+<mat-action-list class="employee-list">
+  <!--  class="employee-list__button"-->
+  <button
+    mat-list-item
+    class="employee-list__button"
+    (click)="onSelectEmployee(employee)"
+    [class.employee-list__button--selected]="employee === selectedEmployee"
+    type="button"
+    *ngFor="let employee of employees">
+    <img matListItemAvatar [src]="employee.avatarUrl" alt="Employee Avatar" />
+    <span class="employee-list__id">{{ employee.id }}</span>
+    <span class="employee-list__name">{{ employee.name }}</span>
+  </button>
+</mat-action-list>
 <button (click)="onAddNewEmployee()">
   {{ 'employee.list.new.employee.button' | translate }}
 </button>
