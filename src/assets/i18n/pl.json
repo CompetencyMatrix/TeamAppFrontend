@@ -34,5 +34,23 @@
       "submit.button": "Zatwierdź",
       "reset.button": "Zresetuj"
     }
+  },
+  "messages": {
+    "title": "Wiadomości",
+    "clear.button": "Wyczyść wiadomości",
+    "service":{
+      "skill":{
+        "fetched.skills": "SerwisUmiejętności: pobrano umiejętności."
+      },
+      "project": {
+        "fetched.projects": "SerwisProjektów: pobrano projekty."
+      },
+      "employee": {
+        "fetched.employees": "SerwisPracowników: pobrano pracowników.",
+        "add.new":  "Zarządca-Pracowników: Dodawanie Nowego Pracownika: {{employee.name}} {{employee.surname}}",
+        "edit":  "Zarządca-Pracowników: Edytowanie Pracownika {{employee.name}} {{employee.surname}}",
+        "select" : "Zarządca-Pracowników: Wybrano pracownika {{employee.name}} {{employee.surname}}"
+      }
+    }
   }
 }

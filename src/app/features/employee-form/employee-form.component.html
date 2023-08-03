@@ -1,12 +1,12 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="employeeForm" class="employee-form">
   <h2 class="employee-form__title">
-    <span *ngIf="editedEmployee; else newEmployeeBlock">
+    <span *ngIf="employeeToEdit; else newEmployeeBlock">
       {{
         'employee.form.edit.title'
           | translate
             : {
                 person:
-                  [editedEmployee.name, editedEmployee.surname]
+                  [employeeToEdit.name, employeeToEdit.surname]
                     .filter(Boolean)
                     .join(' ') | uppercase
               }
@@ -51,7 +51,7 @@
   <div class="employee-form__field">
     <label for="manager"> {{ 'employee.form.manager' | translate }}: </label>
     <ng-select [searchable]="true" id="manager" formControlName="manager">
-      <ng-option *ngFor="let manager of otherEmployees" [value]="manager.name">
+      <ng-option *ngFor="let manager of allowedManagers" [value]="manager.name">
         {{ manager.name }}
       </ng-option>
     </ng-select>
@@ -84,4 +84,3 @@
     {{ 'employee.form.reset.button' | translate }}
   </button>
 </form>
-<app-language-switch></app-language-switch>

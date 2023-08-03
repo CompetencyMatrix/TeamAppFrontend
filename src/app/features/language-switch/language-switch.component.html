@@ -2,7 +2,7 @@
   <button
     class="language-switch__button"
     [class.language-switch__button--selected]="
-      this.translate.currentLang === 'pl'
+      this.getCurrentLanguage() === 'pl'
     "
     (click)="setLanguage('pl')">
     pl
@@ -11,7 +11,7 @@
   <button
     class="language-switch__button"
     [class.language-switch__button--selected]="
-      this.translate.currentLang === 'en'
+      this.getCurrentLanguage() === 'en'
     "
     (click)="setLanguage('en')">
     en

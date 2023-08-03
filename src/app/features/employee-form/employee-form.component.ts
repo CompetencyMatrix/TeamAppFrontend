@@ -8,8 +8,6 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
-import { SKILLS } from '../../mocks/mock-skills';
-import { PROJECTS } from '../../mocks/mock-projects';
 import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
 
 @Component({
@@ -17,52 +15,65 @@ import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss'],
 })
+// TODO: I wasn't sure if this component should be smart or dumb - it is the only one that needs skills and projects, but in future other ones may need them also so maybe its best to pass them from the main - manager component - as it is done now (they used to be set here from mocks without input)
 export class EmployeeFormComponent implements OnInit, OnChanges {
-  @Input() editedEmployee?: EmployeeDTOInterface;
-  @Input() allEmployees?: EmployeeDTOInterface[];
+  @Input() employeeToEdit?: EmployeeDTOInterface;
+  @Input() allowedManagers: EmployeeDTOInterface[] = [];
+  @Input() skills: string[] = [];
+  @Input() projects: ProjectDTOInterface[] = [];
+
   @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
-  skills: string[] = this.getSkills();
-  projects: ProjectDTOInterface[] = this.getProjects();
-  otherEmployees: EmployeeDTOInterface[] = [];
+  // TODO: czy nie powinien byc private i do tego setter i getter?
   employeeForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
-    this.employeeForm = this.formBuilder.group({
-      id: [{ value: '', disabled: true }],
-      name: ['', Validators.required],
-      surname: [''],
-      hireDate: [''],
-      skills: [''],
-      projects: [''],
-      manager: [''],
-    });
+    this.employeeForm = this.buildForm();
   }
 
   ngOnInit(): void {
-    this.setOtherEmployees();
-    if (this.editedEmployee) {
-      this.employeeForm.patchValue(this.editedEmployee);
+    if (this.employeeToEdit) {
+      this.employeeForm.patchValue(this.employeeToEdit);
     }
   }
 
   ngOnChanges(): void {
-    this.setOtherEmployees();
-    if (this.editedEmployee) {
+    if (this.employeeToEdit) {
       this.employeeForm.patchValue({
-        ...this.editedEmployee,
-        hireDate: this.editedEmployee.hireDate.toISOString().slice(0, 10),
+        ...this.employeeToEdit,
+        hireDate: this.employeeToEdit.hireDate.toISOString().slice(0, 10),
       });
     } else {
       this.employeeForm.reset();
     }
   }
 
-  editEmployee(newEmployee: EmployeeDTOInterface): void {
-    this.editEmployeeEvent.emit(newEmployee);
+  buildForm(): FormGroup {
+    return this.formBuilder.group({
+      id: [{ value: '', disabled: true }],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.pattern('^[a-zA-Z]+$'),
+        ],
+      ],
+      surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      hireDate: [''],
+      skills: [{ value: [] }],
+      projects: [{ value: [] }],
+      manager: [''],
+    });
+  }
+
+  updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
+    this.editEmployeeEvent.emit(employeeToUpdate);
   }
 
   onSubmit(): void {
-    this.editEmployee({
+    // TODO: form is not initalized correctly? - nulls
+    console.log(this.employeeForm);
+    this.updateEmployee({
       ...this.employeeForm.getRawValue(),
       hireDate: new Date(this.employeeForm.value['hireDate']),
     });
@@ -70,40 +81,14 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   onResetForm(): void {
-    if (this.editedEmployee) {
+    if (this.employeeToEdit) {
       this.employeeForm.patchValue({
-        ...this.editedEmployee,
-        hireDate: this.editedEmployee.hireDate.toISOString().slice(0, 10),
+        ...this.employeeToEdit,
+        hireDate: this.employeeToEdit.hireDate.toISOString().slice(0, 10),
       });
     } else {
       this.employeeForm.reset();
     }
-  }
-
-  setOtherEmployees(): void {
-    this.otherEmployees = this.getOtherEmployees();
-  }
-
-  getOtherEmployees(): EmployeeDTOInterface[] {
-    if (this.allEmployees === undefined) {
-      return [];
-    } else {
-      if (this.editedEmployee === undefined) {
-        return this.allEmployees;
-      }
-      return this.allEmployees.filter(
-        (e: EmployeeDTOInterface) => e.id != this.editedEmployee?.id
-      );
-    }
-  }
-
-  // TODO: 2 ponizej symulują zapytanie do backendu
-  private getSkills(): string[] {
-    return SKILLS;
-  }
-
-  private getProjects(): ProjectDTOInterface[] {
-    return PROJECTS;
   }
 
   protected readonly Boolean = Boolean;

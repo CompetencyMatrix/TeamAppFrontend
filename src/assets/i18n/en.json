@@ -8,7 +8,7 @@
       "new.employee.button": "New Employee"
     },
     "details": {
-      "title": "{{person}} Details",
+      "title": "{{person}}'s Details",
       "id": "ID",
       "name": "Employee name",
       "hire.date": "Hire Date",
@@ -33,6 +33,24 @@
       "invalid.hint": "Complete the form to enable the button.",
       "submit.button": "Submit",
       "reset.button": "Reset"
+    }
+  },
+  "messages": {
+    "title": "Messages",
+    "clear.button": "Clear messages",
+    "service":{
+      "skill":{
+        "fetched.skills": "SkillService: fetched Skills."
+      },
+      "project": {
+        "fetched.projects": "ProjectService: fetched projects."
+      },
+      "employee": {
+        "fetched.employees": "EmployeeService: fetched employees.",
+        "add.new":  "Employee-Manager: Adding New Employee: {{employee.name}} {{employee.surname}}",
+        "edit":  "Employee-Manager: Editing Employee: {{employee.name}} {{employee.surname}}",
+        "select" : "Employee-Manager: Selected Employee: {{employee.name}} {{employee.surname}}"
+      }
     }
   }
 }

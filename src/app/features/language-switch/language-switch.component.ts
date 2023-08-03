@@ -7,11 +7,15 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./language-switch.component.scss'],
 })
 export class LanguageSwitchComponent {
-  constructor(public translate: TranslateService) {
+  constructor(private readonly translate: TranslateService) {
     this.translate.use('en');
   }
 
   setLanguage(value: string): void {
     this.translate.use(value);
+  }
+
+  getCurrentLanguage(): string {
+    return this.translate.currentLang;
   }
 }

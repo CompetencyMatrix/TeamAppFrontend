@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
-import { EMPLOYEES } from '../../mocks/mock-employees';
-import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-employee-list',
@@ -9,47 +7,33 @@ import { v4 as uuid } from 'uuid';
   styleUrls: ['./employee-list.component.scss'],
 })
 export class EmployeeListComponent {
-  employees: EmployeeDTOInterface[] = EMPLOYEES;
+  // TODO : czy to powinno być nullowalne ("nazwa?") czy lepiej inicjować pustą listą
+  @Input() employees: EmployeeDTOInterface[] = [];
   selectedEmployee?: EmployeeDTOInterface;
+  // TODO: czy trzymanie selectedEmployee nie jest błędne, jesli chcialem traktować ten komponent jako dumb
+  @Output() selectEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
 
-  unselectEmployee(): void {
-    this.selectedEmployee = undefined;
-  }
-
-  onSelect(employee: EmployeeDTOInterface): void {
-    this.selectedEmployee = employee;
-  }
-
-  updateList(submittedEmployee: EmployeeDTOInterface): void {
-    const foundEmployee = this.employees.find(
-      (e: EmployeeDTOInterface) => e.id === submittedEmployee.id
-    );
-
-    if (foundEmployee) {
-      this.editEmployee(submittedEmployee);
-      this.selectedEmployee = submittedEmployee;
+  onSelectEmployee(employee: EmployeeDTOInterface): void {
+    if (
+      this.selectedEmployee === undefined ||
+      this.selectedEmployee != employee
+    ) {
+      this.selectEmployee(employee);
     } else {
-      this.addNewEmployee(submittedEmployee);
+      this.unselectEmployee();
     }
-    this.selectedEmployee = undefined;
   }
 
-  private addNewEmployee(submittedEmployee: EmployeeDTOInterface): void {
-    this.employees.push({
-      ...submittedEmployee,
-      id: uuid(),
-    });
+  onAddNewEmployee(): void {
+    this.unselectEmployee();
   }
-  private editEmployee(submittedEmployee: EmployeeDTOInterface): void {
-    const foundEmployee = this.employees.find(
-      (e: EmployeeDTOInterface) => e.id === submittedEmployee.id
-    );
-    if (foundEmployee) {
-      this.employees.splice(
-        this.employees.indexOf(foundEmployee),
-        1,
-        submittedEmployee
-      );
-    }
+
+  private unselectEmployee(): void {
+    this.selectedEmployee = undefined;
+    this.selectEmployeeEvent.emit(this.selectedEmployee);
+  }
+  private selectEmployee(employee: EmployeeDTOInterface): void {
+    this.selectedEmployee = employee;
+    this.selectEmployeeEvent.emit(this.selectedEmployee);
   }
 }
