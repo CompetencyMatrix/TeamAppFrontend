@@ -1,6 +1,7 @@
-<h2>{{ 'employee.list.title' | translate }}</h2>
 <mat-action-list class="employee-list">
-  <!--  class="employee-list__button"-->
+  <h2>
+    {{ 'employee.list.title' | translate }}
+  </h2>
   <button
     mat-list-item
     class="employee-list__button"
@@ -13,6 +14,7 @@
     <span class="employee-list__name">{{ employee.name }}</span>
   </button>
 </mat-action-list>
+
 <button (click)="onAddNewEmployee()">
   {{ 'employee.list.new.employee.button' | translate }}
 </button>

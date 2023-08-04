@@ -1,8 +1,8 @@
-<article
+<mat-card
   *ngIf="selectedEmployee"
   xmlns="http://www.w3.org/1999/html"
   class="employee-details">
-  <h2 class="employee-details__title">
+  <mat-card-title class="employee-details__title">
     {{
       'employee.details.title'
         | translate
@@ -13,30 +13,33 @@
                   .join(' ') | uppercase
             }
     }}
-  </h2>
-  <div class="employee-details__field">
-    <label for="name">{{ 'employee.details.name' | translate }}: </label>
-    <input [(ngModel)]="selectedEmployee.name" id="name" placeholder="name" />
-  </div>
-  <div class="employee-details__field">
-    <p>{{ 'employee.details.id' | translate }}: {{ selectedEmployee.id }}</p>
-  </div>
-  <div class="employee-details__field">
-    <p>
-      {{ 'employee.details.hire.date' | translate }}:
-      {{ selectedEmployee.hireDate | date: 'dd-MMM-YYYY' }}
-    </p>
-  </div>
-  <div class="employee-details__field">
-    <p>
-      {{ 'employee.details.manager' | translate }}:
-      {{ selectedEmployee.manager }}
-    </p>
-  </div>
-  <div class="employee-details__field">
-    <p>
-      {{ 'employee.details.skills' | translate }}: {{ selectedEmployee.skills }}
-    </p>
-  </div>
-  <app-projects [projects]="selectedEmployee.projects"></app-projects>
-</article>
+  </mat-card-title>
+  <mat-card-content>
+    <div class="employee-details__field">
+      <label for="name">{{ 'employee.details.name' | translate }}: </label>
+      <input [(ngModel)]="selectedEmployee.name" id="name" placeholder="name" />
+    </div>
+    <div class="employee-details__field">
+      <p>{{ 'employee.details.id' | translate }}: {{ selectedEmployee.id }}</p>
+    </div>
+    <div class="employee-details__field">
+      <p>
+        {{ 'employee.details.hire.date' | translate }}:
+        {{ selectedEmployee.hireDate | date: 'dd-MMM-YYYY' }}
+      </p>
+    </div>
+    <div class="employee-details__field">
+      <p>
+        {{ 'employee.details.manager' | translate }}:
+        {{ selectedEmployee.manager }}
+      </p>
+    </div>
+    <div class="employee-details__field">
+      <p>
+        {{ 'employee.details.skills' | translate }}:
+        {{ selectedEmployee.skills }}
+      </p>
+    </div>
+    <app-projects [projects]="selectedEmployee.projects"></app-projects>
+  </mat-card-content>
+</mat-card>

@@ -27,15 +27,15 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   employeeForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
-    // TODO: remove \/
     this.employeeForm = this.buildForm();
   }
 
   ngOnInit(): void {
-    this.employeeForm = this.buildForm();
     if (this.employeeToEdit) {
       this.employeeForm.patchValue(this.employeeToEdit);
     }
+    //   TODO: dodaj tutaj patchValue i inicjalne wartosci
+    this.employeeForm = this.buildForm();
   }
 
   ngOnChanges(): void {
