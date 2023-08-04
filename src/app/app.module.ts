@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { NavbarComponent } from './features/navbar/navbar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -34,6 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageSwitchComponent,
     EmployeeManagerComponent,
     MessagesComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     MatCardModule,
     MatListModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

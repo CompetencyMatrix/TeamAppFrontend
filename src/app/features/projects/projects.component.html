@@ -1,13 +1,19 @@
 <!--event - (selectedTabChange)=""-->
-<mat-list class="projects">
-  <h2>{{ 'employee.details.projects.title' | translate }}:</h2>
-  <mat-list-item *ngFor="let project of projects" class="projects__project">
-    <div class="projects__project__name">
-      {{ 'employee.details.projects.name' | translate }}: {{ project.name }}
+<h2>{{ 'employee.details.projects.title' | translate }}:</h2>
+<mat-tab-group mat-stretch-tabs class="projects">
+  <mat-tab *ngFor="let project of projects" class="projects__project">
+    <div *matTabLabel class="projects__project-name">
+      {{ project.name }}
     </div>
-    <div class="projects__project__deadline">
-      {{ 'employee.details.projects.deadline' | translate }}:
-      {{ project.deadline | date: 'dd-MM-YYYY' }}
-    </div>
-  </mat-list-item>
-</mat-list>
+    <mat-card *matTabContent class="projects__project-details">
+      <mat-card-content class="projects__project-">
+        <p>
+          {{ 'employee.details.projects.deadline' | translate }}:
+          {{ project.deadline | date: 'dd-MM-YYYY' }}
+        </p>
+        <!--        TODO -->
+        <p>Hours worked: 88</p>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
