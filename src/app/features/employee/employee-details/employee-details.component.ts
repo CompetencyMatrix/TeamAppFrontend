@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
+import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
 
 @Component({
   selector: 'app-employee-details',

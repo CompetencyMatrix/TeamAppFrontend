@@ -1,0 +1,17 @@
+@import '../../../../colors';
+
+.employee-details {
+  background-color: $tapp-secondary-light;
+  border-radius: 2rem;
+  padding: 2rem;
+  width: fit-content;
+
+  &__title {
+    color: $tapp-secondary;
+
+    &:hover {
+      color: $tapp-secondary-dark;
+      cursor: grab/pointer;
+    }
+  }
+}

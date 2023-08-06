@@ -7,8 +7,8 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
-import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
+import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
+import { ProjectDTOInterface } from '../../../models/DTO/projectDTO';
 
 @Component({
   selector: 'app-employee-form',

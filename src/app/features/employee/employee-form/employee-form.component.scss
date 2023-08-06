@@ -1,0 +1,18 @@
+@import '../../../../colors';
+
+.employee-form {
+  &__hint {
+    font-size: 1rem;
+    color: $tapp-alert-on-warn;
+    background-color: $tapp-alert-warn;
+    border-color: $tapp-alert-warn;
+    border-style: groove;
+    width: fit-content;
+    padding: 4px;
+    border-radius: 9px;
+    border-width: 0.5px;
+  }
+  &__field {
+    width: 100%;
+  }
+}
