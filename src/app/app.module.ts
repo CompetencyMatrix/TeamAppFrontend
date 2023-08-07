@@ -22,6 +22,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NavbarComponent } from './features/navbar/navbar.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -60,6 +63,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatCardModule,
     MatListModule,
     MatTabsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
