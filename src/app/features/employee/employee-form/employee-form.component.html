@@ -51,7 +51,7 @@
   <div class="employee-form__field">
     <label for="manager"> {{ 'employee.form.manager' | translate }}: </label>
     <ng-select [searchable]="true" id="manager" formControlName="manager">
-      <ng-option *ngFor="let manager of allowedManagers" [value]="manager.name">
+      <ng-option *ngFor="let manager of otherEmployees" [value]="manager.name">
         {{ manager.name }}
       </ng-option>
     </ng-select>

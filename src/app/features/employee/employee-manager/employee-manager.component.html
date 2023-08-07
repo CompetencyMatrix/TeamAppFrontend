@@ -4,11 +4,3 @@
 </app-employee-list>
 <app-employee-details
   [selectedEmployee]="selectedEmployee"></app-employee-details>
-
-<app-employee-form
-  [employeeToEdit]="selectedEmployee"
-  [skills]="skills"
-  [projects]="projects"
-  [allowedManagers]="otherEmployees"
-  (editEmployeeEvent)="updateEmployeesList($event)">
-</app-employee-form>

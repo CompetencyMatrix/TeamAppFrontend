@@ -1,17 +1,12 @@
-import {
-  Component,
-  Input,
-  Output,
-  OnChanges,
-  OnInit,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
 import { ProjectDTOInterface } from '../../../models/DTO/projectDTO';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../../core/services/employee/employee.service';
 import { Location } from '@angular/common';
+import { SkillService } from '../../../core/services/skill/skill.service';
+import { ProjectService } from '../../../core/services/project/project.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -20,12 +15,11 @@ import { Location } from '@angular/common';
 })
 // TODO: I wasn't sure if this component should be smart or dumb - it is the only one that needs skills and projects, but in future other ones may need them also so maybe its best to pass them from the main - manager component - as it is done now (they used to be set here from mocks without input)
 export class EmployeeFormComponent implements OnInit, OnChanges {
-  @Input() employeeToEdit?: EmployeeDTOInterface;
-  @Input() allowedManagers: EmployeeDTOInterface[] = [];
-  @Input() skills: string[] = [];
-  @Input() projects: ProjectDTOInterface[] = [];
+  employeeToEdit?: EmployeeDTOInterface;
+  otherEmployees: EmployeeDTOInterface[] = [];
+  skills: string[] = [];
+  projects: ProjectDTOInterface[] = [];
 
-  @Output() editEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
   // TODO: czy nie powinien byc private i do tego setter i getter?
   employeeForm: FormGroup;
 
@@ -33,16 +27,17 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private employeeService: EmployeeService,
+    private skillService: SkillService,
+    private projectService: ProjectService,
     private location: Location
   ) {
     this.employeeForm = this.buildForm();
   }
 
   ngOnInit(): void {
-    this.getHero();
-    if (this.employeeToEdit) {
-      this.employeeForm.patchValue(this.employeeToEdit);
-    }
+    this.getEmployee();
+    this.getSkills();
+    this.getProjects();
     //   TODO: dodaj tutaj patchValue i inicjalne wartosci
     this.employeeForm = this.buildForm();
   }
@@ -78,9 +73,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     });
   }
 
-  updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
-    this.editEmployeeEvent.emit(employeeToUpdate);
-  }
+  updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {}
 
   onSubmit(): void {
     // TODO: form is not initalized correctly? - nulls
@@ -106,8 +99,9 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   protected readonly Boolean = Boolean;
 
-  getHero(): void {
+  getEmployee(): void {
     const id: string | null = this.route.snapshot.paramMap.get('id');
+    console.log(id);
     if (id === null) {
       this.employeeToEdit = undefined;
     } else {
@@ -119,5 +113,40 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   goBack(): void {
     this.location.back();
+  }
+
+  private getProjects(): void {
+    this.projectService
+      .getProjects()
+      .subscribe(
+        (projects: ProjectDTOInterface[]) => (this.projects = projects)
+      );
+  }
+
+  private getSkills(): void {
+    this.skillService
+      .getSkills()
+      .subscribe((skills: string[]) => (this.skills = skills));
+  }
+
+  //TODO: rewrite
+  private getOtherEmployees(): void {
+    this.otherEmployees = [];
+    if (this.employeeToEdit === undefined) {
+      this.employeeService
+        .getEmployees()
+        .subscribe(
+          (employees: EmployeeDTOInterface[]) =>
+            (this.otherEmployees = employees)
+        );
+    }
+    this.employeeService
+      .getEmployees()
+      .subscribe(
+        (employees: EmployeeDTOInterface[]) =>
+          (this.otherEmployees = employees.filter(
+            (e: EmployeeDTOInterface) => e.id != this.employeeToEdit?.id
+          ))
+      );
   }
 }

@@ -14,22 +14,14 @@ import { ProjectService } from '../../../core/services/project/project.service';
 })
 export class EmployeeManagerComponent implements OnInit {
   allEmployees: EmployeeDTOInterface[] = [];
-  otherEmployees: EmployeeDTOInterface[] = [];
   selectedEmployee?: EmployeeDTOInterface;
-  skills: string[] = [];
-  projects: ProjectDTOInterface[] = [];
 
   ngOnInit(): void {
     this.getAllEmployees();
-    this.setOtherEmployees();
-    this.getSkills();
-    this.getProjects();
   }
 
   constructor(
     private employeeService: EmployeeService,
-    private skillService: SkillService,
-    private projectService: ProjectService,
     private messageService: MessageService
   ) {}
 
@@ -41,7 +33,6 @@ export class EmployeeManagerComponent implements OnInit {
       });
     }
     this.selectedEmployee = newEmployee;
-    this.setOtherEmployees();
   }
   // TODO: 3 below functions: to be moved to service, once it can really update the list -now its not stored in service anyhow - just returned in the getEmployees() call
   updateEmployeesList(submittedEmployee: EmployeeDTOInterface): void {
@@ -88,38 +79,11 @@ export class EmployeeManagerComponent implements OnInit {
     }
   }
 
-  private setOtherEmployees(): void {
-    if (this.allEmployees === undefined) {
-      this.otherEmployees = [];
-    } else {
-      if (this.selectedEmployee === undefined) {
-        this.otherEmployees = this.allEmployees;
-      }
-      this.otherEmployees = this.allEmployees.filter(
-        (e: EmployeeDTOInterface) => e.id != this.selectedEmployee?.id
-      );
-    }
-  }
-
   private getAllEmployees(): void {
     this.employeeService
       .getEmployees()
       .subscribe(
         (employees: EmployeeDTOInterface[]) => (this.allEmployees = employees)
       );
-  }
-
-  private getProjects(): void {
-    this.projectService
-      .getProjects()
-      .subscribe(
-        (projects: ProjectDTOInterface[]) => (this.projects = projects)
-      );
-  }
-
-  private getSkills(): void {
-    this.skillService
-      .getSkills()
-      .subscribe((skills: string[]) => (this.skills = skills));
   }
 }
