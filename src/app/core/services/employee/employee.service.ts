@@ -15,4 +15,16 @@ export class EmployeeService {
     this.messageService.addByKey('messages.service.employee.fetched.employees');
     return employees;
   }
+
+  getEmployee(id: string): Observable<EmployeeDTOInterface> {
+    const employee: EmployeeDTOInterface | undefined = EMPLOYEES.find(
+      (e: EmployeeDTOInterface) => e.id == id
+    );
+    // TODO: add here message and to language json
+    if (employee === undefined) {
+      // TODO: this is mock
+      throw DOMException;
+    }
+    return of(employee);
+  }
 }

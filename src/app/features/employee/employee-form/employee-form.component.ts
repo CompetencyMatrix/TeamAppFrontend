@@ -9,6 +9,9 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
 import { ProjectDTOInterface } from '../../../models/DTO/projectDTO';
+import { ActivatedRoute } from '@angular/router';
+import { EmployeeService } from '../../../core/services/employee/employee.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-employee-form',
@@ -26,11 +29,17 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   // TODO: czy nie powinien byc private i do tego setter i getter?
   employeeForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private employeeService: EmployeeService,
+    private location: Location
+  ) {
     this.employeeForm = this.buildForm();
   }
 
   ngOnInit(): void {
+    this.getHero();
     if (this.employeeToEdit) {
       this.employeeForm.patchValue(this.employeeToEdit);
     }
@@ -96,4 +105,19 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   protected readonly Boolean = Boolean;
+
+  getHero(): void {
+    const id: string | null = this.route.snapshot.paramMap.get('id');
+    if (id === null) {
+      this.employeeToEdit = undefined;
+    } else {
+      this.employeeService
+        .getEmployee(id)
+        .subscribe(employee => (this.employeeToEdit = employee));
+    }
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }

@@ -1,4 +1,8 @@
 <h1>{{ 'teamapp.title' | translate }}</h1>
 <app-language-switch></app-language-switch>
-<app-employee-manager></app-employee-manager>
+<nav>
+  <a routerLink="/employees">Employees</a>
+  <a routerLink="/dashboard">Dashboard</a>
+</nav>
+<router-outlet></router-outlet>
 <app-messages></app-messages>
