@@ -1,14 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmployeeManagerComponent } from './features/employee/employee-manager/employee-manager.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { EmployeeFormComponent } from './features/employee/employee-form/employee-form.component';
 
 const routes: Routes = [
-  { path: 'employees', component: EmployeeManagerComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'employees',
+    loadChildren: () =>
+      import('./employee-list/employee-list.module').then(
+        m => m.EmployeeListModule
+      ),
+  },
+  // TODO: ask - should we have lazy loading everywhere or not -e.g. below - default page - but if somebody starts from different one -e.g. using some shared link - we may not need to load it
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./company-dashboard/company-dashboard.module').then(
+        m => m.CompanyDashboardModule
+      ),
+  },
+  {
+    path: 'employee/:id',
+    loadChildren: () =>
+      import('./employee-form/employee-form.module').then(
+        m => m.EmployeeFormModule
+      ),
+  },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'employee/:id', component: EmployeeFormComponent },
+  //   TODO: ** PageNotFoundComponent
 ];
 
 @NgModule({

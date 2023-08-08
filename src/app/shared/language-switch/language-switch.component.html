@@ -1,0 +1,19 @@
+<div class="language-switch">
+  <button
+    class="language-switch__button"
+    [class.language-switch__button--selected]="
+      this.getCurrentLanguage() === 'pl'
+    "
+    (click)="setLanguage('pl')">
+    pl
+  </button>
+  |
+  <button
+    class="language-switch__button"
+    [class.language-switch__button--selected]="
+      this.getCurrentLanguage() === 'en'
+    "
+    (click)="setLanguage('en')">
+    en
+  </button>
+</div>
