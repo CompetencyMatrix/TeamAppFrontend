@@ -1,7 +1,13 @@
 <mat-toolbar class="toolbar">
   <h1>{{ 'teamapp.title' | translate }}</h1>
   <span class="toolbar__spacer"></span>
+  <!--  TODO: add i18n-->
   <a mat-button routerLink="/employees">Employees</a>
   <a mat-button routerLink="/dashboard">Dashboard</a>
+  <!--  TODO: change this - now it implies that ID === 'new' - it works bc id will be never like this, but should be changed to new-employee and make multiple path-->
+  <a mat-button routerLink="/employee/new">{{
+    'employee.list.new.employee.button' | translate
+  }}</a>
+
   <app-language-switch></app-language-switch>
 </mat-toolbar>

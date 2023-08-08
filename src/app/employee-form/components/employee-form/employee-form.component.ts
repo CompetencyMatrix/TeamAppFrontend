@@ -100,7 +100,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   getEmployee(): void {
     const id: string | null = this.route.snapshot.paramMap.get('id');
-    console.log(id);
     if (id === null) {
       this.employeeToEdit = undefined;
     } else {
