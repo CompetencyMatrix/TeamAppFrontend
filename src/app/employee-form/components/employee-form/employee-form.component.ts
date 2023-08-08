@@ -35,7 +35,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.getEmployee();
+    this.getOtherEmployees();
     this.getSkills();
     this.getProjects();
     //   TODO: dodaj tutaj patchValue i inicjalne wartosci
@@ -65,7 +65,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         ],
       ],
       surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      hireDate: [new Date()],
+      hireDate: '',
       avatarUrl: ['../../../assets/img/avatar-default.jpg'],
       skills: [[]],
       projects: [[]],
@@ -73,7 +73,9 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     });
   }
 
-  updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {}
+  updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
+    this.employeeService.updateEmployee(employeeToUpdate);
+  }
 
   onSubmit(): void {
     // Check in case submit button 'disbaled' attribute was changed manually
@@ -82,7 +84,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         ...this.employeeForm.getRawValue(),
         hireDate: new Date(this.employeeForm.value['hireDate']),
       });
-      this.employeeForm.reset();
+      // this.employeeForm.reset();
+      this.location.back();
     }
   }
   onResetForm(): void {
@@ -129,7 +132,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   //TODO: rewrite
   private getOtherEmployees(): void {
-    this.otherEmployees = [];
     if (this.employeeToEdit === undefined) {
       this.employeeService
         .getEmployees()

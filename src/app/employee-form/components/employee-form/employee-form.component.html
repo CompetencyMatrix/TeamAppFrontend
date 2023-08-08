@@ -18,10 +18,8 @@
   </h2>
 
   <mat-form-field class="employee-form__field">
-    <mat-label for="name">
-      {{ 'employee.form.firstname' | translate }}:
-    </mat-label>
-    <input matInput formControlName="name" id="name" type="text" />
+    <mat-label> {{ 'employee.form.firstname' | translate }}: </mat-label>
+    <input matInput formControlName="name" type="text" />
     <!--    TODO: text to json and get correct form control and then check for errors-->
     <!--    <mat-error *ngIf="employeeForm.hasError('minLength')">-->
     <!--      Name is required-->
@@ -29,10 +27,8 @@
   </mat-form-field>
 
   <mat-form-field class="employee-form__field">
-    <mat-label for="surname">
-      {{ 'employee.form.surname' | translate }}:
-    </mat-label>
-    <input matInput formControlName="surname" id="surname" type="text" />
+    <mat-label> {{ 'employee.form.surname' | translate }}: </mat-label>
+    <input matInput formControlName="surname" type="text" />
   </mat-form-field>
 
   <mat-form-field>
@@ -91,4 +87,4 @@
   </button>
 </form>
 
-<button type="button" (click)="goBack()">go back</button>
+<button mat-raised-button type="button" (click)="goBack()">Back</button>

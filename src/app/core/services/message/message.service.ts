@@ -9,13 +9,13 @@ export class MessageService {
 
   constructor(private readonly translate: TranslateService) {}
 
+  // TODO: which way to add message by key is preffered - asynchronus or synchronus?
   addByKey(messageKey: string, interpolateParams?: object | undefined): void {
     this.translate
       .get(messageKey, interpolateParams)
       .subscribe((message: string) => this.add(message));
   }
 
-  // TODO: which one is preffered
   addByKeySynchronus(
     messageKey: string,
     interpolateParams?: object | undefined
