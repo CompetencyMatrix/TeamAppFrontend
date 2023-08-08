@@ -29,6 +29,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { EmployeeTableComponent } from './employee-list/components/employee-table/employee-table.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -46,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MessagesComponent,
     NavbarComponent,
     DashboardComponent,
+    EmployeeTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatSelectModule,
     MatNativeDateModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

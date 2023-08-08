@@ -2,5 +2,11 @@
   [employees]="allEmployees"
   (selectEmployeeEvent)="selectEmployee($event)">
 </app-employee-list>
+
+<app-employee-table
+  [employees]="allEmployees"
+  (selectEmployeeEvent)="selectEmployee($event)">
+</app-employee-table>
+
 <app-employee-details
   [selectedEmployee]="selectedEmployee"></app-employee-details>
