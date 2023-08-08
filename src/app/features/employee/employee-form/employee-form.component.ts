@@ -76,16 +76,15 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {}
 
   onSubmit(): void {
-    // TODO: form is not initalized correctly? - nulls
-    console.log(this.employeeForm.getRawValue());
-
-    this.updateEmployee({
-      ...this.employeeForm.getRawValue(),
-      hireDate: new Date(this.employeeForm.value['hireDate']),
-    });
-    this.employeeForm.reset();
+    // Check in case submit button 'disbaled' attribute was changed manually
+    if (this.employeeForm.valid) {
+      this.updateEmployee({
+        ...this.employeeForm.getRawValue(),
+        hireDate: new Date(this.employeeForm.value['hireDate']),
+      });
+      this.employeeForm.reset();
+    }
   }
-
   onResetForm(): void {
     if (this.employeeToEdit) {
       this.employeeForm.patchValue({
