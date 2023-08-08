@@ -105,7 +105,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       this.employeeToEdit = undefined;
     } else {
       this.employeeService
-        .getEmployee(id)
+        .getEmployeeById(id)
         .subscribe(employee => (this.employeeToEdit = employee));
     }
   }

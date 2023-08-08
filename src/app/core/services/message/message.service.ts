@@ -15,6 +15,7 @@ export class MessageService {
       .subscribe((message: string) => this.add(message));
   }
 
+  // TODO: which one is preffered
   addByKeySynchronus(
     messageKey: string,
     interpolateParams?: object | undefined
