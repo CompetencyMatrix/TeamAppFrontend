@@ -31,10 +31,6 @@ export class EmployeeTableComponent {
     }
   }
 
-  onAddNewEmployee(): void {
-    this.unselectEmployee();
-  }
-
   private unselectEmployee(): void {
     this.selectEmployee(undefined);
   }

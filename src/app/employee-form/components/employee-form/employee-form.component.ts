@@ -13,7 +13,6 @@ import { ProjectService } from '../../../core/services/project/project.service';
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss'],
 })
-// TODO: I wasn't sure if this component should be smart or dumb - it is the only one that needs skills and projects, but in future other ones may need them also so maybe its best to pass them from the main - manager component - as it is done now (they used to be set here from mocks without input)
 export class EmployeeFormComponent implements OnInit, OnChanges {
   employeeToEdit?: EmployeeDTOInterface;
   otherEmployees: EmployeeDTOInterface[] = [];
@@ -35,6 +34,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.getEmployee();
     this.getOtherEmployees();
     this.getSkills();
     this.getProjects();
@@ -43,6 +43,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    this.getEmployee();
     if (this.employeeToEdit) {
       this.employeeForm.patchValue({
         ...this.employeeToEdit,
@@ -85,7 +86,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         hireDate: new Date(this.employeeForm.value['hireDate']),
       });
       // this.employeeForm.reset();
-      this.location.back();
+      this.goBack();
     }
   }
   onResetForm(): void {
