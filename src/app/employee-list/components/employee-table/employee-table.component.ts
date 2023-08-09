@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-employee-table',
@@ -19,6 +20,10 @@ export class EmployeeTableComponent {
     'skills',
     'manager',
   ];
+
+  // TODO: implement own DataSource
+  employeesDataSource: MatTableDataSource<EmployeeDTOInterface> =
+    new MatTableDataSource(this.employees);
 
   onSelectEmployee(employee: EmployeeDTOInterface): void {
     if (

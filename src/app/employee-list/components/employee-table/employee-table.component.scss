@@ -1,4 +1,33 @@
-.table__row--selected {
-  color: red;
-  background-color: blue;
+
+.employee-table {
+  //TODO: is it okay to treat container as an element
+  &__container {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  width: 100%;
+  max-width: 100%;
+  display: table;
+  border-collapse: collapse;
+  margin: 0;
+
+  &__row,
+  &__header-row {
+    display: table-row;
+  }
+
+  &__cell,
+  &__header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 1rem;
+    line-break: unset;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
 }
