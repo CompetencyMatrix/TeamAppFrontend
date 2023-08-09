@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { EmployeeService } from '../../core/services/employee/employee.service';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,5 +6,8 @@ import { EmployeeService } from '../../core/services/employee/employee.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(private employeeService: EmployeeService) {}
+  @Output() public sidenavToggle = new EventEmitter();
+  onToggleSidenav() {
+    this.sidenavToggle.emit();
+  }
 }

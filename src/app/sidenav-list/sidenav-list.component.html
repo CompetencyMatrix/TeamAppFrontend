@@ -1,0 +1,26 @@
+<mat-nav-list class="navigation-list">
+  <a
+    class="navigation-list__link"
+    mat-list-item
+    routerLink="/dashboard"
+    (click)="onSidenavClose()">
+    <mat-icon>home</mat-icon>
+    <span class="navigation-list__caption">Dashboard</span>
+  </a>
+  <a
+    class="navigation-list__link"
+    mat-list-item
+    routerLink="/employees"
+    (click)="onSidenavClose()">
+    <mat-icon>assignment_ind</mat-icon>
+    <span class="navigation-list__caption">Employees</span>
+  </a>
+  <a
+    class="navigation-list__link"
+    mat-list-item
+    routerLink="/employee/new"
+    (click)="onSidenavClose()">
+    <mat-icon>account_balance</mat-icon
+    ><span class="navigation-list__caption">New Employee</span>
+  </a>
+</mat-nav-list>

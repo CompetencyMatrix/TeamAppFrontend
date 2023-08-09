@@ -31,6 +31,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { EmployeeTableComponent } from './employee-list/components/employee-table/employee-table.component';
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { MatIconModule } from '@angular/material/icon';
+import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -49,6 +52,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NavbarComponent,
     DashboardComponent,
     EmployeeTableComponent,
+    SidenavComponent,
+    SidenavListComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +83,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSelectModule,
     MatNativeDateModule,
     MatTableModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

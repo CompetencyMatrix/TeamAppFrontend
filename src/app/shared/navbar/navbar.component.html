@@ -1,13 +1,36 @@
-<mat-toolbar class="toolbar">
-  <h1>{{ 'teamapp.title' | translate }}</h1>
-  <span class="toolbar__spacer"></span>
-  <!--  TODO: add i18n-->
-  <a mat-button routerLink="/employees">Employees</a>
-  <a mat-button routerLink="/dashboard">Dashboard</a>
-  <!--  TODO: change this - now it implies that ID === 'new' - it works bc id will be never like this, but should be changed to new-employee and make multiple path-->
-  <a mat-button routerLink="/employee/new">{{
-    'employee.list.new.employee.button' | translate
-  }}</a>
-
-  <app-language-switch></app-language-switch>
+<mat-toolbar class="navbar" color="primary">
+  <div class="navbar__left-part">
+    <div fxHide.gt-xs>
+      <button mat-icon-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <a routerLink="/dashboard">
+        <h1 class="navbar__app-title">{{ 'teamapp.title' | translate }}</h1>
+      </a>
+    </div>
+  </div>
+  <!--  TODO: rewrite to css flex styles-->
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs class="navbar__right-part">
+    <!--    TODO: make this list component and paste here and in sidenav - will styling work? -->
+    <ul fxLayout fxLayoutGap="15px" class="navbar__navigation-items">
+      <li class="navbar__navigation-item">
+        <!--  TODO: add i18n-->
+        <a mat-button routerLink="/employees">Employees</a>
+      </li>
+      <li class="navbar__navigation-item">
+        <a mat-button routerLink="/dashboard">Dashboard</a>
+      </li>
+      <li class="navbar__navigation-item">
+        <!--  TODO: change this - now it implies that ID === 'new' - it works bc id will be never like this, but should be changed to new-employee and make multiple path-->
+        <a mat-button routerLink="/employee/new">{{
+          'employee.list.new.employee.button' | translate
+        }}</a>
+      </li>
+    </ul>
+    <li class="navbar__navigation-item">
+      <app-language-switch></app-language-switch>
+    </li>
+  </div>
 </mat-toolbar>

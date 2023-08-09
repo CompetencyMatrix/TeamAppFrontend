@@ -1,0 +1,12 @@
+
+.sidenav__container,.sidenav__content, .sidenav {
+  height: 100%;
+}
+
+.sidenav {
+  width: 250px;
+
+  &__main-content {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,13 @@
+.navigation-list__link {
+  text-decoration: none;
+  color: white;
+
+  &:hover, &:active {
+    color: lightgray;
+  }
+
+  &__caption {
+    display: inline-block;
+    padding-left: 6px;
+  }
+}
