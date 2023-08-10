@@ -5,6 +5,9 @@
   justify-content: space-between;
   color: $tapp-on-primary;
 
+  &__menu-button {
+    display: inline-flex;
+  }
   &__app-title {
     color: $tapp-on-primary;
   }
@@ -22,10 +25,23 @@
   }
 
   &__navigation-item {
+    display: none;
+  }
+}
+
+
+@media only screen and (min-width: 600px) {
+.navbar {
+  &__menu-button {
+    display: none;
+  }
+
+  &__navigation-item {
     display: inline-flex;
 
     &:hover, &:active {
       color: $tapp-primary-light;
     }
   }
+}
 }

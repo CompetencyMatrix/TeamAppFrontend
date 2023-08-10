@@ -40,15 +40,13 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.getProjects();
     //   TODO: dodaj tutaj patchValue i inicjalne wartosci
     this.employeeForm = this.buildForm();
+    this.initializeForm();
   }
 
   ngOnChanges(): void {
     this.getEmployee();
     if (this.employeeToEdit) {
-      this.employeeForm.patchValue({
-        ...this.employeeToEdit,
-        hireDate: this.employeeToEdit.hireDate.toISOString().slice(0, 10),
-      });
+      this.initializeForm();
     } else {
       this.employeeForm.reset();
     }
@@ -149,5 +147,12 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
             (e: EmployeeDTOInterface) => e.id != this.employeeToEdit?.id
           ))
       );
+  }
+
+  initializeForm() {
+    this.employeeForm.patchValue({
+      ...this.employeeToEdit,
+      hireDate: this.employeeToEdit?.hireDate.toISOString().slice(0, 10),
+    });
   }
 }

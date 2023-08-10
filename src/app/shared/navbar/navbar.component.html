@@ -1,7 +1,10 @@
 <mat-toolbar class="navbar" color="primary">
   <div class="navbar__left-part">
     <div fxHide.gt-xs>
-      <button mat-icon-button (click)="onToggleSidenav()">
+      <button
+        mat-icon-button
+        class="navbar__menu-button"
+        (click)="onToggleSidenav()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+//TODO: do stalej
+// TODO: fall back path **
 const routes: Routes = [
   {
     path: 'employees',

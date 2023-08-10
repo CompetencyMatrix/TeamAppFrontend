@@ -33,7 +33,7 @@ import { MatTableModule } from '@angular/material/table';
 import { EmployeeTableComponent } from './employee-list/components/employee-table/employee-table.component';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { MatIconModule } from '@angular/material/icon';
-import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
+import { SidenavListComponent } from './shared/sidenav-list/sidenav-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
