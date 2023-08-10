@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
 import { v4 as uuid } from 'uuid';
 import { EmployeeService } from '../../../core/services/employee/employee.service';
@@ -6,6 +6,7 @@ import { ProjectDTOInterface } from '../../../models/DTO/projectDTO';
 import { MessageService } from '../../../core/services/message/message.service';
 import { SkillService } from '../../../core/services/skill/skill.service';
 import { ProjectService } from '../../../core/services/project/project.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-employee-manager',
@@ -13,6 +14,7 @@ import { ProjectService } from '../../../core/services/project/project.service';
   styleUrls: ['./employee-manager.component.scss'],
 })
 export class EmployeeManagerComponent implements OnInit {
+  destroyRef: DestroyRef = inject(DestroyRef);
   allEmployees: EmployeeDTOInterface[] = [];
   selectedEmployee?: EmployeeDTOInterface;
 
@@ -82,6 +84,7 @@ export class EmployeeManagerComponent implements OnInit {
   private getAllEmployees(): void {
     this.employeeService
       .getEmployees()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
         (employees: EmployeeDTOInterface[]) => (this.allEmployees = employees)
       );

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
 import { EmployeeService } from '../../../core/services/employee/employee.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +9,7 @@ import { EmployeeService } from '../../../core/services/employee/employee.servic
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  destroyRef: DestroyRef = inject(DestroyRef);
   employees: EmployeeDTOInterface[] = [];
 
   constructor(private employeeService: EmployeeService) {}
@@ -19,6 +21,10 @@ export class DashboardComponent implements OnInit {
   getEmployees(): void {
     this.employeeService
       .getEmployees()
-      .subscribe(employees => (this.employees = employees.slice(1, 5)));
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        (employees: EmployeeDTOInterface[]) =>
+          (this.employees = employees.slice(1, 5))
+      );
   }
 }

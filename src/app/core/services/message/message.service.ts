@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
+  destroyRef: DestroyRef = inject(DestroyRef);
   messages: string[] = [];
 
   constructor(private readonly translate: TranslateService) {}
@@ -13,6 +15,7 @@ export class MessageService {
   addByKey(messageKey: string, interpolateParams?: object | undefined): void {
     this.translate
       .get(messageKey, interpolateParams)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((message: string) => this.add(message));
   }
 

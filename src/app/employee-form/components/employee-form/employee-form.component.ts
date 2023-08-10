@@ -1,4 +1,10 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
 import { ProjectDTOInterface } from '../../../models/DTO/projectDTO';
@@ -7,6 +13,7 @@ import { EmployeeService } from '../../../core/services/employee/employee.servic
 import { Location } from '@angular/common';
 import { SkillService } from '../../../core/services/skill/skill.service';
 import { ProjectService } from '../../../core/services/project/project.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-employee-form',
@@ -14,6 +21,7 @@ import { ProjectService } from '../../../core/services/project/project.service';
   styleUrls: ['./employee-form.component.scss'],
 })
 export class EmployeeFormComponent implements OnInit, OnChanges {
+  destroyRef: DestroyRef = inject(DestroyRef);
   employeeToEdit?: EmployeeDTOInterface;
   otherEmployees: EmployeeDTOInterface[] = [];
   skills: string[] = [];
@@ -107,6 +115,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     } else {
       this.employeeService
         .getEmployeeById(id)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(employee => (this.employeeToEdit = employee));
     }
   }
@@ -118,6 +127,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   private getProjects(): void {
     this.projectService
       .getProjects()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
         (projects: ProjectDTOInterface[]) => (this.projects = projects)
       );
@@ -126,6 +136,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   private getSkills(): void {
     this.skillService
       .getSkills()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((skills: string[]) => (this.skills = skills));
   }
 
@@ -134,6 +145,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     if (this.employeeToEdit === undefined) {
       this.employeeService
         .getEmployees()
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(
           (employees: EmployeeDTOInterface[]) =>
             (this.otherEmployees = employees)
@@ -141,6 +153,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     }
     this.employeeService
       .getEmployees()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
         (employees: EmployeeDTOInterface[]) =>
           (this.otherEmployees = employees.filter(
