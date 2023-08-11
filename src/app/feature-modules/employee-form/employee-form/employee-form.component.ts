@@ -46,38 +46,13 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.getOtherEmployees();
     this.getSkills();
     this.getProjects();
-    //   TODO: dodaj tutaj patchValue i inicjalne wartosci
     this.employeeForm = this.buildForm();
     this.initializeForm();
   }
 
   ngOnChanges(): void {
     this.getEmployee();
-    if (this.employeeToEdit) {
-      this.initializeForm();
-    } else {
-      this.employeeForm.reset();
-    }
-  }
-
-  buildForm(): FormGroup {
-    return this.formBuilder.group({
-      id: [{ value: '', disabled: true }],
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(50),
-          Validators.pattern('^[a-zA-Z]+$'),
-        ],
-      ],
-      surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      hireDate: '',
-      avatarUrl: ['../../../assets/img/avatar-default.jpg'],
-      skills: [[]],
-      projects: [[]],
-      manager: [''],
-    });
+    this.initializeForm();
   }
 
   updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
@@ -96,14 +71,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     }
   }
   onResetForm(): void {
-    if (this.employeeToEdit) {
-      this.employeeForm.patchValue({
-        ...this.employeeToEdit,
-        hireDate: this.employeeToEdit.hireDate.toISOString().slice(0, 10),
-      });
-    } else {
-      this.employeeForm.reset();
-    }
+    console.log(this.employeeToEdit);
+    this.initializeForm();
   }
 
   protected readonly Boolean = Boolean;
@@ -116,7 +85,10 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       this.employeeService
         .getEmployeeById(id)
         .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe(employee => (this.employeeToEdit = employee));
+        .subscribe(
+          (employee: EmployeeDTOInterface | undefined) =>
+            (this.employeeToEdit = employee)
+        );
     }
   }
 
@@ -162,10 +134,35 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       );
   }
 
-  initializeForm() {
-    this.employeeForm.patchValue({
-      ...this.employeeToEdit,
-      hireDate: this.employeeToEdit?.hireDate.toISOString().slice(0, 10),
+  private buildForm(): FormGroup {
+    return this.formBuilder.group({
+      id: [{ value: '', disabled: true }],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.pattern('^[a-zA-Z]+$'),
+        ],
+      ],
+      surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      hireDate: '',
+      avatarUrl: ['../../../assets/img/avatar-default.jpg'],
+      skills: [[]],
+      projects: [[]],
+      manager: [''],
     });
+  }
+
+  private initializeForm(): void {
+    if (this.employeeToEdit) {
+      this.employeeForm.patchValue(this.employeeToEdit);
+    } else {
+      this.employeeForm.reset();
+    }
+    // this.employeeForm.patchValue({
+    //   ...this.employeeToEdit,
+    //   hireDate: this.employeeToEdit?.hireDate.toISOString().slice(0, 10),
+    // });
   }
 }

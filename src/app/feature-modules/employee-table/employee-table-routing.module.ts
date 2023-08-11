@@ -8,4 +8,4 @@ const routes: Routes = [{ path: '', component: EmployeeManagerComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EmployeeListRoutingModule {}
+export class EmployeeTableRoutingModule {}
