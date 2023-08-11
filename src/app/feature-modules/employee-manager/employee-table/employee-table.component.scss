@@ -1,4 +1,4 @@
-@import "src/styles/colors";
+@import 'src/styles/colors';
 
 .employee-table {
   //TODO: is it okay to treat container as an element
@@ -40,7 +40,8 @@
     margin: 0;
     background-color: transparent;
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       color: $tapp-tertiary;
     }
   }

@@ -166,13 +166,17 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   private updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
-    this.employeeService.updateEmployee(employeeToUpdate);
+    this.employeeService
+      .updateEmployee(employeeToUpdate)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   private addEmployee(employeeToAdd: EmployeeDTOInterface): void {
     this.employeeService
       .addNewEmployee(employeeToAdd)
-      .subscribe(emp => console.log(emp));
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   private getFormData(): EmployeeDTOInterface {
@@ -184,7 +188,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   private getEmployeeId(): void {
     this.employeeId = this.route.snapshot.paramMap.get('id');
-    console.log(this.employeeId);
   }
 
   private isAddingNewEmployee(): boolean {

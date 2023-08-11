@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
-import { EMPLOYEES } from '../../../mocks/mock-employees';
 import { Observable, of } from 'rxjs';
 import { MessageService } from '../message/message.service';
-import { v4 as uuid } from 'uuid';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -24,17 +23,25 @@ export class EmployeeService {
   }
 
   getEmployees(): Observable<EmployeeDTOInterface[]> {
-    this.log('messages.service.employee.fetched.employees');
-    return this.httpClient.get<EmployeeDTOInterface[]>(this.employeesApiUrl);
+    return this.httpClient
+      .get<EmployeeDTOInterface[]>(this.employeesApiUrl)
+      .pipe(
+        tap(_ => this.log('messages.service.employee.fetched.employees')),
+        catchError(this.handleError<EmployeeDTOInterface[]>('getEmployees', []))
+      );
   }
 
-  getEmployeeById(id: string): Observable<EmployeeDTOInterface | undefined> {
-    const employee: EmployeeDTOInterface | undefined = EMPLOYEES.find(
-      (e: EmployeeDTOInterface) => e.id == id
+  getEmployeeById(id: string): Observable<EmployeeDTOInterface> {
+    const employeeUrl = `${this.employeesApiUrl}/${id}`;
+    return this.httpClient.get<EmployeeDTOInterface>(employeeUrl).pipe(
+      tap(_ =>
+        // TODO: add here message and to language json
+        this.log('messages.service.employee.fetched.employee', { id: id })
+      ),
+      catchError(
+        this.handleError<EmployeeDTOInterface>(`getEmployeeById id=${id}`)
+      )
     );
-    // TODO: add here message and to language json
-
-    return of(employee);
   }
 
   addNewEmployee(
@@ -44,7 +51,6 @@ export class EmployeeService {
     this.log('messages.service.employee.add.new', {
       employee: submittedEmployee,
     });
-    console.log(submittedEmployee);
     return this.httpClient
       .post<EmployeeDTOInterface>(
         this.employeesApiUrl,
@@ -76,8 +82,43 @@ export class EmployeeService {
       );
   }
 
+  deleteEmployee(id: string): Observable<EmployeeDTOInterface> {
+    const employeeUrl = `${this.employeesApiUrl}/${id}`;
+
+    return this.httpClient
+      .delete<EmployeeDTOInterface>(employeeUrl, this.httpOptions)
+      .pipe(
+        tap(_ =>
+          // TODO: add here message and to language json
+          this.log('messages.service.employee.delete.employee', {
+            id: id,
+          })
+        ),
+        catchError(
+          this.handleError<EmployeeDTOInterface>(`deleteEmployee id=${id}`)
+        )
+      );
+  }
+
   private log(messageKey: string, interpolateParams?: object | undefined) {
     this.messageService.addByKey(messageKey, interpolateParams);
     // this.messageService.addByKeySynchronous(messageKey, interpolateParams);
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   *
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: Add translate module
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }

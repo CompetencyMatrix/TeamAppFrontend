@@ -18,7 +18,11 @@
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
         Name
       </th>
-      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
+      <td
+        mat-cell
+        class="employee-table__cell"
+        *matCellDef="let employee"
+        (click)="onSelectEmployee(employee)">
         {{ employee.name }}
       </td>
     </ng-container>
@@ -69,15 +73,36 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <th
+        mat-header-cell
+        class="employee-table__header-cell"
+        *matHeaderCellDef></th>
+      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
+        <!--        TODO: action list component -->
+        <ul class="employee-table__action-list">
+          <li>
+            <button
+              type="button"
+              class="employee-table__action-button"
+              title="delete employee"
+              (click)="onDeleteEmployee(employee)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </li>
+        </ul>
+      </td>
+    </ng-container>
+
     <tr
       mat-header-row
       class="employee-table__header-row"
       *matHeaderRowDef="columnsToDisplay"></tr>
     <tr
       mat-row
-      (click)="onSelectEmployee(row)"
       class="employee-table__row"
       [class.employee-table__row--selected]="row === selectedEmployee"
       *matRowDef="let row; columns: columnsToDisplay"></tr>
+    <!--    (click)="onSelectEmployee(row)"-->
   </table>
 </div>
