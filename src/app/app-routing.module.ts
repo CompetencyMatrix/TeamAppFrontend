@@ -4,14 +4,16 @@ import {
   addEmployeeFormPath,
   dashboardPath,
   editEmployeeFormPath,
+  employeeFormPath,
   employeeManagerPath,
   fallbackRoutePath,
+  noPath,
 } from './core/constants/routes';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 // TODO: [{ path..., component..., children: [ {path..., loadChildren ...}, {path....}]
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: noPath, redirectTo: dashboardPath, pathMatch: 'full' },
   {
     path: employeeManagerPath,
     loadChildren: () =>
@@ -28,18 +30,23 @@ const routes: Routes = [
       ),
   },
   {
-    path: addEmployeeFormPath,
-    loadChildren: () =>
-      import('./feature-modules/employee-form/employee-form.module').then(
-        m => m.EmployeeFormModule
-      ),
-  },
-  {
-    path: editEmployeeFormPath,
-    loadChildren: () =>
-      import('./feature-modules/employee-form/employee-form.module').then(
-        m => m.EmployeeFormModule
-      ),
+    path: employeeFormPath,
+    children: [
+      {
+        path: addEmployeeFormPath,
+        loadChildren: () =>
+          import('./feature-modules/employee-form/employee-form.module').then(
+            m => m.EmployeeFormModule
+          ),
+      },
+      {
+        path: editEmployeeFormPath,
+        loadChildren: () =>
+          import('./feature-modules/employee-form/employee-form.module').then(
+            m => m.EmployeeFormModule
+          ),
+      },
+    ],
   },
   {
     path: fallbackRoutePath,

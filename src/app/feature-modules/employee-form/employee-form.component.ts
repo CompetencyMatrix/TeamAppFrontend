@@ -21,11 +21,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./employee-form.component.scss'],
 })
 export class EmployeeFormComponent implements OnInit, OnChanges {
-  destroyRef: DestroyRef = inject(DestroyRef);
   employeeToEdit?: EmployeeDTOInterface;
   otherEmployees: EmployeeDTOInterface[] = [];
   skills: string[] = [];
   projects: ProjectDTOInterface[] = [];
+  private destroyRef: DestroyRef = inject(DestroyRef);
+  private employeeId: string | null = null;
 
   // TODO: czy nie powinien byc private i do tego setter i getter?
   employeeForm: FormGroup;
@@ -42,6 +43,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.getEmployeeId();
     this.getEmployee();
     this.getOtherEmployees();
     this.getSkills();
@@ -55,35 +57,32 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.initializeForm();
   }
 
-  updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
-    this.employeeService.updateEmployee(employeeToUpdate);
-  }
-
   onSubmit(): void {
     // Check in case submit button 'disbaled' attribute was changed manually
     if (this.employeeForm.valid) {
-      this.updateEmployee({
-        ...this.employeeForm.getRawValue(),
-        hireDate: new Date(this.employeeForm.value['hireDate']),
-      });
+      if (this.isAddingNewEmployee()) {
+        this.addEmployee(this.getFormData());
+      } else {
+        this.updateEmployee(this.getFormData());
+      }
       // this.employeeForm.reset();
       this.goBack();
     }
   }
+
   onResetForm(): void {
-    console.log(this.employeeToEdit);
     this.initializeForm();
   }
 
   protected readonly Boolean = Boolean;
 
   getEmployee(): void {
-    const id: string | null = this.route.snapshot.paramMap.get('id');
-    if (id === null) {
+    // TODO: this.isAddingNewEmployee() but then in 'else' block compiler is not aware that employeeId is never null -> can i use 'employeeId!' in such cases or is it still bad pracitce even though code would be more understandable imo
+    if (this.employeeId == null) {
       this.employeeToEdit = undefined;
     } else {
       this.employeeService
-        .getEmployeeById(id)
+        .getEmployeeById(this.employeeId)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(
           (employee: EmployeeDTOInterface | undefined) =>
@@ -164,5 +163,31 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     //   ...this.employeeToEdit,
     //   hireDate: this.employeeToEdit?.hireDate.toISOString().slice(0, 10),
     // });
+  }
+
+  private updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
+    this.employeeService.updateEmployee(employeeToUpdate);
+  }
+
+  private addEmployee(employeeToAdd: EmployeeDTOInterface): void {
+    this.employeeService
+      .addNewEmployee(employeeToAdd)
+      .subscribe(emp => console.log(emp));
+  }
+
+  private getFormData(): EmployeeDTOInterface {
+    return {
+      ...this.employeeForm.getRawValue(),
+      hireDate: new Date(this.employeeForm.value['hireDate']),
+    };
+  }
+
+  private getEmployeeId(): void {
+    this.employeeId = this.route.snapshot.paramMap.get('id');
+    console.log(this.employeeId);
+  }
+
+  private isAddingNewEmployee(): boolean {
+    return this.employeeId == null;
   }
 }
