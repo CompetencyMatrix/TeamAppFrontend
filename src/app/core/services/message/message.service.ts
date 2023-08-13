@@ -19,7 +19,7 @@ export class MessageService {
       .subscribe((message: string) => this.add(message));
   }
 
-  addByKeySynchronus(
+  addByKeySynchronous(
     messageKey: string,
     interpolateParams?: object | undefined
   ): void {

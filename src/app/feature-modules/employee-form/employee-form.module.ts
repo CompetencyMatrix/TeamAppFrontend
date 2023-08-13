@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EmployeeFormRoutingModule } from './employee-form-routing.module';
-import { EmployeeFormComponent } from './employee-form/employee-form.component';
+import { EmployeeFormComponent } from './employee-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';

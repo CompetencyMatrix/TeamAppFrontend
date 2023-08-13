@@ -1,11 +1,11 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { EmployeeDTOInterface } from '../../../../models/DTO/employeeDTO';
+import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { v4 as uuid } from 'uuid';
-import { EmployeeService } from '../../../../core/services/employee/employee.service';
-import { ProjectDTOInterface } from '../../../../models/DTO/projectDTO';
-import { MessageService } from '../../../../core/services/message/message.service';
-import { SkillService } from '../../../../core/services/skill/skill.service';
-import { ProjectService } from '../../../../core/services/project/project.service';
+import { EmployeeService } from '../../core/services/employee/employee.service';
+import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
+import { MessageService } from '../../core/services/message/message.service';
+import { SkillService } from '../../core/services/skill/skill.service';
+import { ProjectService } from '../../core/services/project/project.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -53,7 +53,7 @@ export class EmployeeManagerComponent implements OnInit {
 
   private addNewEmployee(submittedEmployee: EmployeeDTOInterface): void {
     // TODO: changed to Synchronus - should it stay like this and why?
-    this.messageService.addByKeySynchronus(
+    this.messageService.addByKeySynchronous(
       'messages.service.employee.add.new',
       {
         employee: submittedEmployee,

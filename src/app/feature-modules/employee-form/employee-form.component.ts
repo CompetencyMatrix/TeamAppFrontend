@@ -6,13 +6,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
-import { ProjectDTOInterface } from '../../../models/DTO/projectDTO';
+import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
+import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
 import { ActivatedRoute } from '@angular/router';
-import { EmployeeService } from '../../../core/services/employee/employee.service';
+import { EmployeeService } from '../../core/services/employee/employee.service';
 import { Location } from '@angular/common';
-import { SkillService } from '../../../core/services/skill/skill.service';
-import { ProjectService } from '../../../core/services/project/project.service';
+import { SkillService } from '../../core/services/skill/skill.service';
+import { ProjectService } from '../../core/services/project/project.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({

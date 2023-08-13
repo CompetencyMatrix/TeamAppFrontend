@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
-import { EmployeeService } from '../../../core/services/employee/employee.service';
+import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
+import { EmployeeService } from '../../core/services/employee/employee.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({

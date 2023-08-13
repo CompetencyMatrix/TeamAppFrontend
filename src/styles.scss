@@ -1,7 +1,6 @@
 /* Application-wide Styles */
-@import 'colors';
+@import 'src/colors';
 //TODO: can we use such themes from imported libraries
-@import '~@ng-select/ng-select/themes/default.theme.css';
 
 //App styles
 body {

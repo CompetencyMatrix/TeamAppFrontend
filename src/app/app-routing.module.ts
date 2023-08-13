@@ -8,8 +8,8 @@ const routes: Routes = [
   {
     path: 'employees',
     loadChildren: () =>
-      import('./feature-modules/employee-table/employee-table.module').then(
-        m => m.EmployeeTableModule
+      import('./feature-modules/employee-manager/employee-manager.module').then(
+        m => m.EmployeeManagerModule
       ),
   },
   // TODO: ask - should we have lazy loading everywhere or not -e.g. below - default page - but if somebody starts from different one -e.g. using some shared link - we may not need to load it

@@ -1,3 +1,5 @@
+@import "src/colors";
+
 .employee-table {
   //TODO: is it okay to treat container as an element
   &__container {
@@ -27,5 +29,19 @@
     white-space: nowrap;
     overflow: hidden;
     vertical-align: middle;
+  }
+
+  &__action-list {
+    list-style: none;
+  }
+
+  &__action-button {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+
+    &:hover, &:active {
+      color: $tapp-tertiary;
+    }
   }
 }
