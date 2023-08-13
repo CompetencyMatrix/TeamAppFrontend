@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
 import { EMPLOYEES } from '../../../mocks/mock-employees';
-import { find, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MessageService } from '../message/message.service';
 import { v4 as uuid } from 'uuid';
 

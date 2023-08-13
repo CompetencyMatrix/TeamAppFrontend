@@ -38,8 +38,8 @@
   "messages": {
     "title": "Wiadomości",
     "clear.button": "Wyczyść wiadomości",
-    "service":{
-      "skill":{
+    "service": {
+      "skill": {
         "fetched.skills": "SerwisUmiejętności: pobrano umiejętności."
       },
       "project": {
@@ -47,9 +47,9 @@
       },
       "employee": {
         "fetched.employees": "SerwisPracowników: pobrano pracowników.",
-        "add.new":  "Zarządca-Pracowników: Dodawanie Nowego Pracownika: {{employee.name}} {{employee.surname}}",
-        "edit":  "Zarządca-Pracowników: Edytowanie Pracownika {{employee.name}} {{employee.surname}}",
-        "select" : "Zarządca-Pracowników: Wybrano pracownika {{employee.name}} {{employee.surname}}"
+        "add.new": "Zarządca-Pracowników: Dodawanie Nowego Pracownika: {{employee.name}} {{employee.surname}}",
+        "edit": "Zarządca-Pracowników: Edytowanie Pracownika {{employee.name}} {{employee.surname}}",
+        "select": "Zarządca-Pracowników: Wybrano pracownika {{employee.name}} {{employee.surname}}"
       }
     }
   }
