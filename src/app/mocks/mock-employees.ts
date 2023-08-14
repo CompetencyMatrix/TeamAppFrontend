@@ -1,4 +1,4 @@
-import { EmployeeDTOInterface } from '../models/DTO/employeeDTO';
+import { EmployeeDTOInterface } from '../core/models/DTO/employeeDTO';
 import { PROJECTS } from './mock-projects';
 
 export const EMPLOYEES: EmployeeDTOInterface[] = [

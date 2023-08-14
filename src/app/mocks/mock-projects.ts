@@ -1,4 +1,4 @@
-import { ProjectDTOInterface } from '../models/DTO/projectDTO';
+import { ProjectDTOInterface } from '../core/models/DTO/projectDTO';
 
 export const PROJECTS: ProjectDTOInterface[] = [
   {

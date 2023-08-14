@@ -10,9 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { NameConcatPipe } from './pipes/name-concat/name-concat.pipe';
 import { MatListModule } from '@angular/material/list';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatListModule } from '@angular/material/list';
     SidenavComponent,
     SidenavListComponent,
     NameConcatPipe,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     RouterOutlet,
     MatListModule,
+    RouterLink,
   ],
   exports: [NavbarComponent, SidenavComponent, NameConcatPipe],
 })

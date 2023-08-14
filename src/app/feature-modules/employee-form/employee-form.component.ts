@@ -6,8 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
-import { ProjectDTOInterface } from '../../models/DTO/projectDTO';
+import { EmployeeDTOInterface } from '../../core/models/DTO/employeeDTO';
+import { ProjectDTOInterface } from '../../core/models/DTO/projectDTO';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { Location } from '@angular/common';

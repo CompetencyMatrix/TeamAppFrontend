@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProjectDTOInterface } from '../../../models/DTO/projectDTO';
+import { ProjectDTOInterface } from '../../../core/models/DTO/projectDTO';
 
 @Component({
   selector: 'app-projects',

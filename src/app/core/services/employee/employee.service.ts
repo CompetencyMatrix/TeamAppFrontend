@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
+import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { EMPLOYEES } from '../../../mocks/mock-employees';
 import { Observable, of } from 'rxjs';
 import { MessageService } from '../message/message.service';

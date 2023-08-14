@@ -1,7 +1,7 @@
-import { ReportDTOInterface } from '../models/DTO/reportDTO';
+import { ReportDTOInterface } from '../core/models/DTO/reportDTO';
 import { PROJECTS } from './mock-projects';
 import { EMPLOYEES } from './mock-employees';
-import { DateRange } from '../models/dateRange';
+import { DateRange } from '../core/models/dateRange';
 
 export const REPORTS: ReportDTOInterface[] = [
   {

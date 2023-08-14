@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EmployeeDTOInterface } from '../../../models/DTO/employeeDTO';
+import { EmployeeDTOInterface } from '../../../core/models/DTO/employeeDTO';
 
 @Component({
   selector: 'app-employee-list',
