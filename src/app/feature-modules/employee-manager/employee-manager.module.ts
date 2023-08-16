@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { EmployeeManagerRoutingModule } from './employee-manager-routing.module';
 import { ProjectsComponent } from './projects/projects.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { EmployeeManagerComponent } from './employee-manager.component';
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
@@ -17,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     ProjectsComponent,
-    EmployeeListComponent,
     EmployeeDetailsComponent,
     EmployeeManagerComponent,
     EmployeeTableComponent,
