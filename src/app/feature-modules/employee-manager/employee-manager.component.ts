@@ -37,10 +37,11 @@ export class EmployeeManagerComponent implements OnInit {
     this.employeeService
       .deleteEmployee(employeeToDelete.id)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
-    this.allEmployees = this.allEmployees.filter(
-      (employee: EmployeeDTOInterface) => employee !== employeeToDelete
-    );
+      .subscribe(_ => {
+        this.allEmployees = this.allEmployees.filter(
+          (employee: EmployeeDTOInterface) => employee !== employeeToDelete
+        );
+      });
   }
 
   private getAllEmployees(): void {

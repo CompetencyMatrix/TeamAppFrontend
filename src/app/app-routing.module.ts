@@ -11,7 +11,7 @@ import {
 } from './core/constants/routes';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
-// TODO: [{ path..., component..., children: [ {path..., loadChildren ...}, {path....}]
+// TODO: when there is a reason to use such structure?: [{ path..., component..., children: [ {path..., loadChildren ...}, {path....}]
 const routes: Routes = [
   { path: noPath, redirectTo: dashboardPath, pathMatch: 'full' },
   {
@@ -21,7 +21,6 @@ const routes: Routes = [
         m => m.EmployeeManagerModule
       ),
   },
-  // TODO: ask - should we have lazy loading everywhere or not -e.g. below - default page - but if somebody starts from different one -e.g. using some shared link - we may not need to load it
   {
     path: dashboardPath,
     loadChildren: () =>

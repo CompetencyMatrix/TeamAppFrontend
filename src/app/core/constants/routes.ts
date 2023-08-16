@@ -1,3 +1,4 @@
+// TODO: is it better - in each module with routing - file <name>.routes.ts ?
 export const dashboardPath = 'dashboard';
 export const noPath = '';
 export const employeeManagerPath = 'employees';
