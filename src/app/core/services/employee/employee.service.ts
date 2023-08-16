@@ -41,7 +41,6 @@ export class EmployeeService {
   }
 
   private addNewEmployee(submittedEmployee: EmployeeDTOInterface): void {
-    // TODO: changed to Synchronus - should it stay like this and why?
     this.messageService.addByKeySynchronous(
       'messages.service.employee.add.new',
       {
@@ -50,7 +49,6 @@ export class EmployeeService {
     );
     EMPLOYEES.push({
       ...submittedEmployee,
-      // TODO: ID: to be set in database
       id: uuid(),
     });
   }

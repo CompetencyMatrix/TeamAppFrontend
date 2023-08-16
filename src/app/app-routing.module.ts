@@ -4,14 +4,16 @@ import {
   addEmployeeFormPath,
   dashboardPath,
   editEmployeeFormPath,
+  employeeFormPath,
   employeeManagerPath,
   fallbackRoutePath,
+  noPath,
 } from './core/constants/routes';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
-// TODO: [{ path..., component..., children: [ {path..., loadChildren ...}, {path....}]
+// TODO: when there is a reason to use such structure?: [{ path..., component..., children: [ {path..., loadChildren ...}, {path....}]
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: noPath, redirectTo: dashboardPath, pathMatch: 'full' },
   {
     path: employeeManagerPath,
     loadChildren: () =>
@@ -19,7 +21,6 @@ const routes: Routes = [
         m => m.EmployeeManagerModule
       ),
   },
-  // TODO: ask - should we have lazy loading everywhere or not -e.g. below - default page - but if somebody starts from different one -e.g. using some shared link - we may not need to load it
   {
     path: dashboardPath,
     loadChildren: () =>
@@ -28,18 +29,23 @@ const routes: Routes = [
       ),
   },
   {
-    path: addEmployeeFormPath,
-    loadChildren: () =>
-      import('./feature-modules/employee-form/employee-form.module').then(
-        m => m.EmployeeFormModule
-      ),
-  },
-  {
-    path: editEmployeeFormPath,
-    loadChildren: () =>
-      import('./feature-modules/employee-form/employee-form.module').then(
-        m => m.EmployeeFormModule
-      ),
+    path: employeeFormPath,
+    children: [
+      {
+        path: addEmployeeFormPath,
+        loadChildren: () =>
+          import('./feature-modules/employee-form/employee-form.module').then(
+            m => m.EmployeeFormModule
+          ),
+      },
+      {
+        path: editEmployeeFormPath,
+        loadChildren: () =>
+          import('./feature-modules/employee-form/employee-form.module').then(
+            m => m.EmployeeFormModule
+          ),
+      },
+    ],
   },
   {
     path: fallbackRoutePath,

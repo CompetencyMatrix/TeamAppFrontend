@@ -11,6 +11,7 @@ export class EmployeeTableComponent {
   @Input() employees: EmployeeDTOInterface[] = [];
   selectedEmployee?: EmployeeDTOInterface;
   @Output() selectEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
+  @Output() deleteEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
   // TODO: add projects-time columns names
   columnsToDisplay: string[] = [
     'id',
@@ -19,6 +20,7 @@ export class EmployeeTableComponent {
     'hireDate',
     'skills',
     'manager',
+    'actions',
   ];
 
   // TODO: implement own DataSource
@@ -34,6 +36,10 @@ export class EmployeeTableComponent {
     } else {
       this.unselectEmployee();
     }
+  }
+
+  onDeleteEmployee(employee: EmployeeDTOInterface): void {
+    this.deleteEmployeeEvent.emit(employee);
   }
 
   private unselectEmployee(): void {
