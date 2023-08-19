@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { appRoutesNames } from '../../core/constants/appRoutesNames';
+import { appRoutesNames } from '../../../config/appRoutesNames';
 import { PageNotFoundComponent } from '../../core/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -22,7 +22,6 @@ const routes: Routes = [
       import('../dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
-    // TODO: sprawdz jak sie zachowa teraz
     path: appRoutesNames.EMPLOYEE_FORM,
     loadChildren: () =>
       import('../employee-form/employee-form.module').then(
