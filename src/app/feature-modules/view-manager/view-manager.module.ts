@@ -33,5 +33,6 @@ import { ViewManagerRoutingModule } from './view-manager-routing.module';
     MatListModule,
     ViewManagerRoutingModule,
   ],
+  exports: [MessagesComponent],
 })
 export class ViewManagerModule {}
