@@ -1,20 +1,30 @@
 /* Application-wide Styles */
-@import 'src/styles/colors';
-//TODO: can we use such themes from imported libraries
+
+@use "@angular/material" as mat;
+
+@use "src/styles/themes/light";
+
+@include mat.core();
+
+@include mat.core-theme(light.$tapp-theme-light);
+@include mat.button-theme(light.$tapp-theme-light);
+//TODO: add - like above - theme to used components
+
 
 //App styles
 body {
   font-size: 10px;
-  margin: 2em;
-}
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;}
 
+//TODO: move to body?
 .content {
   font-size: 1.6rem;
 }
 
 //Default styles:
 h1 {
-  color: $tapp-secondary-dark;
+  color: darkblue;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
@@ -61,16 +71,13 @@ button:disabled {
   cursor: auto;
 }
 
-/* everywhere else */
-* {
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 html,
 body {
   height: 100%;
 }
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+/* everywhere else */
+* {
+  font-family: Arial, Helvetica, sans-serif;
 }

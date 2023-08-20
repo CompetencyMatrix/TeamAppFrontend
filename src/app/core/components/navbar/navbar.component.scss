@@ -1,15 +1,10 @@
-@import 'src/styles/colors';
 
 .navbar {
   display: flex;
   justify-content: space-between;
-  color: $tapp-on-primary;
 
   &__menu-button {
     display: inline-flex;
-  }
-  &__app-title {
-    color: $tapp-on-primary;
   }
 
   &__right-part,
@@ -41,8 +36,8 @@
 
       &:hover,
       &:active {
-        color: $tapp-primary-light;
       }
     }
   }
 }
+
