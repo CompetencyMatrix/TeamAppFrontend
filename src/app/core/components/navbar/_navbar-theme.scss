@@ -1,19 +1,23 @@
-@import "@angular/material/theming";
 @use 'sass:map';
 @use '@angular/material' as mat;
+@import "@angular/material/theming";
 
 //TODO: czy moge po prostu dostac sie do core-theme - ustawiam go w styles/theme.scss i uwzgledniam media query
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
   $primary-palette: map.get($color-config, 'primary');
+  $accent-palette: map.get($color-config, 'accent');
+  $warn-palette: map.get($color-config, 'warn');
+
   $primary500: mat.get-color-from-palette($primary-palette, 500);
+  $accent500: mat.get-color-from-palette($accent-palette, 500);
+  $primary500-contrast: mat.get-color-from-palette($primary-palette, 500-contrast);
   $primary200: mat.get-color-from-palette($primary-palette, 200);
 
   .navbar {
-    color: $primary500;
 
     &__app-title {
-      color: $primary500;
+      color: $accent500;
     }
   }
 
@@ -26,6 +30,22 @@
         }
       }
     }
+  }
+}
+
+@mixin typography($typography-config) {
+//  TODO: Future development
+}
+
+
+@mixin theme($theme, $typography-config) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
+
+  @if $typography-config != null {
+    @include typography($typography-config);
   }
 }
 

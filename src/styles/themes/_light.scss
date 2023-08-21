@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-@use "src/styles/palette" as palette;
+@use "src/styles/palette";
 
 $tapp-primary-palette: mat.define-palette(palette.$tapp-primary-palette);
 $tapp-accent-palette: mat.define-palette(palette.$tapp-accent-palette, A200, A100, A400);

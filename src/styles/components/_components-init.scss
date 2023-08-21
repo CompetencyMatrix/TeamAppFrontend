@@ -1,0 +1,5 @@
+@use "src/app/core/components/navbar/navbar-theme" as navbar;
+
+@mixin theme($theme, $typography-config) {
+  @include navbar.theme($theme, $typography-config);
+}

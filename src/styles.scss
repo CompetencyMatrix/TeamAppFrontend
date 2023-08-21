@@ -1,15 +1,5 @@
 /* Application-wide Styles */
-
-@use "@angular/material" as mat;
-
-@use "src/styles/themes/light";
-
-@include mat.core();
-
-@include mat.core-theme(light.$tapp-theme-light);
-@include mat.button-theme(light.$tapp-theme-light);
-//TODO: add - like above - theme to used components
-
+@import "src/styles/themes/theme";
 
 //App styles
 body {
