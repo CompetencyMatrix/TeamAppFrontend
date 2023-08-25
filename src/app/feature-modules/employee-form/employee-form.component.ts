@@ -6,8 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeDTOInterface } from '../../core/models/DTO/employeeDTO';
-import { ProjectDTOInterface } from '../../core/models/DTO/projectDTO';
+import { EmployeeInterface } from '../../core/models/employee';
+import { ProjectInterface } from '../../core/models/project';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { Location } from '@angular/common';
@@ -22,10 +22,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class EmployeeFormComponent implements OnInit, OnChanges {
   destroyRef: DestroyRef = inject(DestroyRef);
-  employeeToEdit?: EmployeeDTOInterface;
-  otherEmployees: EmployeeDTOInterface[] = [];
+  employeeToEdit?: EmployeeInterface;
+  otherEmployees: EmployeeInterface[] = [];
   skills: string[] = [];
-  projects: ProjectDTOInterface[] = [];
+  projects: ProjectInterface[] = [];
 
   // TODO: czy nie powinien byc private i do tego setter i getter?
   employeeForm: FormGroup;
@@ -55,7 +55,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.initializeForm();
   }
 
-  updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
+  updateEmployee(employeeToUpdate: EmployeeInterface): void {
     this.employeeService.updateEmployee(employeeToUpdate);
   }
 
@@ -86,7 +86,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         .getEmployeeById(id)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(
-          (employee: EmployeeDTOInterface | undefined) =>
+          (employee: EmployeeInterface | undefined) =>
             (this.employeeToEdit = employee)
         );
     }
@@ -100,9 +100,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.projectService
       .getProjects()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        (projects: ProjectDTOInterface[]) => (this.projects = projects)
-      );
+      .subscribe((projects: ProjectInterface[]) => (this.projects = projects));
   }
 
   private getSkills(): void {
@@ -119,17 +117,16 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         .getEmployees()
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(
-          (employees: EmployeeDTOInterface[]) =>
-            (this.otherEmployees = employees)
+          (employees: EmployeeInterface[]) => (this.otherEmployees = employees)
         );
     }
     this.employeeService
       .getEmployees()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-        (employees: EmployeeDTOInterface[]) =>
+        (employees: EmployeeInterface[]) =>
           (this.otherEmployees = employees.filter(
-            (e: EmployeeDTOInterface) => e.id != this.employeeToEdit?.id
+            (e: EmployeeInterface) => e.id != this.employeeToEdit?.id
           ))
       );
   }
@@ -147,8 +144,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       ],
       surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       hireDate: '',
-      avatarUrl: ['../../../assets/img/avatar-default.jpg'],
-      skills: [[]],
+      skills: this.formBuilder.group({ name: [''], proficiency: [''] }),
       projects: [[]],
       manager: [''],
     });

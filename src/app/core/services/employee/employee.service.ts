@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
+import { EmployeeInterface } from '../../models/employee';
 import { EMPLOYEES } from '../../../mocks/mock-employees';
 import { Observable, of } from 'rxjs';
 import { MessageService } from '../message/message.service';
@@ -14,24 +14,24 @@ export class EmployeeService {
     // this._employees = this.getEmployees();
   }
 
-  getEmployees(): Observable<EmployeeDTOInterface[]> {
-    const employees: Observable<EmployeeDTOInterface[]> = of(EMPLOYEES);
+  getEmployees(): Observable<EmployeeInterface[]> {
+    const employees: Observable<EmployeeInterface[]> = of(EMPLOYEES);
     this.messageService.addByKey('messages.service.employee.fetched.employees');
     return employees;
   }
 
-  getEmployeeById(id: string): Observable<EmployeeDTOInterface | undefined> {
-    const employee: EmployeeDTOInterface | undefined = EMPLOYEES.find(
-      (e: EmployeeDTOInterface) => e.id == id
+  getEmployeeById(id: string): Observable<EmployeeInterface | undefined> {
+    const employee: EmployeeInterface | undefined = EMPLOYEES.find(
+      (e: EmployeeInterface) => e.id == id
     );
     // TODO: add here message and to language json
 
     return of(employee);
   }
 
-  updateEmployee(submittedEmployee: EmployeeDTOInterface): void {
-    const foundEmployee: EmployeeDTOInterface | undefined = EMPLOYEES.find(
-      (e: EmployeeDTOInterface) => e.id === submittedEmployee.id
+  updateEmployee(submittedEmployee: EmployeeInterface): void {
+    const foundEmployee: EmployeeInterface | undefined = EMPLOYEES.find(
+      (e: EmployeeInterface) => e.id === submittedEmployee.id
     );
     if (foundEmployee) {
       this.editEmployee(submittedEmployee);
@@ -40,7 +40,7 @@ export class EmployeeService {
     }
   }
 
-  private addNewEmployee(submittedEmployee: EmployeeDTOInterface): void {
+  private addNewEmployee(submittedEmployee: EmployeeInterface): void {
     this.messageService.addByKeySynchronous(
       'messages.service.employee.add.new',
       {
@@ -53,9 +53,9 @@ export class EmployeeService {
     });
   }
 
-  private editEmployee(submittedEmployee: EmployeeDTOInterface): void {
+  private editEmployee(submittedEmployee: EmployeeInterface): void {
     const employeeIndex: number = EMPLOYEES.findIndex(
-      (employee: EmployeeDTOInterface): boolean =>
+      (employee: EmployeeInterface): boolean =>
         employee.id === submittedEmployee.id
     );
     EMPLOYEES.splice(employeeIndex, 1, submittedEmployee);

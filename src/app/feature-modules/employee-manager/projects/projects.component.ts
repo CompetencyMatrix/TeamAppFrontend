@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProjectDTOInterface } from '../../../core/models/DTO/projectDTO';
+import { ProjectInterface } from '../../../core/models/project';
 
 @Component({
   selector: 'app-projects',
@@ -7,5 +7,5 @@ import { ProjectDTOInterface } from '../../../core/models/DTO/projectDTO';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent {
-  @Input() projects?: ProjectDTOInterface[];
+  @Input() projects?: ProjectInterface[];
 }

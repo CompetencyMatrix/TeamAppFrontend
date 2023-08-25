@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EmployeeDTOInterface } from '../../../core/models/DTO/employeeDTO';
+import { EmployeeInterface } from '../../../core/models/employee';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -8,10 +8,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./employee-table.component.scss'],
 })
 export class EmployeeTableComponent {
-  @Input() employees: EmployeeDTOInterface[] = [];
-  selectedEmployee?: EmployeeDTOInterface;
-  @Output() selectEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
-  @Output() deleteEmployeeEvent = new EventEmitter<EmployeeDTOInterface>();
+  @Input() employees: EmployeeInterface[] = [];
+  selectedEmployee?: EmployeeInterface;
+  @Output() selectEmployeeEvent = new EventEmitter<EmployeeInterface>();
+  @Output() deleteEmployeeEvent = new EventEmitter<EmployeeInterface>();
   // TODO: add projects-time columns names
   columnsToDisplay: string[] = [
     'id',
@@ -24,10 +24,10 @@ export class EmployeeTableComponent {
   ];
 
   // TODO: implement own DataSource
-  employeesDataSource: MatTableDataSource<EmployeeDTOInterface> =
+  employeesDataSource: MatTableDataSource<EmployeeInterface> =
     new MatTableDataSource(this.employees);
 
-  onSelectEmployee(employee: EmployeeDTOInterface): void {
+  onSelectEmployee(employee: EmployeeInterface): void {
     if (
       this.selectedEmployee === undefined ||
       this.selectedEmployee != employee
@@ -38,14 +38,14 @@ export class EmployeeTableComponent {
     }
   }
 
-  onDeleteEmployee(employee: EmployeeDTOInterface): void {
+  onDeleteEmployee(employee: EmployeeInterface): void {
     this.deleteEmployeeEvent.emit(employee);
   }
 
   private unselectEmployee(): void {
     this.selectEmployee(undefined);
   }
-  private selectEmployee(employee: EmployeeDTOInterface | undefined): void {
+  private selectEmployee(employee: EmployeeInterface | undefined): void {
     this.selectedEmployee = employee;
     this.selectEmployeeEvent.emit(this.selectedEmployee);
   }
