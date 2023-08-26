@@ -8,32 +8,11 @@
   $accent-palette: map.get($color-config, 'accent');
   $warn-palette: map.get($color-config, 'warn');
 
-  $primary500: mat.get-color-from-palette($primary-palette, 500);
-  $accent500: mat.get-color-from-palette($accent-palette, 500);
-  $primary500-contrast: mat.get-color-from-palette($primary-palette, 500-contrast);
-  $primary200: mat.get-color-from-palette($primary-palette, 200);
 
-  .navbar {
-
-    &__app-title {
-      color: $accent500;
-    }
-  }
-
-  @media only screen and (min-width: 600px) {
-    .navbar {
-      &__navigation-item {
-        &:hover,
-        &:active {
-          color: $primary200;
-        }
-      }
-    }
-  }
 }
 
 @mixin typography($typography-config) {
-//  TODO: Future development
+  //  TODO: Future development
 }
 
 

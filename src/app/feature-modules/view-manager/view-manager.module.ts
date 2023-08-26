@@ -13,6 +13,7 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ViewManagerRoutingModule } from './view-manager-routing.module';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ViewManagerRoutingModule } from './view-manager-routing.module';
     MatIconModule,
     MatListModule,
     ViewManagerRoutingModule,
+    MatCardModule,
   ],
   exports: [MessagesComponent],
 })
