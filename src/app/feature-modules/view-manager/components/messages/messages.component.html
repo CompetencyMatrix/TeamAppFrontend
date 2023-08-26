@@ -3,9 +3,13 @@
   mat-fab
   extended
   class="messages-window__toggle-button"
-  (click)="openChatWindow()"
-  [hidden]="messageService.messages.length === 0">
-  <mat-icon class="messages-window__toggle-icon">messages</mat-icon>Logs
+  (click)="openChatWindow()">
+  <mat-icon
+    class="messages-window__toggle-icon"
+    [matBadge]="messageService.messages.length"
+    [matBadgeHidden]="messageService.messages.length === 0"
+    >messages</mat-icon
+  >Logs
 </button>
 <mat-card *ngIf="isChatOpen" class="messages-window__card">
   <mat-card-header class="messages-window__header">

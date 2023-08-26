@@ -21,6 +21,7 @@ import {
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CdkFixedSizeVirtualScroll,
     CdkVirtualScrollableWindow,
     MatSnackBarModule,
+    MatBadgeModule,
   ],
   exports: [MessagesComponent],
 })
