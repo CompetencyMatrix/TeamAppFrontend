@@ -1,4 +1,7 @@
 .messages-window {
+  display: flex;
+  flex-direction: column;
+
   &__toggle-button {
     position: absolute;
     z-index: 1000;
@@ -6,10 +9,14 @@
     right: 2rem;
   }
 
+  &__toggle-icon {
+    margin: 0;
+  }
+
   &__card {
     display: flex;
     flex-direction: column;
-    width: 20rem;
+    width: 24rem;
     height: 30rem;
     position: absolute;
     bottom: 2rem;
@@ -17,18 +24,18 @@
   }
 
   &__list {
+    height: 20rem;
+    overflow-y: auto;
   }
 
   &__header {
-    //flex-shrink: 0;
   }
 
   &__content {
-    //flex-grow: 1;
-    //overflow: auto;
   }
 
   &__actions {
-    //flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
   }
 }

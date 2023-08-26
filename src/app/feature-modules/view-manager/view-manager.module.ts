@@ -14,6 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ViewManagerRoutingModule } from './view-manager-routing.module';
 import { MatCardModule } from '@angular/material/card';
+import {
+  CdkFixedSizeVirtualScroll,
+  CdkVirtualForOf,
+  CdkVirtualScrollableWindow,
+  CdkVirtualScrollViewport,
+} from '@angular/cdk/scrolling';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -34,6 +41,11 @@ import { MatCardModule } from '@angular/material/card';
     MatListModule,
     ViewManagerRoutingModule,
     MatCardModule,
+    CdkVirtualScrollViewport,
+    CdkVirtualForOf,
+    CdkFixedSizeVirtualScroll,
+    CdkVirtualScrollableWindow,
+    MatSnackBarModule,
   ],
   exports: [MessagesComponent],
 })

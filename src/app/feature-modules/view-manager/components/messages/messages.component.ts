@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MessageService } from '../../../../core/services/message/message.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-messages',
@@ -16,5 +17,10 @@ export class MessagesComponent {
 
   closeChatWindow() {
     this.isChatOpen = false;
+  }
+
+  clearMessages() {
+    this.messageService.clear();
+    this.closeChatWindow();
   }
 }
