@@ -2,36 +2,36 @@
   *ngIf="!isChatOpen"
   mat-fab
   extended
-  class="message-list__toggle-button"
+  class="messages-window__toggle-button"
   (click)="openChatWindow()">
   <mat-icon>messages</mat-icon>
 </button>
 <mat-card
   *ngIf="isChatOpen && messageService.messages.length"
-  class="message-list__card">
-  <mat-card-header class="message-list__header">
+  class="messages-window__card">
+  <mat-card-header class="messages-window__header">
     <mat-card-title>{{ 'messages.title' | translate }}</mat-card-title>
     <button
       mat-flat-button
-      class="message-list__toggle-button"
+      class="messages-window__toggle-button"
       (click)="closeChatWindow()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-card-header>
   <mat-card-content class="message_list__content">
-    <mat-list>
+    <mat-list class="messages-window__list">
       <mat-list-item
         *ngFor="let message of messageService.messages"
-        class="message-list__message"
+        class="messages-window__message"
         >{{ message }}</mat-list-item
       >
     </mat-list>
   </mat-card-content>
-  <mat-card-actions class="message-list__actions">
+  <mat-card-actions class="messages-window__actions">
     <button
       mat-raised-button
       type="button"
-      class="message-list__clear-button"
+      class="messages-window__clear-button"
       (click)="messageService.clear()">
       <mat-icon>delete_outline</mat-icon>
       {{ 'messages.clear.button' | translate }}

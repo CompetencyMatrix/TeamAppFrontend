@@ -1,4 +1,4 @@
-.message-list {
+.messages-window {
   &__toggle-button {
     position: absolute;
     z-index: 1000;
@@ -14,6 +14,9 @@
     position: absolute;
     bottom: 2rem;
     right: 2rem;
+  }
+
+  &__list {
   }
 
   &__header {
