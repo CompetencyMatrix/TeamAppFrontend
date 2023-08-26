@@ -8,6 +8,24 @@
   $accent-palette: map.get($color-config, 'accent');
   $warn-palette: map.get($color-config, 'warn');
 
+  $primary500: mat.get-color-from-palette($primary-palette, 500);
+  $accent500: mat.get-color-from-palette($accent-palette, 500);
+  $primary500-contrast: mat.get-color-from-palette($primary-palette, 500-contrast);
+  $primary200: mat.get-color-from-palette($primary-palette, 200);
+  $primary200-contrast: mat.get-color-from-palette($primary-palette, 200-contrast);
+
+  .messages-window {
+    &__header {
+      color: $primary200-contrast;
+      background-color: $primary200;
+      border-color: $primary200-contrast;
+    }
+    &__content {
+      background-color: mat.get-color-from-palette($primary-palette, 200);
+      border-color: $primary200-contrast;
+      padding: 1rem;
+    }
+  }
 
 }
 
