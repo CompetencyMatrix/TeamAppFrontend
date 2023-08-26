@@ -1,14 +1,21 @@
-import { EmployeeDTOInterface } from '../core/models/DTO/employeeDTO';
+import { EmployeeInterface } from '../core/models/employee';
 import { PROJECTS } from './mock-projects';
+import { ProficiencyLevel } from '../core/enums/proficiency-level-enum';
+import { SKILLS } from './mock-skills';
 
-export const EMPLOYEES: EmployeeDTOInterface[] = [
+export const EMPLOYEES: EmployeeInterface[] = [
   {
     id: '1212',
     name: 'Dr. Nice',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[4], PROJECTS[3]],
     manager: 'Marcello',
   },
@@ -16,9 +23,14 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     id: '1313',
     name: 'Bombasto',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[5], PROJECTS[3]],
     manager: 'Marcello',
   },
@@ -26,9 +38,14 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     id: '1414',
     name: 'Celeritas',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[4], PROJECTS[3]],
     manager: 'Marcello',
   },
@@ -36,9 +53,14 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     id: '1515',
     name: 'Magneta',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[4], PROJECTS[5]],
     manager: 'Marcello',
   },
@@ -46,9 +68,14 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     id: '1616',
     name: 'RubberMan',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[2], PROJECTS[3]],
     manager: 'Marcello',
   },
@@ -56,9 +83,14 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     id: '1717',
     name: 'Dynama',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[0], PROJECTS[1]],
     manager: 'Marcello',
   },
@@ -66,9 +98,14 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     id: '1818',
     name: 'Dr. IQ',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[5], PROJECTS[4]],
     manager: 'Marcello',
   },
@@ -76,9 +113,14 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     id: '1919',
     name: 'Magma',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[3], PROJECTS[5]],
     manager: 'Marcello',
   },
@@ -86,9 +128,14 @@ export const EMPLOYEES: EmployeeDTOInterface[] = [
     id: '2020',
     name: 'Tornado',
     surname: 'Wonter',
-    avatarUrl: 'https://images.pexels.com/photos/17811/pexels-photo.jpg',
     hireDate: new Date('12.10.2131'),
-    skills: ['cvc', 'milling'],
+    skills: [
+      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      {
+        skill: SKILLS[2],
+        proficiency: ProficiencyLevel.MID,
+      },
+    ],
     projects: [PROJECTS[3], PROJECTS[4]],
     manager: 'Marcello',
   },

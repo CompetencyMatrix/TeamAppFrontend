@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { EmployeeDTOInterface } from '../../core/models/DTO/employeeDTO';
+import { EmployeeInterface } from '../../core/models/employee';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { MessageService } from '../../core/services/message/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,8 +11,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class EmployeeManagerComponent implements OnInit {
   destroyRef: DestroyRef = inject(DestroyRef);
-  allEmployees: EmployeeDTOInterface[] = [];
-  selectedEmployee?: EmployeeDTOInterface;
+  allEmployees: EmployeeInterface[] = [];
+  selectedEmployee?: EmployeeInterface;
 
   ngOnInit(): void {
     this.getAllEmployees();
@@ -23,7 +23,7 @@ export class EmployeeManagerComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  selectEmployee(newEmployee: EmployeeDTOInterface | undefined): void {
+  selectEmployee(newEmployee: EmployeeInterface | undefined): void {
     if (newEmployee === undefined) {
       //   TODO
     } else {
@@ -33,13 +33,13 @@ export class EmployeeManagerComponent implements OnInit {
     }
     this.selectedEmployee = newEmployee;
   }
-  deleteEmployee(employeeToDelete: EmployeeDTOInterface): void {
+  deleteEmployee(employeeToDelete: EmployeeInterface): void {
     this.employeeService
       .deleteEmployee(employeeToDelete.id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(_ => {
         this.allEmployees = this.allEmployees.filter(
-          (employee: EmployeeDTOInterface) => employee !== employeeToDelete
+          (employee: EmployeeInterface) => employee !== employeeToDelete
         );
       });
   }
@@ -49,7 +49,7 @@ export class EmployeeManagerComponent implements OnInit {
       .getEmployees()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-        (employees: EmployeeDTOInterface[]) => (this.allEmployees = employees)
+        (employees: EmployeeInterface[]) => (this.allEmployees = employees)
       );
   }
 }

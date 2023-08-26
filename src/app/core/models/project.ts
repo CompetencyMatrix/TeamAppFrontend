@@ -1,4 +1,4 @@
-export interface ProjectDTOInterface {
+export interface ProjectInterface {
   id: string;
   name: string;
   startDate: Date;

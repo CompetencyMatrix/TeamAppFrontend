@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { EmployeeDTOInterface } from '../../../core/models/DTO/employeeDTO';
+import { EmployeeInterface } from '../../../core/models/employee';
 
 @Component({
   selector: 'app-employee-details',
@@ -7,6 +7,6 @@ import { EmployeeDTOInterface } from '../../../core/models/DTO/employeeDTO';
   styleUrls: ['./employee-details.component.scss'],
 })
 export class EmployeeDetailsComponent {
-  @Input() selectedEmployee?: EmployeeDTOInterface;
+  @Input() selectedEmployee?: EmployeeInterface;
   protected readonly Boolean = Boolean;
 }

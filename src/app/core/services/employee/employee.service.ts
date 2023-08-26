@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { EmployeeDTOInterface } from '../../models/DTO/employeeDTO';
 import { Observable, of } from 'rxjs';
 import { MessageService } from '../message/message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
+import { EmployeeInterface } from '../../models/employee';
 
 @Injectable({
   providedIn: 'root',
@@ -22,37 +22,35 @@ export class EmployeeService {
     // this._employees = this.getEmployees();
   }
 
-  getEmployees(): Observable<EmployeeDTOInterface[]> {
-    return this.httpClient
-      .get<EmployeeDTOInterface[]>(this.employeesApiUrl)
-      .pipe(
-        tap(_ => this.log('messages.service.employee.fetched.employees')),
-        catchError(this.handleError<EmployeeDTOInterface[]>('getEmployees', []))
-      );
+  getEmployees(): Observable<EmployeeInterface[]> {
+    return this.httpClient.get<EmployeeInterface[]>(this.employeesApiUrl).pipe(
+      tap(_ => this.log('messages.service.employee.fetched.employees')),
+      catchError(this.handleError<EmployeeInterface[]>('getEmployees', []))
+    );
   }
 
-  getEmployeeById(id: string): Observable<EmployeeDTOInterface> {
+  getEmployeeById(id: string): Observable<EmployeeInterface> {
     const employeeUrl = `${this.employeesApiUrl}/${id}`;
-    return this.httpClient.get<EmployeeDTOInterface>(employeeUrl).pipe(
+    return this.httpClient.get<EmployeeInterface>(employeeUrl).pipe(
       tap(_ =>
         // TODO: add here message and to language json
         this.log('messages.service.employee.fetched.employee', { id: id })
       ),
       catchError(
-        this.handleError<EmployeeDTOInterface>(`getEmployeeById id=${id}`)
+        this.handleError<EmployeeInterface>(`getEmployeeById id=${id}`)
       )
     );
   }
 
   addNewEmployee(
-    submittedEmployee: EmployeeDTOInterface
-  ): Observable<EmployeeDTOInterface> {
+    submittedEmployee: EmployeeInterface
+  ): Observable<EmployeeInterface> {
     // TODO: changed to Synchronus - should it stay like this and why?
     this.log('messages.service.employee.add.new', {
       employee: submittedEmployee,
     });
     return this.httpClient
-      .post<EmployeeDTOInterface>(
+      .post<EmployeeInterface>(
         this.employeesApiUrl,
         submittedEmployee,
         this.httpOptions
@@ -62,11 +60,11 @@ export class EmployeeService {
           // TODO: add here message and to language json
           this.log('messages.service.employee.added.employee')
         ),
-        catchError(this.handleError<EmployeeDTOInterface>('addEmployee'))
+        catchError(this.handleError<EmployeeInterface>('addEmployee'))
       );
   }
 
-  updateEmployee(submittedEmployee: EmployeeDTOInterface): Observable<any> {
+  updateEmployee(submittedEmployee: EmployeeInterface): Observable<any> {
     return this.httpClient
       .put(this.employeesApiUrl, submittedEmployee, this.httpOptions)
       .pipe(
@@ -82,11 +80,11 @@ export class EmployeeService {
       );
   }
 
-  deleteEmployee(id: string): Observable<EmployeeDTOInterface> {
+  deleteEmployee(id: string): Observable<EmployeeInterface> {
     const employeeUrl = `${this.employeesApiUrl}/${id}`;
 
     return this.httpClient
-      .delete<EmployeeDTOInterface>(employeeUrl, this.httpOptions)
+      .delete<EmployeeInterface>(employeeUrl, this.httpOptions)
       .pipe(
         tap(_ =>
           // TODO: add here message and to language json
@@ -95,7 +93,7 @@ export class EmployeeService {
           })
         ),
         catchError(
-          this.handleError<EmployeeDTOInterface>(`deleteEmployee id=${id}`)
+          this.handleError<EmployeeInterface>(`deleteEmployee id=${id}`)
         )
       );
   }

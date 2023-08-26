@@ -6,8 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeDTOInterface } from '../../core/models/DTO/employeeDTO';
-import { ProjectDTOInterface } from '../../core/models/DTO/projectDTO';
+import { EmployeeInterface } from '../../core/models/employee';
+import { ProjectInterface } from '../../core/models/project';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { Location } from '@angular/common';
@@ -21,11 +21,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./employee-form.component.scss'],
 })
 export class EmployeeFormComponent implements OnInit, OnChanges {
-  employeeToEdit?: EmployeeDTOInterface;
-  otherEmployees: EmployeeDTOInterface[] = [];
+  destroyRef: DestroyRef = inject(DestroyRef);
+  employeeToEdit?: EmployeeInterface;
+  otherEmployees: EmployeeInterface[] = [];
   skills: string[] = [];
-  projects: ProjectDTOInterface[] = [];
-  private destroyRef: DestroyRef = inject(DestroyRef);
+  projects: ProjectInterface[] = [];
   private employeeId: string | null = null;
 
   // TODO: czy nie powinien byc private i do tego setter i getter?
@@ -85,7 +85,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         .getEmployeeById(this.employeeId)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(
-          (employee: EmployeeDTOInterface | undefined) =>
+          (employee: EmployeeInterface | undefined) =>
             (this.employeeToEdit = employee)
         );
     }
@@ -99,9 +99,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.projectService
       .getProjects()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        (projects: ProjectDTOInterface[]) => (this.projects = projects)
-      );
+      .subscribe((projects: ProjectInterface[]) => (this.projects = projects));
   }
 
   private getSkills(): void {
@@ -118,17 +116,16 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         .getEmployees()
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(
-          (employees: EmployeeDTOInterface[]) =>
-            (this.otherEmployees = employees)
+          (employees: EmployeeInterface[]) => (this.otherEmployees = employees)
         );
     }
     this.employeeService
       .getEmployees()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-        (employees: EmployeeDTOInterface[]) =>
+        (employees: EmployeeInterface[]) =>
           (this.otherEmployees = employees.filter(
-            (e: EmployeeDTOInterface) => e.id != this.employeeToEdit?.id
+            (e: EmployeeInterface) => e.id != this.employeeToEdit?.id
           ))
       );
   }
@@ -146,8 +143,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       ],
       surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       hireDate: '',
-      avatarUrl: ['../../../assets/img/avatar-default.jpg'],
-      skills: [[]],
+      skills: this.formBuilder.group({ name: [''], proficiency: [''] }),
       projects: [[]],
       manager: [''],
     });
@@ -165,21 +161,21 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     // });
   }
 
-  private updateEmployee(employeeToUpdate: EmployeeDTOInterface): void {
+  private updateEmployee(employeeToUpdate: EmployeeInterface): void {
     this.employeeService
       .updateEmployee(employeeToUpdate)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }
 
-  private addEmployee(employeeToAdd: EmployeeDTOInterface): void {
+  private addEmployee(employeeToAdd: EmployeeInterface): void {
     this.employeeService
       .addNewEmployee(employeeToAdd)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }
 
-  private getFormData(): EmployeeDTOInterface {
+  private getFormData(): EmployeeInterface {
     return {
       ...this.employeeForm.getRawValue(),
       hireDate: new Date(this.employeeForm.value['hireDate']),

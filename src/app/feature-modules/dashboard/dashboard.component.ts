@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { EmployeeDTOInterface } from '../../core/models/DTO/employeeDTO';
+import { EmployeeInterface } from '../../core/models/employee';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -10,7 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class DashboardComponent implements OnInit {
   destroyRef: DestroyRef = inject(DestroyRef);
-  employees: EmployeeDTOInterface[] = [];
+  employees: EmployeeInterface[] = [];
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
       .getEmployees()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-        (employees: EmployeeDTOInterface[]) =>
+        (employees: EmployeeInterface[]) =>
           (this.employees = employees.slice(1, 5))
       );
   }
