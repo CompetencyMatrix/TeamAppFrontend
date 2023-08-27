@@ -36,7 +36,7 @@
   }
 
   &__content {
-    margin: 0 0.3rem;
+    margin: 0;
     padding: 0.5rem 0.7rem ;
   }
 
@@ -51,6 +51,7 @@
     padding: 0 1rem;
     border-radius: 2rem;
     overflow: visible;
+    height:initial!important;
 
     & * {
       word-wrap: break-word;
@@ -60,7 +61,8 @@
 
   &__message-time {
     position: absolute;
-    bottom: 2.8rem;
+    top: -1.3rem;
+    left: -0.3rem;
   }
 
   &__actions {
