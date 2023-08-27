@@ -3,6 +3,8 @@ import {
   DestroyRef,
   ElementRef,
   inject,
+  Input,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { EmployeeSkillInterface } from '../../../../core/models/employeeSkill';
@@ -25,9 +27,9 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   templateUrl: './chips-multiselect.component.html',
   styleUrls: ['./chips-multiselect.component.scss'],
 })
-export class ChipsMultiselectComponent {
+export class ChipsMultiselectComponent implements OnInit {
+  @Input() allSkills: EmployeeSkillInterface[] = [];
   chosenSkills: EmployeeSkillInterface[] = [];
-  allSkills: EmployeeSkillInterface[] = [];
   filteredSkills?: Observable<EmployeeSkillInterface[]>;
   destroyRef: DestroyRef = inject(DestroyRef);
 
@@ -38,6 +40,10 @@ export class ChipsMultiselectComponent {
   announcer = inject(LiveAnnouncer);
 
   constructor() {
+    this.filteredSkills = this.getFilteredObservable();
+  }
+
+  ngOnInit(): void {
     this.filteredSkills = this.getFilteredObservable();
   }
 
@@ -83,22 +89,24 @@ export class ChipsMultiselectComponent {
   private getFilteredObservable():
     | Observable<EmployeeSkillInterface[]>
     | undefined {
-    return this.skillsFormControl.valueChanges?.pipe(
-      takeUntilDestroyed(this.destroyRef),
-      startWith(null),
-      map((skill: EmployeeSkillInterface | null) =>
-        skill ? this._filterWithName(skill) : this.allSkills.slice()
-      )
-    );
+    if (!this.skillsFormControl.control) {
+      return undefined;
+    } else {
+      return this.skillsFormControl.control.valueChanges?.pipe(
+        takeUntilDestroyed(this.destroyRef),
+        startWith(null),
+        map((typedName: string | null) =>
+          typedName ? this._filterWithName(typedName) : this.allSkills.slice()
+        )
+      );
+    }
   }
-  private _filterWithName(
-    skill: EmployeeSkillInterface
-  ): EmployeeSkillInterface[] {
-    const nameFilterValue = skill.name.toLowerCase();
+  private _filterWithName(skillName: string): EmployeeSkillInterface[] {
+    console.log(skillName);
 
     return this.allSkills.filter((skill: EmployeeSkillInterface) =>
       //TODO: change to '===' instead of 'includes'
-      skill.name.toLowerCase().includes(nameFilterValue)
+      skill.name.toLowerCase().includes(skillName)
     );
   }
 }

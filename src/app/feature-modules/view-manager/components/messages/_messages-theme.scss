@@ -13,6 +13,7 @@
   .messages-window {
     &__card {
       background-color: $primary100 !important;
+      box-shadow: 0 0 1.5rem 0 rgb(1, 0, 0) inset !important;
     }
 
     &__header {

@@ -62,7 +62,9 @@
   <!--      }}</mat-option>-->
   <!--    </mat-select>-->
   <!--  </mat-form-field>-->
-  <app-chips-multiselect formControlName="skills"></app-chips-multiselect>
+  <app-chips-multiselect
+    formControlName="skills"
+    [allSkills]="allSkills"></app-chips-multiselect>
 
   <mat-form-field class="employee-form__field">
     <mat-label> {{ 'employee.form.manager' | translate }}: </mat-label>
