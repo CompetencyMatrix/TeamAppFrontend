@@ -9,9 +9,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { ChipsMultiselectComponent } from './components/chips-multiselect/chips-multiselect.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [EmployeeFormComponent],
+  declarations: [EmployeeFormComponent, ChipsMultiselectComponent],
   imports: [
     CommonModule,
     EmployeeFormRoutingModule,
@@ -22,6 +26,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     ReactiveFormsModule,
     FormsModule,
     MatDatepickerModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatIconModule,
   ],
 })
 export class EmployeeFormModule {}

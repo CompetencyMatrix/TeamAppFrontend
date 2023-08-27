@@ -1,11 +1,19 @@
 import {
   Component,
   DestroyRef,
+  ElementRef,
   inject,
   OnChanges,
   OnInit,
+  ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { EmployeeInterface } from '../../core/models/employee';
 import { ProjectInterface } from '../../core/models/project';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +22,11 @@ import { Location } from '@angular/common';
 import { SkillService } from '../../core/services/skill/skill.service';
 import { ProjectService } from '../../core/services/project/project.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EmployeeSkillInterface } from '../../core/models/employeeSkill';
+import { map, Observable, startWith } from 'rxjs';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
 
 @Component({
   selector: 'app-employee-form',
@@ -21,14 +34,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./employee-form.component.scss'],
 })
 export class EmployeeFormComponent implements OnInit, OnChanges {
-  destroyRef: DestroyRef = inject(DestroyRef);
   employeeToEdit?: EmployeeInterface;
   otherEmployees: EmployeeInterface[] = [];
-  skills: string[] = [];
   projects: ProjectInterface[] = [];
+  allSkills: EmployeeSkillInterface[] = [];
 
-  // TODO: czy nie powinien byc private i do tego setter i getter?
   employeeForm: FormGroup;
+  destroyRef: DestroyRef = inject(DestroyRef);
+  announcer = inject(LiveAnnouncer);
+  // TODO: dodaj ten banner z info ze sie udalo dodac
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,16 +56,11 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.getEmployee();
-    this.getOtherEmployees();
-    this.getSkills();
-    this.getProjects();
-    this.employeeForm = this.buildForm();
+    this.getInitialData();
     this.initializeForm();
   }
 
   ngOnChanges(): void {
-    this.getEmployee();
     this.initializeForm();
   }
 
@@ -107,7 +116,12 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.skillService
       .getSkills()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((skills: string[]) => (this.skills = skills));
+      .subscribe(
+        (skills: string[]) =>
+          (this.allSkills = skills.map((skillName: string) => {
+            return { name: skillName, proficiency: ProficiencyLevel.JUNIOR };
+          }))
+      );
   }
 
   //TODO: rewrite
@@ -144,7 +158,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       ],
       surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       hireDate: '',
-      skills: this.formBuilder.group({ name: [''], proficiency: [''] }),
+      skills: [[]],
       projects: [[]],
       manager: [''],
     });
@@ -160,5 +174,12 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     //   ...this.employeeToEdit,
     //   hireDate: this.employeeToEdit?.hireDate.toISOString().slice(0, 10),
     // });
+  }
+
+  private getInitialData(): void {
+    this.getEmployee();
+    this.getOtherEmployees();
+    this.getSkills();
+    this.getProjects();
   }
 }
