@@ -27,6 +27,10 @@
       background-color: mat.get-color-from-palette($primary-palette, 50);
       box-shadow: 0 0.01rem 0.5rem 0 rgb(1, 0, 0) inset;
     }
+
+    &__message {
+      background-color: mat.get-color-from-palette($primary-palette, 200)!important;
+    }
   }
 }
 

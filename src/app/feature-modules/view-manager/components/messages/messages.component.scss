@@ -39,17 +39,22 @@
   }
 
   &__content {
+    padding: 0.5rem 0.7rem ;
   }
 
   &__list {
     height: 20rem;
     overflow-y: auto;
+
+    :first-child {
+      margin-top: 0;
+    }
   }
 
   &__message {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    padding: 0 1rem;
     border-radius: 2rem;
-    background-color: #2bb3ff;
   }
 
   &__actions {
