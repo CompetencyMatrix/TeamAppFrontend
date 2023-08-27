@@ -19,8 +19,11 @@
     <mat-list class="messages-window__list" cdkScrollable>
       <mat-list-item
         *ngFor="let message of messageService.messages"
-        class="messages-window__message"
-        >{{ message }}</mat-list-item
+        class="messages-window__message">
+        <div class="messages-window__message-time" mat-line>
+          {{ message.time.toTimeString().slice(0, 5) }}
+        </div>
+        <div mat-line>{{ message.text }}</div></mat-list-item
       >
     </mat-list>
   </mat-card-content>
