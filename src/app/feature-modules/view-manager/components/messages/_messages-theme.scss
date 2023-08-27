@@ -16,17 +16,18 @@
 
   .messages-window {
     &__header {
-      color: $primary200-contrast;
-      background-color: $primary200;
-      border-color: $primary200-contrast;
+      color: mat.get-color-from-palette($primary-palette, 800-contrast);
+      background-color: mat.get-color-from-palette($primary-palette, 800);
+      border-color: mat.get-color-from-palette($primary-palette, 200-contrast);
+      box-shadow: 0 0.14rem 0.28rem 0 rgba(0.9,0,0.20);
     }
+
+
     &__content {
-      background-color: mat.get-color-from-palette($primary-palette, 200);
-      border-color: $primary200-contrast;
-      padding: 1rem;
+      background-color: mat.get-color-from-palette($primary-palette, 50);
+      box-shadow: 0 0.01rem 0.5rem 0 rgb(1, 0, 0) inset;
     }
   }
-
 }
 
 @mixin typography($typography-config) {

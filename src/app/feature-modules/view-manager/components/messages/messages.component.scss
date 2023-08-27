@@ -14,11 +14,13 @@
   }
 
   &__header {
+    justify-content: center;
     padding: 0.6rem;
-    border-radius: 1rem 1rem 0 0;
+    margin: 0.7rem;
+    border-radius: 1.8rem;
     border-style: solid;
     border-width: 0.1rem;
-    border-bottom-style: none;
+
   }
 
   &__card {
@@ -29,20 +31,34 @@
     position: absolute;
     bottom: 2rem;
     right: 2rem;
+
+    //border-radius: 1.8rem 1.8rem 0 0;
+    //border-style: solid;
+    //border-width: 0.1rem;
+    background-color: #4e6a78;
   }
 
   &__content {
-    border-style: solid;
-    border-width: 0.1rem;
-    border-top-style: none;
   }
+
   &__list {
     height: 20rem;
     overflow-y: auto;
   }
 
+  &__message {
+    margin-top: 1rem;
+    border-radius: 2rem;
+    background-color: #2bb3ff;
+  }
+
   &__actions {
     display: flex;
     justify-content: space-between;
+  }
+
+  &__close-button, &__clear-button {
+    margin-right: 1rem;
+    margin-left: 1rem;
   }
 }
