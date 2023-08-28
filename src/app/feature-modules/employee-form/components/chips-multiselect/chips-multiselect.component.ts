@@ -75,6 +75,7 @@ export class ChipsMultiselectComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(event.option.value);
     //TODO: tutaj tez pobierz level
     this.chosenSkills.push({
       name: event.option.viewValue,
@@ -105,7 +106,6 @@ export class ChipsMultiselectComponent implements OnInit {
     console.log(skillName);
 
     return this.allSkills.filter((skill: EmployeeSkillInterface) =>
-      //TODO: change to '===' instead of 'includes'
       skill.name.toLowerCase().includes(skillName)
     );
   }
