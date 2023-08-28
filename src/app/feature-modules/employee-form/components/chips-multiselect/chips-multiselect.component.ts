@@ -29,6 +29,10 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 })
 export class ChipsMultiselectComponent implements OnInit {
   @Input() allSkills: EmployeeSkillInterface[] = [];
+  possibleLevels: (string | ProficiencyLevel)[] = Object.values(
+    ProficiencyLevel
+  ).filter((lvl: string | ProficiencyLevel) => isNaN(Number(lvl)));
+
   private _chosenSkills: EmployeeSkillInterface[] = [];
   filteredSkills?: Observable<EmployeeSkillInterface[]>;
   @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
