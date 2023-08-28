@@ -10,6 +10,7 @@
   </mat-chip-grid>
   <input
     #skillsInput
+    #trigger="matAutocompleteTrigger"
     [formControl]="this.skillsFormControl.control"
     [matChipInputFor]="chipGrid"
     [matAutocomplete]="auto"
@@ -19,8 +20,15 @@
     #auto="matAutocomplete"
     requireSelection
     (optionSelected)="selected($event)">
-    <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+    <mat-option
+      *ngFor="let skill of filteredSkills | async"
+      [value]="skill"
+      (click)="$event.stopPropagation(); trigger.openPanel()">
       {{ skill.name }}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
+
+<button
+  type="button"
+  (click)="$event.stopPropagation(); trigger.openPanel()"></button>

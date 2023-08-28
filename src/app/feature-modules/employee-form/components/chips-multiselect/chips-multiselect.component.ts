@@ -61,7 +61,7 @@ export class ChipsMultiselectComponent implements OnInit {
     //TODO
     //    event.chipInput!.clear();
     event.chipInput.clear();
-    this.skillsFormControl.control.setValue(null);
+    this.skillsFormControl.control.setValue([...this.chosenSkills]);
   }
 
   remove(skill: EmployeeSkillInterface): void {
@@ -72,6 +72,7 @@ export class ChipsMultiselectComponent implements OnInit {
 
       this.announcer.announce(`Removed ${skill}`);
     }
+    this.skillsFormControl.control.setValue([...this.chosenSkills]);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -84,7 +85,7 @@ export class ChipsMultiselectComponent implements OnInit {
     if (this.skillsInput) {
       this.skillsInput.nativeElement.value = '';
     }
-    this.skillsFormControl.control.setValue(null);
+    this.skillsFormControl.control.setValue([...this.chosenSkills]);
   }
 
   private getFilteredObservable():
