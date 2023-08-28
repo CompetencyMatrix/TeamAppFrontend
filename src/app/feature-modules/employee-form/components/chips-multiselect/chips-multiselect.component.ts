@@ -52,16 +52,17 @@ export class ChipsMultiselectComponent implements OnInit {
     //TODO: tutaj pobierac wartosc proficiency
     const value: string = (event.value || '').trim();
 
+    // this.updateOrInsertChosenSkills(event.value);
     if (value) {
       this.chosenSkills.push({
         name: value,
         proficiency: ProficiencyLevel.JUNIOR,
       });
     }
-    //TODO
-    //    event.chipInput!.clear();
-    event.chipInput.clear();
+
     this.skillsFormControl.control.setValue([...this.chosenSkills]);
+
+    event.chipInput.clear();
   }
 
   remove(skill: EmployeeSkillInterface): void {
@@ -82,10 +83,12 @@ export class ChipsMultiselectComponent implements OnInit {
       name: event.option.viewValue,
       proficiency: ProficiencyLevel.JUNIOR,
     });
+
+    this.skillsFormControl.control.setValue([...this.chosenSkills]);
+
     if (this.skillsInput) {
       this.skillsInput.nativeElement.value = '';
     }
-    this.skillsFormControl.control.setValue([...this.chosenSkills]);
   }
 
   private getFilteredObservable():
