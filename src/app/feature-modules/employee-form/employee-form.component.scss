@@ -1,6 +1,9 @@
 @import 'src/styles/colors';
 
 .employee-form {
+  display: flex;
+  flex-direction: column;
+
   &__hint {
     font-size: 1rem;
     color: $tapp-alert-on-warn;
