@@ -29,15 +29,14 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 })
 export class ChipsMultiselectComponent implements OnInit {
   @Input() allSkills: EmployeeSkillInterface[] = [];
-  chosenSkills: EmployeeSkillInterface[] = [];
+  private _chosenSkills: EmployeeSkillInterface[] = [];
   filteredSkills?: Observable<EmployeeSkillInterface[]>;
-  destroyRef: DestroyRef = inject(DestroyRef);
-
-  separatorKeysCodes: number[] = [ENTER, COMMA];
   @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
   skillsFormControl: FormControlDirective | FormControlName | NgModel =
     injectNgControl();
   announcer = inject(LiveAnnouncer);
+  destroyRef: DestroyRef = inject(DestroyRef);
+  separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor() {
     this.filteredSkills = this.getFilteredObservable();
@@ -47,6 +46,15 @@ export class ChipsMultiselectComponent implements OnInit {
     this.filteredSkills = this.getFilteredObservable();
   }
 
+  @Input()
+  set chosenSkills(skills: EmployeeSkillInterface[] | undefined) {
+    this._chosenSkills = skills === undefined ? [] : skills;
+  }
+
+  get chosenSkills(): EmployeeSkillInterface[] {
+    return this._chosenSkills;
+  }
+
   add(event: MatChipInputEvent): void {
     console.log(event.value);
     //TODO: tutaj pobierac wartosc proficiency
@@ -54,41 +62,44 @@ export class ChipsMultiselectComponent implements OnInit {
 
     // this.updateOrInsertChosenSkills(event.value);
     if (value) {
-      this.chosenSkills.push({
+      this._chosenSkills.push({
         name: value,
         proficiency: ProficiencyLevel.JUNIOR,
       });
     }
 
-    this.skillsFormControl.control.setValue([...this.chosenSkills]);
+    this.skillsFormControl.control.setValue([...this._chosenSkills]);
 
     event.chipInput.clear();
+    this.filteredSkills = this.getFilteredObservable();
   }
 
   remove(skill: EmployeeSkillInterface): void {
-    const index = this.chosenSkills.indexOf(skill);
+    const index = this._chosenSkills.indexOf(skill);
 
     if (index >= 0) {
-      this.chosenSkills.splice(index, 1);
+      this._chosenSkills.splice(index, 1);
 
       this.announcer.announce(`Removed ${skill}`);
     }
-    this.skillsFormControl.control.setValue([...this.chosenSkills]);
+    this.skillsFormControl.control.setValue([...this._chosenSkills]);
+    this.filteredSkills = this.getFilteredObservable();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     console.log(event.option.value);
     //TODO: tutaj tez pobierz level
-    this.chosenSkills.push({
+    this._chosenSkills.push({
       name: event.option.viewValue,
       proficiency: ProficiencyLevel.JUNIOR,
     });
 
-    this.skillsFormControl.control.setValue([...this.chosenSkills]);
+    this.skillsFormControl.control.setValue([...this._chosenSkills]);
 
     if (this.skillsInput) {
       this.skillsInput.nativeElement.value = '';
     }
+    this.filteredSkills = this.getFilteredObservable();
   }
 
   private getFilteredObservable():
