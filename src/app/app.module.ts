@@ -8,7 +8,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 import { ViewManagerModule } from './feature-modules/view-manager/view-manager.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,10 +31,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     MatNativeDateModule,
     ViewManagerModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false,
-      passThruUnknownUrl: true,
-    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

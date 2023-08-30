@@ -10,9 +10,9 @@ import { EmployeeInterface } from '../../models/employee';
 })
 export class EmployeeService {
   // TODO: move to some config file
-  private employeesApiUrl = 'api/employees';
+  private employeesApiUrl = 'http://localhost:8080/api/employees';
   httpOptions = {
-    headers: new HttpHeaders({ 'Content=Type': 'application/json' }),
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
   constructor(
     private httpClient: HttpClient,
