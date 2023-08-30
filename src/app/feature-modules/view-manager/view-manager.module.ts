@@ -22,6 +22,8 @@ import {
 } from '@angular/cdk/scrolling';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     CdkVirtualScrollableWindow,
     MatSnackBarModule,
     MatBadgeModule,
+    MatSelectModule,
+    MatMenuModule,
   ],
   exports: [MessagesComponent],
 })

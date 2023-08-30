@@ -15,6 +15,10 @@ export class LanguageSwitchComponent {
     this.translate.use(value);
   }
 
+  getLanguages(): string[] {
+    return this.translate.getLangs();
+  }
+
   getCurrentLanguage(): string {
     return this.translate.currentLang;
   }

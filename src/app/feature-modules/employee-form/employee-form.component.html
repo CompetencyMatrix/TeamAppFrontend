@@ -64,7 +64,8 @@
   <!--  </mat-form-field>-->
   <app-chips-multiselect
     formControlName="skills"
-    [allSkills]="allSkills"></app-chips-multiselect>
+    [allSkills]="allSkills"
+    [initChosenSkills]="employeeToEdit?.skills"></app-chips-multiselect>
 
   <mat-form-field class="employee-form__field">
     <mat-label> {{ 'employee.form.manager' | translate }}: </mat-label>

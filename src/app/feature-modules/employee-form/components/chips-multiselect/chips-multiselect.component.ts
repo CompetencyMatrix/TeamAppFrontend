@@ -50,10 +50,10 @@ export class ChipsMultiselectComponent implements OnInit {
     this.filteredSkills = this.getFilteredObservable();
   }
 
-  // @Input()
-  // set chosenSkillsSetter(skills: EmployeeSkillInterface[] | undefined) {
-  //   this.chosenSkills = skills === undefined ? [] : skills;
-  // }
+  @Input()
+  set initChosenSkills(skills: EmployeeSkillInterface[] | undefined) {
+    this.chosenSkills = skills === undefined ? [] : skills;
+  }
 
   add(event: MatChipInputEvent): void {
     console.log(event.value);
