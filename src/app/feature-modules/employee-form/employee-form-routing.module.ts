@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeFormComponent } from './employee-form.component';
-import { appRoutesNames } from '../../../config/appRoutesNames';
 
 const routes: Routes = [
   {

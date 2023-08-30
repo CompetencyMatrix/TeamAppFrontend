@@ -10,9 +10,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],
@@ -25,9 +25,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],
@@ -40,9 +40,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],
@@ -55,9 +55,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],
@@ -70,9 +70,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],
@@ -85,9 +85,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],
@@ -100,9 +100,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],
@@ -115,9 +115,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],
@@ -130,9 +130,9 @@ export const EMPLOYEES: EmployeeInterface[] = [
     surname: 'Wonter',
     hireDate: new Date('12.10.2131'),
     skills: [
-      { skill: SKILLS[0], proficiency: ProficiencyLevel.MID },
+      { name: SKILLS[0], proficiency: ProficiencyLevel.MID },
       {
-        skill: SKILLS[2],
+        name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
     ],

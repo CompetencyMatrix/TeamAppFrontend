@@ -11,7 +11,6 @@ $tapp-possible-typography: null;
 @include mat.core-theme(light.$tapp-theme-light);
 @include mat.button-theme(light.$tapp-theme-light);
 @include components.theme(light.$tapp-theme-light, $tapp-possible-typography);
-//TODO: add for the rest
 
 @media (prefers-color-scheme: dark) {
   @include mat.core-color(dark.$tapp-theme-dark);

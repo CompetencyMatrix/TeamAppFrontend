@@ -1,13 +1,14 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Message } from '../../models/message';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
   destroyRef: DestroyRef = inject(DestroyRef);
-  messages: string[] = [];
+  messages: Message[] = [];
 
   constructor(private readonly translate: TranslateService) {}
 
@@ -26,7 +27,7 @@ export class MessageService {
     this.add(this.translate.instant(messageKey, interpolateParams));
   }
   add(message: string) {
-    this.messages.push(message);
+    this.messages.push({ time: new Date(), text: message });
   }
 
   clear() {

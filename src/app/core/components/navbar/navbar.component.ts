@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +8,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class NavbarComponent {
   @Output() public sidenavToggle = new EventEmitter();
+
+  constructor(private location: Location) {}
+
   onToggleSidenav() {
     this.sidenavToggle.emit();
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

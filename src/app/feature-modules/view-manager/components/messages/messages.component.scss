@@ -1,23 +1,78 @@
-@import 'src/styles/colors';
+.messages-window {
+  display: flex;
+  flex-direction: column;
 
-.message-list {
-  &__message {
-    font-size: 1rem;
-    background-color: $tapp-alert-good-light;
-    color: $tapp-alert-good-dark;
-    text-align: center;
+  &__toggle-button {
+    position: fixed;
+    z-index: 1000;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  &__toggle-icon {
+    margin: 0;
+  }
+
+  &__header {
+    justify-content: center;
     padding: 0.6rem;
-    margin-bottom: 0.7rem;
-    border-radius: 1rem;
-    border-color: $tapp-alert-good-dark;
-    border-width: 0.1rem;
+    margin: 0.7rem;
+    border-radius: 1.8rem;
     border-style: solid;
+    border-width: 0.1rem;
   }
 
-  :last-child {
-    margin-bottom: 0;
+  &__card {
+    position: fixed;
+    z-index: 1000;
+    bottom: 2rem;
+    right: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    width: 24rem;
+    height: 30rem;
+    border-radius: 1rem;
   }
 
-  &__clear-button {
+  &__content {
+    margin: 0;
+    padding: 0.5rem 0.7rem ;
   }
+
+  &__list {
+    height: 19rem;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+  }
+
+  &__message {
+    margin-top: 1.8rem;
+    padding: 0 1rem;
+    border-radius: 2rem;
+    overflow: visible;
+    height:initial!important;
+
+    & * {
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+  }
+
+  &__message-time {
+    position: absolute;
+    top: -1.3rem;
+    left: -0.3rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__close-button, &__clear-button {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+
 }

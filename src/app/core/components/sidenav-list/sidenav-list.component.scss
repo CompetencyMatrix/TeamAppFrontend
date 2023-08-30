@@ -1,10 +1,8 @@
-.navigation-list__link {
+.navigation-list__navigation-item {
   text-decoration: none;
-  color: white;
 
   &:hover,
   &:active {
-    color: lightgray;
   }
 
   &__caption {

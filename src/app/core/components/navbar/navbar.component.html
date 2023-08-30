@@ -20,20 +20,42 @@
     <ul fxLayout fxLayoutGap="15px" class="navbar__navigation-items">
       <li class="navbar__navigation-item">
         <!--  TODO: add i18n-->
-        <a mat-button routerLink="/employees">Employees</a>
+        <a
+          mat-button
+          routerLink="/employees"
+          routerLinkActive="navbar__navigation-item--active"
+          >Employees</a
+        >
       </li>
       <li class="navbar__navigation-item">
-        <a mat-button routerLink="/dashboard">Dashboard</a>
+        <a
+          mat-button
+          routerLink="/dashboard"
+          routerLinkActive="navbar__navigation-item--active"
+          >Dashboard</a
+        >
       </li>
       <li class="navbar__navigation-item">
         <!--  TODO: change this - now it implies that ID === 'new' - it works bc id will be never like this, but should be changed to new-employee and make multiple path-->
-        <a mat-button routerLink="/employee/new">{{
-          'employee.list.new.employee.button' | translate
-        }}</a>
+        <a
+          mat-button
+          routerLink="/employee/new"
+          routerLinkActive="navbar__navigation-item--active"
+          >{{ 'employee.list.new.employee.button' | translate }}</a
+        >
       </li>
     </ul>
-    <li class="navbar__navigation-item">
-      <app-language-switch></app-language-switch>
-    </li>
+    <button
+      mat-icon-button
+      type="button"
+      class="navbar__back-button"
+      matTooltip="Go Back"
+      (click)="goBack()">
+      <mat-icon>subdirectory_arrow_left</mat-icon>
+    </button>
+    <app-language-switch
+      class="navbar__language-button"
+      matTooltip="Change Language"
+      matTooltipClass="navbar__language-tooltip"></app-language-switch>
   </div>
 </mat-toolbar>
