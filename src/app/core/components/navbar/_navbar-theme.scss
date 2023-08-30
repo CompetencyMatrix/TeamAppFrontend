@@ -32,7 +32,19 @@
 
       }
       }
+
+    &__language-button > * {
+      &:hover {
+        background-color: rgba(mat.get-color-from-palette($primary-palette, 300), 0.15);
+      }
     }
+    &__back-button {
+      &:hover {
+        background-color: rgba(mat.get-color-from-palette($primary-palette, 300), 0.15);
+      }
+    }
+
+  }
   }
 
 //@media only screen and (min-width: 600px) {

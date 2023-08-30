@@ -45,8 +45,17 @@
         >
       </li>
     </ul>
-    <li class="navbar__navigation-item">
-      <app-language-switch></app-language-switch>
-    </li>
+    <button
+      mat-icon-button
+      type="button"
+      class="navbar__back-button"
+      matTooltip="Go Back"
+      (click)="goBack()">
+      <mat-icon>subdirectory_arrow_left</mat-icon>
+    </button>
+    <app-language-switch
+      class="navbar__language-button"
+      matTooltip="Change Language"
+      matTooltipClass="navbar__language-tooltip"></app-language-switch>
   </div>
 </mat-toolbar>

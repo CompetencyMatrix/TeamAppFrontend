@@ -24,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatBadgeModule,
     MatSelectModule,
     MatMenuModule,
+    MatTooltipModule,
   ],
   exports: [MessagesComponent],
 })

@@ -10,6 +10,9 @@
     display: inline-flex;
   }
 
+  &__language-tooltip {
+  }
+
   &__right-part,
   &__left-part {
     align-items: center;
@@ -20,7 +23,7 @@
     list-style: none;
     flex-direction: row;
     padding: 0;
-    margin: 0;
+    margin: 0 1rem;
   }
 
   &__navigation-item {

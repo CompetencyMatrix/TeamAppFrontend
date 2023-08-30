@@ -3,6 +3,9 @@
 .employee-form {
   display: flex;
   flex-direction: column;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 
   &__hint {
     font-size: 1rem;

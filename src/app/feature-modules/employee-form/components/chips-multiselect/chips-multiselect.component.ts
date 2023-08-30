@@ -48,6 +48,7 @@ export class ChipsMultiselectComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredSkills = this.getFilteredObservable();
+    this.chosenSkills = this.chosenSkills === null ? [] : this.chosenSkills;
   }
 
   @Input()
