@@ -27,6 +27,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-form',
@@ -50,7 +51,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     private employeeService: EmployeeService,
     private skillService: SkillService,
     private projectService: ProjectService,
-    private location: Location
+    private location: Location,
+    private _snackBar: MatSnackBar
   ) {
     this.employeeForm = this.buildForm();
   }
@@ -78,14 +80,13 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       });
       // this.employeeForm.reset();
       this.goBack();
+      this.openSnackBar('Form submitted successfully', 'Ok');
     }
   }
   onResetForm(): void {
     console.log(this.employeeToEdit);
     this.initializeForm();
   }
-
-  protected readonly Boolean = Boolean;
 
   getEmployee(): void {
     const id: string | null = this.route.snapshot.paramMap.get('id');
@@ -106,6 +107,11 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.location.back();
   }
 
+  openSnackBar(message: string, action: string): void {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
   private getProjects(): void {
     this.projectService
       .getProjects()

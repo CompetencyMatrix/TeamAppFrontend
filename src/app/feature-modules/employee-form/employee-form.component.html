@@ -6,9 +6,8 @@
           | translate
             : {
                 person:
-                  [employeeToEdit.name, employeeToEdit.surname]
-                    .filter(Boolean)
-                    .join(' ') | uppercase
+                  [employeeToEdit.name, employeeToEdit.surname].join(' ')
+                  | uppercase
               }
       }}</span
     >
@@ -70,9 +69,7 @@
   <mat-form-field class="employee-form__field">
     <mat-label> {{ 'employee.form.manager' | translate }}: </mat-label>
     <mat-select formControlName="manager">
-      <mat-option
-        *ngFor="let manager of otherEmployees"
-        [value]="employeeToEdit?.manager">
+      <mat-option *ngFor="let manager of otherEmployees" [value]="manager.name">
         {{ manager.name }}
       </mat-option>
     </mat-select>
@@ -89,13 +86,18 @@
   </mat-form-field>
 
   <button
+    class="employee-form__button"
     mat-raised-button
     [disabled]="employeeForm.invalid"
     type="submit"
     [title]="employeeForm.invalid ? 'The form is invalid' : ''">
     {{ 'employee.form.submit.button' | translate }}
   </button>
-  <button mat-raised-button type="button" (click)="onResetForm()">
+  <button
+    mat-raised-button
+    class="employee-form__button"
+    type="button"
+    (click)="onResetForm()">
     {{ 'employee.form.reset.button' | translate }}
   </button>
 </form>
