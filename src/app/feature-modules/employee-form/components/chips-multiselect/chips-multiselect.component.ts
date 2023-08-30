@@ -33,7 +33,7 @@ export class ChipsMultiselectComponent implements OnInit {
     ProficiencyLevel
   ).filter((lvl: string | ProficiencyLevel) => isNaN(Number(lvl)));
 
-  private _chosenSkills: EmployeeSkillInterface[] = [];
+  chosenSkills: EmployeeSkillInterface[] = [];
   filteredSkills?: Observable<EmployeeSkillInterface[]>;
   @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
   skillsFormControl: FormControlDirective | FormControlName | NgModel =
@@ -50,14 +50,10 @@ export class ChipsMultiselectComponent implements OnInit {
     this.filteredSkills = this.getFilteredObservable();
   }
 
-  @Input()
-  set chosenSkills(skills: EmployeeSkillInterface[] | undefined) {
-    this._chosenSkills = skills === undefined ? [] : skills;
-  }
-
-  get chosenSkills(): EmployeeSkillInterface[] {
-    return this._chosenSkills;
-  }
+  // @Input()
+  // set chosenSkillsSetter(skills: EmployeeSkillInterface[] | undefined) {
+  //   this.chosenSkills = skills === undefined ? [] : skills;
+  // }
 
   add(event: MatChipInputEvent): void {
     console.log(event.value);
@@ -66,39 +62,39 @@ export class ChipsMultiselectComponent implements OnInit {
 
     // this.updateOrInsertChosenSkills(event.value);
     if (value) {
-      this._chosenSkills.push({
+      this.chosenSkills.push({
         name: value,
         proficiency: ProficiencyLevel.JUNIOR,
       });
     }
 
-    this.skillsFormControl.control.setValue([...this._chosenSkills]);
+    this.skillsFormControl.control.setValue([...this.chosenSkills]);
 
     event.chipInput.clear();
     this.filteredSkills = this.getFilteredObservable();
   }
 
   remove(skill: EmployeeSkillInterface): void {
-    const index = this._chosenSkills.indexOf(skill);
+    const index = this.chosenSkills.indexOf(skill);
 
     if (index >= 0) {
-      this._chosenSkills.splice(index, 1);
+      this.chosenSkills.splice(index, 1);
 
       this.announcer.announce(`Removed ${skill}`);
     }
-    this.skillsFormControl.control.setValue([...this._chosenSkills]);
+    this.skillsFormControl.control.setValue([...this.chosenSkills]);
     this.filteredSkills = this.getFilteredObservable();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     console.log(event.option.value);
     //TODO: tutaj tez pobierz level
-    this._chosenSkills.push({
+    this.chosenSkills.push({
       name: event.option.viewValue,
       proficiency: ProficiencyLevel.JUNIOR,
     });
 
-    this.skillsFormControl.control.setValue([...this._chosenSkills]);
+    this.skillsFormControl.control.setValue([...this.chosenSkills]);
 
     if (this.skillsInput) {
       this.skillsInput.nativeElement.value = '';
