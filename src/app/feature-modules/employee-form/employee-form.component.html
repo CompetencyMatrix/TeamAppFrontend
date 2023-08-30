@@ -79,7 +79,7 @@
     <mat-label> {{ 'employee.form.projects' | translate }}: </mat-label>
 
     <mat-select formControlName="projects" multiple>
-      <mat-option *ngFor="let project of projects" [value]="project">
+      <mat-option *ngFor="let project of allProjects" [value]="project">
         {{ project.name }}
       </mat-option>
     </mat-select>

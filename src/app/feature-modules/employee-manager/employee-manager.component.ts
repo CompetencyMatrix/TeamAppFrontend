@@ -25,7 +25,7 @@ export class EmployeeManagerComponent implements OnInit {
 
   selectEmployee(newEmployee: EmployeeInterface | undefined): void {
     if (newEmployee === undefined) {
-      //   TODO
+      //   TODO: throw exception
     } else {
       this.messageService.addByKey('messages.service.employee.select', {
         employee: newEmployee,
@@ -33,6 +33,7 @@ export class EmployeeManagerComponent implements OnInit {
     }
     this.selectedEmployee = newEmployee;
   }
+
   deleteEmployee(employeeToDelete: EmployeeInterface): void {
     this.employeeService
       .deleteEmployee(employeeToDelete.id)

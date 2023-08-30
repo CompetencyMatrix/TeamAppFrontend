@@ -35,14 +35,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EmployeeFormComponent implements OnInit, OnChanges {
   employeeToEdit?: EmployeeInterface;
   otherEmployees: EmployeeInterface[] = [];
-  projects: ProjectInterface[] = [];
+  allProjects: ProjectInterface[] = [];
   allSkills: EmployeeSkillInterface[] = [];
-  private employeeId: string | null = null;
+  private pathEmployeeId: string | null = null;
 
   employeeForm: FormGroup;
   destroyRef: DestroyRef = inject(DestroyRef);
-  announcer = inject(LiveAnnouncer);
-  // TODO: dodaj ten banner z info ze sie udalo dodac
+  announcer: LiveAnnouncer = inject(LiveAnnouncer);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,17 +57,15 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getInitialData();
-    this.initializeForm();
   }
 
   ngOnChanges(): void {
-    //TODO: rethink
+    //TODO: rethink - how often do we need to get data - how to react to different lifecycle events
     this.getInitialData();
-    this.initializeForm();
   }
 
   onSubmit(): void {
-    // Check in case submit button 'disbaled' attribute was changed manually
+    // Check in case submit button 'disabled' attribute was changed manually
     if (this.employeeForm.valid) {
       if (this.isAddingNewEmployee()) {
         this.addEmployee(this.getFormData());
@@ -85,18 +82,18 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.initializeForm();
   }
 
-  getEmployee(): void {
-    // TODO: this.isAddingNewEmployee() but then in 'else' block compiler is not aware that employeeId is never null -> can i use 'employeeId!' in such cases or is it still bad pracitce even though code would be more understandable imo
-    if (this.employeeId == null) {
+  fetchEmployeeToForm(): void {
+    // TODO: this.isAddingNewEmployee() but then in 'else' block compiler is not aware that pathEmployeeId is never null -> can i use 'pathEmployeeId!' in such cases or is it still bad pracitce even though code would be more understandable imo
+    if (this.pathEmployeeId === null || this.pathEmployeeId === 'new') {
       this.employeeToEdit = undefined;
     } else {
       this.employeeService
-        .getEmployeeById(this.employeeId)
+        .getEmployeeById(this.pathEmployeeId)
         .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe(
-          (employee: EmployeeInterface | undefined) =>
-            (this.employeeToEdit = employee)
-        );
+        .subscribe((employee: EmployeeInterface | undefined) => {
+          this.employeeToEdit = employee;
+          this.initializeForm();
+        });
     }
   }
 
@@ -109,11 +106,14 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       duration: 3000,
     });
   }
+
   private getProjects(): void {
     this.projectService
       .getProjects()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((projects: ProjectInterface[]) => (this.projects = projects));
+      .subscribe(
+        (projects: ProjectInterface[]) => (this.allProjects = projects)
+      );
   }
 
   private getSkills(): void {
@@ -128,7 +128,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       );
   }
 
-  //TODO: rewrite
   private getOtherEmployees(): void {
     if (this.employeeToEdit === undefined) {
       this.employeeService
@@ -137,16 +136,17 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         .subscribe(
           (employees: EmployeeInterface[]) => (this.otherEmployees = employees)
         );
+    } else {
+      this.employeeService
+        .getEmployees()
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(
+          (employees: EmployeeInterface[]) =>
+            (this.otherEmployees = employees.filter(
+              (e: EmployeeInterface) => e.id != this.employeeToEdit?.id
+            ))
+        );
     }
-    this.employeeService
-      .getEmployees()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        (employees: EmployeeInterface[]) =>
-          (this.otherEmployees = employees.filter(
-            (e: EmployeeInterface) => e.id != this.employeeToEdit?.id
-          ))
-      );
   }
 
   private buildForm(): FormGroup {
@@ -169,7 +169,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   private initializeForm(): void {
-    if (this.employeeToEdit) {
+    if (this.employeeToEdit != undefined) {
       this.employeeForm.patchValue(this.employeeToEdit);
     } else {
       this.employeeForm.reset();
@@ -182,7 +182,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   private getInitialData(): void {
     this.getEmployeeId();
-    this.getEmployee();
+    this.fetchEmployeeToForm();
     this.getOtherEmployees();
     this.getSkills();
     this.getProjects();
@@ -210,10 +210,11 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   private getEmployeeId(): void {
-    this.employeeId = this.route.snapshot.paramMap.get('id');
+    this.pathEmployeeId = this.route.snapshot.paramMap.get('id');
   }
 
   private isAddingNewEmployee(): boolean {
-    return this.employeeId == null;
+    //TODO: move to config - 'add_employee-_id_indicator'
+    return this.pathEmployeeId === 'new';
   }
 }
