@@ -11,6 +11,12 @@
   $primary100-contrast: mat.get-color-from-palette($primary-palette, 100-contrast);
 
   .messages-window {
+    &__toggle-button {
+      background-color: mat.get-color-from-palette($accent-palette, 500)!important;
+      & .mat-badge-content {
+        background: mat.get-color-from-palette($primary-palette, 600);
+      }
+    }
     &__card {
       background-color: $primary100 !important;
       box-shadow: 0 0 1.5rem 0 rgb(1, 0, 0) inset !important;

@@ -1,0 +1,11 @@
+.languages{
+  &__button * {
+    &:hover,
+    &:active{
+      color:red!important;
+      background-color: blue;
+    }
+    &--selected {
+    }
+  }
+}

@@ -1,8 +1,10 @@
 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Language choice">
   <mat-icon>language</mat-icon>
 </button>
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" class="languages">
   <button
+    class="class.languages__button"
+    [class.languages__button--selected]="getCurrentLanguage() === lang"
     mat-menu-item
     *ngFor="let lang of getLanguages()"
     (click)="setLanguage(lang)">
