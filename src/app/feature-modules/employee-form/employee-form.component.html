@@ -68,11 +68,23 @@
 
   <mat-form-field class="employee-form__field">
     <mat-label> {{ 'employee.form.manager' | translate }}: </mat-label>
-    <mat-select formControlName="manager">
-      <mat-option *ngFor="let manager of otherEmployees" [value]="manager.name">
+    <input
+      type="text"
+      placeholder="Choose manager..."
+      aria-label="Manager"
+      matInput
+      formControlName="manager"
+      [matAutocomplete]="managerAutocomplete"
+      matAutocompletePosition="below" />
+    <mat-autocomplete
+      #managerAutocomplete
+      [displayWith]="managerAutocompleteDisplayFunctionWrapper()">
+      <mat-option
+        *ngFor="let manager of filteredOtherEmployees | async"
+        [value]="manager.id">
         {{ manager.name }}
       </mat-option>
-    </mat-select>
+    </mat-autocomplete>
   </mat-form-field>
 
   <mat-form-field class="employee-form__field">

@@ -13,6 +13,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { ChipsMultiselectComponent } from './components/chips-multiselect/chips-multiselect.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [EmployeeFormComponent, ChipsMultiselectComponent],
@@ -29,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatAutocompleteModule,
     MatChipsModule,
     MatIconModule,
+    MatRadioModule,
   ],
 })
 export class EmployeeFormModule {}

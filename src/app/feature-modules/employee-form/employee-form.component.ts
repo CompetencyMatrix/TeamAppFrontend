@@ -23,7 +23,7 @@ import { SkillService } from '../../core/services/skill/skill.service';
 import { ProjectService } from '../../core/services/project/project.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EmployeeSkillInterface } from '../../core/models/employeeSkill';
-import { map, Observable, startWith } from 'rxjs';
+import { map, Observable, of, startWith } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
@@ -37,13 +37,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EmployeeFormComponent implements OnInit, OnChanges {
   employeeToEdit?: EmployeeInterface;
   otherEmployees: EmployeeInterface[] = [];
+  filteredOtherEmployees: Observable<EmployeeInterface[]>;
   projects: ProjectInterface[] = [];
   allSkills: EmployeeSkillInterface[] = [];
 
   employeeForm: FormGroup;
   destroyRef: DestroyRef = inject(DestroyRef);
-  announcer = inject(LiveAnnouncer);
-  // TODO: dodaj ten banner z info ze sie udalo dodac
+  announcer: LiveAnnouncer = inject(LiveAnnouncer);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,6 +55,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     private _snackBar: MatSnackBar
   ) {
     this.employeeForm = this.buildForm();
+    this.filteredOtherEmployees = this.getInitialFilteredOtherEmployees();
   }
 
   ngOnInit(): void {
@@ -188,5 +189,38 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.getOtherEmployees();
     this.getSkills();
     this.getProjects();
+  }
+
+  private getInitialFilteredOtherEmployees(): Observable<EmployeeInterface[]> {
+    const managerControl: AbstractControl | null =
+      this.employeeForm.get('manager');
+
+    return managerControl === null
+      ? of([])
+      : managerControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterManagerByName(value || ''))
+        );
+  }
+
+  private _filterManagerByName(value: string): EmployeeInterface[] {
+    const filterValue: string = value.toLowerCase();
+
+    return this.otherEmployees.filter((employee: EmployeeInterface) =>
+      employee.name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  public managerAutocompleteDisplayFunction(managerId: string): string {
+    const foundEmployee: EmployeeInterface | undefined =
+      this.otherEmployees.find(
+        (employee: EmployeeInterface) => employee.id === managerId
+      );
+    return foundEmployee === undefined ? '' : foundEmployee.name;
+  }
+
+  public managerAutocompleteDisplayFunctionWrapper() {
+    return (managerId: string) =>
+      this.managerAutocompleteDisplayFunction(managerId);
   }
 }

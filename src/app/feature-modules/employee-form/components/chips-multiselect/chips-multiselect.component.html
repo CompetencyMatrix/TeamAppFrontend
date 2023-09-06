@@ -1,8 +1,33 @@
 <mat-form-field class="chip-multiselect__field">
   <mat-label> {{ 'employee.form.skills' | translate }}: </mat-label>
-  <input matInput class="chip-multiselect__mock-input" />
+  <mat-chip-grid
+    #chipGrid
+    aria-label="Skills selection"
+    class="chip-multiselect__chip-grid">
+    <mat-chip-row
+      class="chip-multiselect__chip"
+      *ngFor="let skill of chosenSkills"
+      (removed)="remove(skill)">
+      <div class="chip-multiselect__chip-stars">
+        <button
+          mat-icon-button
+          *ngFor="let level of possibleLevels"
+          class="chip-multiselect__chip-star">
+          <mat-icon>star</mat-icon>
+        </button>
+      </div>
+      <div class="chip-multiselect__chip-content">
+        {{ skill.name }}
+        <button matChipRemove [attr.aria-label]="'remove ' + skill">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </mat-chip-row>
+  </mat-chip-grid>
+
   <input
     class="chip-multiselect__input"
+    placeholder="New skill..."
     #skillsInput
     [formControl]="this.skillsFormControl.control"
     [matChipInputFor]="chipGrid"
@@ -17,19 +42,17 @@
       *ngFor="let skill of filteredSkills | async"
       [value]="skill"
       class="chip-multiselect__option">
-      {{ skill.name }}
+      <div>
+        {{ skill.name }}
+      </div>
+      <mat-radio-group>
+        <mat-radio-button
+          *ngFor="let level of possibleLevels"
+          [value]="level"
+          (click)="$event.stopPropagation()"
+          >{{ level }}</mat-radio-button
+        >
+      </mat-radio-group>
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
-
-<mat-chip-grid
-  #chipGrid
-  aria-label="Skills selection"
-  class="chip-multiselect__chip-grid">
-  <mat-chip-row *ngFor="let skill of chosenSkills" (removed)="remove(skill)">
-    {{ skill.name }}
-    <button matChipRemove [attr.aria-label]="'remove ' + skill">
-      <mat-icon>cancel</mat-icon>
-    </button>
-  </mat-chip-row>
-</mat-chip-grid>

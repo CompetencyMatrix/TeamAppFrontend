@@ -1,6 +1,37 @@
+$star-size: 1.4rem;
+
 .chip-multiselect{
   &__mock-input {
     display: none;
+  }
+
+  &__chip{
+    margin-top: $star-size!important;
+    margin-right: 1.5*$star-size!important;
+    min-width: 4 * $star-size;
+  }
+
+  &__chip-stars {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: -1.5*$star-size;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &__chip-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__chip-star {
+    width: $star-size;
+    padding: 0.1rem;
   }
 
   &__field {

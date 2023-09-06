@@ -4,6 +4,7 @@ import {
   ElementRef,
   inject,
   Input,
+  OnChanges,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -12,38 +13,46 @@ import { map, Observable, startWith } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControlDirective, FormControlName, NgModel } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  injectNgControl,
-  NoopValueAccessorDirective,
-} from '../../../../core/directives/NoopValueAccesorDirective';
+import { FormControlValueAccessorDirective } from '../../../../shared/directives/FormControlValueAccessorDirective';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ProficiencyLevel } from '../../../../core/enums/proficiency-level-enum';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { InjectionManagerService } from '../../../../core/services/injection-manager/injection-manager.service';
 
 @Component({
   selector: 'app-chips-multiselect',
-  hostDirectives: [NoopValueAccessorDirective],
+  hostDirectives: [FormControlValueAccessorDirective],
   templateUrl: './chips-multiselect.component.html',
   styleUrls: ['./chips-multiselect.component.scss'],
 })
 export class ChipsMultiselectComponent implements OnInit {
+  @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
   @Input() allSkills: EmployeeSkillInterface[] = [];
-  possibleLevels: (string | ProficiencyLevel)[] = Object.values(
-    ProficiencyLevel
-  ).filter((lvl: string | ProficiencyLevel) => isNaN(Number(lvl)));
 
   chosenSkills: EmployeeSkillInterface[] = [];
   filteredSkills?: Observable<EmployeeSkillInterface[]>;
-  @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
   skillsFormControl: FormControlDirective | FormControlName | NgModel =
-    injectNgControl();
+    this.injectionManager.injectNgControl();
   announcer = inject(LiveAnnouncer);
   destroyRef: DestroyRef = inject(DestroyRef);
+  possibleLevels: (string | ProficiencyLevel)[] = Object.values(
+    ProficiencyLevel
+  ).filter((lvl: string | ProficiencyLevel) => isNaN(Number(lvl)));
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  constructor() {
+  constructor(
+    private injectionManager: InjectionManagerService,
+    private valueAccessor: FormControlValueAccessorDirective<
+      EmployeeSkillInterface[]
+    >
+  ) {
     this.filteredSkills = this.getFilteredObservable();
+    valueAccessor.value
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        (value: EmployeeSkillInterface[]) => (this.chosenSkills = value)
+      );
   }
 
   ngOnInit(): void {
