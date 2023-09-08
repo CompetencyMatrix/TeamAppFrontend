@@ -4,9 +4,7 @@ import {
   ElementRef,
   inject,
   Input,
-  OnChanges,
   OnInit,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { EmployeeSkillInterface } from '../../../../core/models/employeeSkill';
@@ -14,12 +12,11 @@ import { map, Observable, startWith } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControlDirective, FormControlName, NgModel } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControlValueAccessorDirective } from '../../../../shared/directives/FormControlValueAccessorDirective';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { ProficiencyLevel } from '../../../../core/enums/proficiency-level-enum';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { InjectionManagerService } from '../../../../core/services/injection-manager/injection-manager.service';
+import { FormControlValueAccessorDirective } from '../../../../shared/directives/FormControlValueAccessorDirective';
 
 @Component({
   selector: 'app-chips-multiselect',
@@ -27,16 +24,14 @@ import { InjectionManagerService } from '../../../../core/services/injection-man
   templateUrl: './chips-multiselect.component.html',
   styleUrls: ['./chips-multiselect.component.scss'],
 })
-export class ChipsMultiselectComponent implements OnInit, OnChanges {
-  @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
+export class ChipsMultiselectComponent implements OnInit {
   @Input() allSkills: EmployeeSkillInterface[] = [];
-
-  chosenSkills: EmployeeSkillInterface[] = [];
-  filteredSkills$?: Observable<EmployeeSkillInterface[]>;
+  @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
   skillsFormControl: FormControlDirective | FormControlName | NgModel =
     this.injectionManager.injectNgControl();
-
-  announcer = inject(LiveAnnouncer);
+  chosenSkills: EmployeeSkillInterface[] = [];
+  filteredSkills$?: Observable<EmployeeSkillInterface[]>;
+  announcer: LiveAnnouncer = inject(LiveAnnouncer);
   destroyRef: DestroyRef = inject(DestroyRef);
   possibleLevels: (string | ProficiencyLevel)[] = Object.values(
     ProficiencyLevel
@@ -67,12 +62,6 @@ export class ChipsMultiselectComponent implements OnInit, OnChanges {
     this.filteredSkills$ = this.getFilteredObservable();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('CHANGES');
-
-    console.log(this.valueAccessor.value$);
-  }
-
   private getFilteredObservable():
     | Observable<EmployeeSkillInterface[]>
     | undefined {
@@ -88,6 +77,7 @@ export class ChipsMultiselectComponent implements OnInit, OnChanges {
       );
     }
   }
+
   private _filterWithName(skillName: string): EmployeeSkillInterface[] {
     console.log('FilterName: skillName ' + JSON.stringify(skillName));
     console.log('FilterName: value observable: ');
@@ -97,50 +87,48 @@ export class ChipsMultiselectComponent implements OnInit, OnChanges {
       skill.name.toLowerCase().includes(skillName)
     );
   }
-  // add(event: MatChipInputEvent): void {
-  //   console.log(event.value);
-  //   //TODO: tutaj pobierac wartosc proficiency
-  //   const value: string = (event.value || '').trim();
-  //
-  //   // this.updateOrInsertChosenSkills(event.value);
-  //   if (value) {
-  //     this.chosenSkills.push({
-  //       name: value,
-  //       proficiency: ProficiencyLevel.JUNIOR,
-  //     });
-  //   }
-  //
-  //   this.skillsFormControl.control.setValue([...this.chosenSkills]);
-  //
-  //   event.chipInput.clear();
-  //   this.filteredSkills = this.getFilteredObservable();
-  // }
-  //
-  // remove(skill: EmployeeSkillInterface): void {
-  //   const index = this.chosenSkills.indexOf(skill);
-  //
-  //   if (index >= 0) {
-  //     this.chosenSkills.splice(index, 1);
-  //
-  //     this.announcer.announce(`Removed ${skill}`);
-  //   }
-  //   this.skillsFormControl.control.setValue([...this.chosenSkills]);
-  //   this.filteredSkills = this.getFilteredObservable();
-  // }
-  //
-  // selected(event: MatAutocompleteSelectedEvent): void {
-  //   console.log(event.option.value);
-  //   //TODO: tutaj tez pobierz level
-  //   this.chosenSkills.push({
-  //     name: event.option.viewValue,
-  //     proficiency: ProficiencyLevel.JUNIOR,
-  //   });
-  //
-  //   this.skillsFormControl.control.setValue([...this.chosenSkills]);
-  //
-  //   if (this.skillsInput) {
-  //     this.skillsInput.nativeElement.value = '';
-  //   }
-  //   this.filteredSkills = this.getFilteredObservable();
-  // }
+
+  remove(skill: EmployeeSkillInterface): void {
+    const index = this.chosenSkills.indexOf(skill);
+
+    if (index >= 0) {
+      this.chosenSkills.splice(index, 1);
+
+      this.announcer.announce(`Removed ${skill}`);
+    }
+    this.filteredSkills$ = this.getFilteredObservable();
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    console.log('SELECTED autocomplete: ' + JSON.stringify(event.option.value));
+    //TODO: tutaj tez pobierz level
+    this.chosenSkills.push(event.option.value);
+    this.skillsFormControl.control.setValue([...this.chosenSkills]);
+
+    if (this.skillsInput) {
+      this.skillsInput.nativeElement.value = '';
+    }
+    this.filteredSkills$ = this.getFilteredObservable();
+  }
 }
+
+// add(event: MatChipInputEvent): void {
+//   console.log('MATCHIP ADD');
+//   console.log(event);
+//   console.log(event.value);
+//   //TODO: tutaj pobierac wartosc proficiency
+//   const value: string = (event.value || '').trim();
+//
+//   // this.updateOrInsertChosenSkills(event.value);
+//   if (value) {
+//     this.chosenSkills.push({
+//       name: value,
+//       proficiency: ProficiencyLevel.JUNIOR,
+//     });
+//   }
+//
+//   this.skillsFormControl.control.setValue([...this.chosenSkills]);
+//
+//   event.chipInput.clear();
+//   this.filteredSkills$ = this.getFilteredObservable();
+// }

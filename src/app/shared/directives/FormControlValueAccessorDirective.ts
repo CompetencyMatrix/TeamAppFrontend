@@ -1,12 +1,5 @@
-import {
-  ControlValueAccessor,
-  FormControlDirective,
-  FormControlName,
-  NG_VALUE_ACCESSOR,
-  NgControl,
-  NgModel,
-} from '@angular/forms';
-import { Directive, forwardRef, inject, OnDestroy } from '@angular/core';
+import { Directive, forwardRef, OnDestroy } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 @Directive({

@@ -72,7 +72,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit(): void {
-    console.log('SUBMIT: ' + this.employeeForm.value);
     // Check in case submit button 'disbaled' attribute was changed manually
     if (this.employeeForm.valid) {
       this.updateEmployee({
@@ -172,6 +171,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   private initializeForm(): void {
+    this.getEmployee();
     console.log('INITIALIZE FORM WITH: ' + JSON.stringify(this.employeeToEdit));
     if (this.employeeToEdit) {
       this.employeeForm.patchValue(this.employeeToEdit);
