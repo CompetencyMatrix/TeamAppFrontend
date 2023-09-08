@@ -6,8 +6,7 @@
     class="chip-multiselect__chip-grid">
     <mat-chip-row
       class="chip-multiselect__chip"
-      *ngFor="let skill of chosenSkills"
-      (removed)="remove(skill)">
+      *ngFor="let skill of chosenSkills">
       <div class="chip-multiselect__chip-stars">
         <button
           mat-icon-button
@@ -32,14 +31,10 @@
     [formControl]="this.skillsFormControl.control"
     [matChipInputFor]="chipGrid"
     [matAutocomplete]="auto"
-    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-    (matChipInputTokenEnd)="add($event)" />
-  <mat-autocomplete
-    class="chip-multiselect__select"
-    #auto="matAutocomplete"
-    (optionSelected)="selected($event)">
+    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" />
+  <mat-autocomplete class="chip-multiselect__select" #auto="matAutocomplete">
     <mat-option
-      *ngFor="let skill of filteredSkills | async"
+      *ngFor="let skill of filteredSkills$ | async"
       [value]="skill"
       class="chip-multiselect__option">
       <div>

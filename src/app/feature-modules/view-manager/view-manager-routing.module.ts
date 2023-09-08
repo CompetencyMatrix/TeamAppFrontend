@@ -23,7 +23,14 @@ const routes: Routes = [
           import('../dashboard/dashboard.module').then(m => m.DashboardModule),
       },
       {
-        path: appRoutesNames.EMPLOYEE_FORM,
+        path: appRoutesNames.EMPLOYEE_FORM_NEW,
+        loadChildren: () =>
+          import('../employee-form/employee-form.module').then(
+            m => m.EmployeeFormModule
+          ),
+      },
+      {
+        path: appRoutesNames.EMPLOYEE_FORM_EDIT,
         loadChildren: () =>
           import('../employee-form/employee-form.module').then(
             m => m.EmployeeFormModule

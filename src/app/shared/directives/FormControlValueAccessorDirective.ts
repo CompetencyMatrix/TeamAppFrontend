@@ -7,7 +7,7 @@ import {
   NgModel,
 } from '@angular/forms';
 import { Directive, forwardRef, inject, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 @Directive({
   standalone: true,
@@ -25,8 +25,8 @@ export class FormControlValueAccessorDirective<T>
 {
   private onChange: any;
   private onTouched: any;
-  private valueSubject: Subject<T> = new Subject<T>();
-  readonly value: Observable<T> = this.valueSubject.asObservable();
+  private valueSubject: Subject<T> = new ReplaySubject<T>();
+  readonly value$: Observable<T> = this.valueSubject.asObservable();
 
   constructor() {}
 
@@ -43,6 +43,7 @@ export class FormControlValueAccessorDirective<T>
   }
 
   writeValue(obj: any): void {
+    console.log('writeValue\n' + JSON.stringify(obj));
     this.valueSubject.next(obj);
   }
 

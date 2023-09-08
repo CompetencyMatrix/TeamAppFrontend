@@ -2,5 +2,6 @@
 export const appRoutesNames = {
   DASHBOARD: 'dashboard',
   EMPLOYEE_MANAGER: 'employees',
-  EMPLOYEE_FORM: 'employee/:id',
+  EMPLOYEE_FORM_NEW: 'employee/new',
+  EMPLOYEE_FORM_EDIT: 'employee/:id',
 };
