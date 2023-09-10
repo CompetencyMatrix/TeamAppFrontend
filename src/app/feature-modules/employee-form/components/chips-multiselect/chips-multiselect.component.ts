@@ -152,6 +152,7 @@ export class ChipsMultiselectComponent implements OnInit {
   }
 
   protected readonly ProficiencyLevel = ProficiencyLevel;
+  protected readonly ondragover = ondragover;
 }
 
 // add(event: MatChipInputEvent): void {

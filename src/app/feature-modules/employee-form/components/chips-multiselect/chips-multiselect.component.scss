@@ -1,13 +1,13 @@
 $star-size: 1.4rem;
 
-.chip-multiselect{
+.chip-multiselect {
   &__mock-input {
     display: none;
   }
 
-  &__chip{
-    margin-top: $star-size!important;
-    margin-right: 1.5*$star-size!important;
+  &__chip {
+    margin-top: $star-size !important;
+    margin-right: 1.5*$star-size !important;
     min-width: 4 * $star-size;
   }
 
@@ -49,12 +49,24 @@ $star-size: 1.4rem;
   }
 
   &__option-level {
-    border-left: none!important;
+    border-left: none !important;
     background: transparent;
 
-    ::ng-deep &:hover ,
+    ::ng-deep &:hover,
     ::ng-deep &:active {
       background-color: gold;
     }
+
+    &-icon {
+      ::ng-deep &::before {
+        content: "star_outlined";
+      }
+    }
+
+    &:hover &-icon {
+        ::ng-deep &::before {
+          content: "star";
+        }
+      }
+    }
   }
-}

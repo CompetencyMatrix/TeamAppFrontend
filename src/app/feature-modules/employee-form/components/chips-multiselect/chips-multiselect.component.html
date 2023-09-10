@@ -55,8 +55,8 @@
             [value]="levelName"
             [checked]="ProficiencyLevel[skill.proficiency] === levelName"
             (click)="$event.stopPropagation(); onChooseLevel(skill, levelName)"
-            ><mat-icon>star_outlined</mat-icon
-            >{{ levelName }}</mat-button-toggle
+            ><mat-icon class="chip-multiselect__option-level-icon"></mat-icon>
+            {{ levelName }}</mat-button-toggle
           >
         </mat-button-toggle-group>
       </div>
