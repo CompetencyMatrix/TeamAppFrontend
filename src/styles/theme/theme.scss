@@ -1,0 +1,19 @@
+@use "@angular/material" as mat;
+
+@use "src/styles/theme/light";
+@use "src/styles/theme/dark";
+@use "src/styles/components/components-init" as components;
+
+@include mat.core();
+
+$tapp-mock-typography: mat.define-typography-config();
+
+@include mat.core-theme(light.$tapp-theme-light);
+@include components.theme(light.$tapp-theme-light, $tapp-mock-typography);
+
+@media (prefers-color-scheme: dark) {
+  @include mat.core-color(dark.$tapp-theme-dark);
+  @include components.theme(dark.$tapp-theme-dark, $tapp-mock-typography);
+}
+
+

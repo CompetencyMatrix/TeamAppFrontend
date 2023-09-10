@@ -63,10 +63,14 @@ $star-size: 1.4rem;
       }
     }
 
+    &:hover {
+    }
+
     &:hover &-icon {
         ::ng-deep &::before {
           content: "star";
         }
       }
+
     }
   }

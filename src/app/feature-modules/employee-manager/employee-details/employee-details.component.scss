@@ -1,16 +1,15 @@
-@import 'src/styles/colors';
 
 .employee-details {
-  background-color: $tapp-secondary-light;
+  background-color: blue;
   border-radius: 2rem;
   padding: 2rem;
   width: fit-content;
 
   &__title {
-    color: $tapp-secondary;
+    color: darkblue;
 
     &:hover {
-      color: $tapp-secondary-dark;
+      color: darkviolet;
       cursor: grab/pointer;
     }
   }

@@ -1,4 +1,3 @@
-@import 'src/styles/colors';
 
 .employee-form {
   display: flex;
@@ -7,17 +6,6 @@
   margin-left: auto;
   margin-right: auto;
 
-  &__hint {
-    font-size: 1rem;
-    color: $tapp-alert-on-warn;
-    background-color: $tapp-alert-warn;
-    border-color: $tapp-alert-warn;
-    border-style: groove;
-    width: fit-content;
-    padding: 4px;
-    border-radius: 9px;
-    border-width: 0.5px;
-  }
   &__field {
     width: 100%;
   }

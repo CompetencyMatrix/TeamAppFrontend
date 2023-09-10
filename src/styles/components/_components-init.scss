@@ -4,6 +4,6 @@
 
 @mixin theme($theme, $typography-config) {
   @include navbar.theme($theme, $typography-config);
-  @include  messages.theme($theme, $typography-config);
-  @include  languages.theme($theme, $typography-config);
+  @include messages.theme($theme, $typography-config);
+  @include languages.theme($theme, $typography-config);
 }
