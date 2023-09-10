@@ -34,7 +34,7 @@ export class ChipsMultiselectComponent implements OnInit {
   announcer: LiveAnnouncer = inject(LiveAnnouncer);
   destroyRef: DestroyRef = inject(DestroyRef);
   possibleLevelsNames: (string | ProficiencyLevel)[] =
-    this.getPossibleLevelsNames();
+    this._getPossibleLevelsNames();
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
@@ -44,7 +44,7 @@ export class ChipsMultiselectComponent implements OnInit {
     >
   ) {
     console.log('Constructor');
-    this.filteredSkills$ = this.getFilteredObservable();
+    this.filteredSkills$ = this._getFilteredObservable();
   }
 
   ngOnInit(): void {
@@ -54,20 +54,20 @@ export class ChipsMultiselectComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value: EmployeeSkillInterface[]) => {
         console.log('INSUB' + value);
-        this.chosenSkills = value;
+        this.chosenSkills = value ? value : [];
       });
     console.log(this.valueAccessor.value$);
 
-    this.filteredSkills$ = this.getFilteredObservable();
+    this.filteredSkills$ = this._getFilteredObservable();
   }
 
-  private getPossibleLevelsNames(): (ProficiencyLevel | string)[] {
+  private _getPossibleLevelsNames(): (ProficiencyLevel | string)[] {
     return Object.values(ProficiencyLevel).filter(
       (lvl: string | ProficiencyLevel) => isNaN(Number(lvl))
     );
   }
 
-  private getFilteredObservable():
+  private _getFilteredObservable():
     | Observable<EmployeeSkillInterface[]>
     | undefined {
     if (!this.skillsFormControl.control) {
@@ -77,12 +77,32 @@ export class ChipsMultiselectComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
         startWith(null),
         map((typedName: string | null) =>
-          typedName ? this._filterWithName(typedName) : this.allSkills.slice()
+          this._filterOutAlreadyChosen(
+            typedName ? this._filterWithName(typedName) : this.allSkills.slice()
+          )
         )
       );
     }
   }
 
+  private _filterOutAlreadyChosen(
+    skills: EmployeeSkillInterface[]
+  ): EmployeeSkillInterface[] {
+    return this.chosenSkills
+      ? skills.filter(
+          (skill: EmployeeSkillInterface) =>
+            !this._isSkillNameChosen(skill.name)
+        )
+      : skills;
+  }
+
+  private _isSkillNameChosen(skillName: string): boolean {
+    return this.chosenSkills
+      ? this.chosenSkills.find(
+          (chosenSkill: EmployeeSkillInterface) => chosenSkill.name == skillName
+        ) != undefined
+      : false;
+  }
   private _filterWithName(skillName: string): EmployeeSkillInterface[] {
     console.log('FilterName: skillName ' + JSON.stringify(skillName));
     console.log('FilterName: value observable: ');
@@ -101,26 +121,31 @@ export class ChipsMultiselectComponent implements OnInit {
 
       this.announcer.announce(`Removed ${skill}`);
     }
-    this.filteredSkills$ = this.getFilteredObservable();
+    this.filteredSkills$ = this._getFilteredObservable();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     console.log('SELECTED autocomplete: ' + JSON.stringify(event.option.value));
     //TODO: tutaj tez pobierz level
-    this.chosenSkills.push(event.option.value);
+    this._chooseSkill(event.option.value);
     this.skillsFormControl.control.setValue([...this.chosenSkills]);
 
     if (this.skillsInput) {
       this.skillsInput.nativeElement.value = '';
     }
-    this.filteredSkills$ = this.getFilteredObservable();
+    this.filteredSkills$ = this._getFilteredObservable();
   }
 
+  private _chooseSkill(chosenSkill: EmployeeSkillInterface): void {
+    if (!this._isSkillNameChosen(chosenSkill.name)) {
+      this.chosenSkills.push(chosenSkill);
+    }
+  }
   public onChooseLevel(
     skill: EmployeeSkillInterface,
     level: ProficiencyLevel | string
   ): void {
-    const proficiencyLevel: ProficiencyLevel = level as ProficiencyLevel;
+    // const proficiencyLevel: ProficiencyLevel = level as ProficiencyLevel;
 
     const enumValue: ProficiencyLevel = (<any>ProficiencyLevel)[level];
     skill.proficiency = enumValue;

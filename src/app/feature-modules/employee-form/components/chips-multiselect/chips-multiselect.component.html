@@ -48,6 +48,7 @@
         </div>
         <mat-radio-group>
           <mat-radio-button
+            class="chip-multiselect__option-level"
             *ngFor="let levelName of possibleLevelsNames"
             [value]="levelName"
             [checked]="ProficiencyLevel[skill.proficiency] === levelName"
