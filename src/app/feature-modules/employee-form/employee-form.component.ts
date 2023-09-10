@@ -125,7 +125,10 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       .subscribe(
         (skills: string[]) =>
           (this.allSkills = skills.map((skillName: string) => {
-            return { name: skillName, proficiency: ProficiencyLevel.JUNIOR };
+            return {
+              name: skillName,
+              proficiency: ProficiencyLevel.JUNIOR,
+            } as EmployeeSkillInterface;
           }))
       );
   }

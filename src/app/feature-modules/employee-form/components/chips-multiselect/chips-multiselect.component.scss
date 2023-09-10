@@ -37,4 +37,10 @@ $star-size: 1.4rem;
   &__field {
     width: 100%;
   }
+
+  &__option-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

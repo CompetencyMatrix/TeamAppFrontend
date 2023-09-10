@@ -11,7 +11,7 @@
       <div class="chip-multiselect__chip-stars">
         <button
           mat-icon-button
-          *ngFor="let level of possibleLevels"
+          *ngFor="let level of possibleLevelsNames"
           class="chip-multiselect__chip-star">
           <mat-icon>star</mat-icon>
         </button>
@@ -42,17 +42,20 @@
       *ngFor="let skill of filteredSkills$ | async"
       [value]="skill"
       class="chip-multiselect__option">
-      <div>
-        {{ skill.name }}
+      <div class="chip-multiselect__option-content">
+        <div>
+          {{ skill.name }}
+        </div>
+        <mat-radio-group>
+          <mat-radio-button
+            *ngFor="let levelName of possibleLevelsNames"
+            [value]="levelName"
+            [checked]="ProficiencyLevel[skill.proficiency] === levelName"
+            (click)="$event.stopPropagation(); onChooseLevel(skill, levelName)"
+            >{{ levelName }}</mat-radio-button
+          >
+        </mat-radio-group>
       </div>
-      <mat-radio-group>
-        <mat-radio-button
-          *ngFor="let level of possibleLevels"
-          [value]="level"
-          (click)="$event.stopPropagation()"
-          >{{ level }}</mat-radio-button
-        >
-      </mat-radio-group>
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

@@ -33,9 +33,8 @@ export class ChipsMultiselectComponent implements OnInit {
   filteredSkills$?: Observable<EmployeeSkillInterface[]>;
   announcer: LiveAnnouncer = inject(LiveAnnouncer);
   destroyRef: DestroyRef = inject(DestroyRef);
-  possibleLevels: (string | ProficiencyLevel)[] = Object.values(
-    ProficiencyLevel
-  ).filter((lvl: string | ProficiencyLevel) => isNaN(Number(lvl)));
+  possibleLevelsNames: (string | ProficiencyLevel)[] =
+    this.getPossibleLevelsNames();
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
@@ -60,6 +59,12 @@ export class ChipsMultiselectComponent implements OnInit {
     console.log(this.valueAccessor.value$);
 
     this.filteredSkills$ = this.getFilteredObservable();
+  }
+
+  private getPossibleLevelsNames(): (ProficiencyLevel | string)[] {
+    return Object.values(ProficiencyLevel).filter(
+      (lvl: string | ProficiencyLevel) => isNaN(Number(lvl))
+    );
   }
 
   private getFilteredObservable():
@@ -110,6 +115,18 @@ export class ChipsMultiselectComponent implements OnInit {
     }
     this.filteredSkills$ = this.getFilteredObservable();
   }
+
+  public onChooseLevel(
+    skill: EmployeeSkillInterface,
+    level: ProficiencyLevel | string
+  ): void {
+    const proficiencyLevel: ProficiencyLevel = level as ProficiencyLevel;
+
+    const enumValue: ProficiencyLevel = (<any>ProficiencyLevel)[level];
+    skill.proficiency = enumValue;
+  }
+
+  protected readonly ProficiencyLevel = ProficiencyLevel;
 }
 
 // add(event: MatChipInputEvent): void {
