@@ -39,8 +39,22 @@ $star-size: 1.4rem;
   }
 
   &__option-content {
-    display: flex;
-    justify-content: space-between;
+    display: inline-grid;
     align-items: center;
+    grid-template-columns: 10rem max-content;
+  }
+
+  &__option-levels {
+    border: none;
+  }
+
+  &__option-level {
+    border-left: none!important;
+    background: transparent;
+
+    ::ng-deep &:hover ,
+    ::ng-deep &:active {
+      background-color: gold;
+    }
   }
 }

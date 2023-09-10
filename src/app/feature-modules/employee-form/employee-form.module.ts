@@ -14,6 +14,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ChipsMultiselectComponent } from './components/chips-multiselect/chips-multiselect.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [EmployeeFormComponent, ChipsMultiselectComponent],
@@ -31,6 +32,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatChipsModule,
     MatIconModule,
     MatRadioModule,
+    MatButtonToggleModule,
   ],
 })
 export class EmployeeFormModule {}
