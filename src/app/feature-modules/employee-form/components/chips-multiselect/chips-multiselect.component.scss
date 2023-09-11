@@ -1,3 +1,5 @@
+@import "src/styles/screen-sizes";
+
 $star-size: 1.4rem;
 
 .chip-multiselect {
@@ -40,11 +42,6 @@ $star-size: 1.4rem;
 
   }
 
-  &__option-content {
-    display: inline-grid;
-    align-items: center;
-    grid-template-columns: 10rem max-content;
-  }
 
   &__option-levels {
     border: none;
@@ -82,3 +79,15 @@ $star-size: 1.4rem;
     }
   }
 }
+
+@media (min-width: $tapp-medium-screen) {
+ .chip-multiselect {
+
+   &__option-content {
+     display: inline-grid;
+     align-items: center;
+     grid-template-columns: 10rem max-content;
+   }
+   }
+
+ }
