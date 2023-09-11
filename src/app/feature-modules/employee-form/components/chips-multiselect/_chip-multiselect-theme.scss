@@ -46,10 +46,40 @@
       &-senior--selected {
         color: $tapp-skill-level-3 !important;
       }
+    }
 
+
+    &__chip {
+      &-star-button {
+
+        &-junior:hover {
+          color: $tapp-skill-level-1 !important;
+        }
+
+        &-junior--selected {
+          color: $tapp-skill-level-1 !important;
+        }
+
+        &-mid:hover {
+          color: $tapp-skill-level-2 !important;
+        }
+
+        &-mid--selected {
+          color: $tapp-skill-level-2 !important;
+        }
+
+        &-senior:hover {
+          color: $tapp-skill-level-3 !important;
+        }
+
+        &-senior--selected {
+          color: $tapp-skill-level-3 !important;
+        }
+      }
     }
   }
 }
+
 
 
 

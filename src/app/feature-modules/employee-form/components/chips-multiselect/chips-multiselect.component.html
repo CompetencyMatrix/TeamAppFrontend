@@ -16,8 +16,17 @@
           [className]="
             'chip-multiselect__chip-star-button chip-multiselect__chip-star-button-' +
               levelName | lowercase
+          "
+          [ngClass]="
+            ProficiencyLevel[skill.proficiency] === levelName
+              ? [
+                  'chip-multiselect__option-level--selected',
+                  ('chip-multiselect__option-level-' + levelName | lowercase) +
+                    '--selected'
+                ]
+              : ''
           ">
-          <mat-icon class="chip-multiselect__chip-star">star</mat-icon>
+          <mat-icon class="chip-multiselect__chip-star">star_outlined</mat-icon>
         </button>
       </div>
       <div class="chip-multiselect__chip-content">
