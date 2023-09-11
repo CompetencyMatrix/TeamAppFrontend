@@ -1,3 +1,4 @@
+@use "@angular/material" as mat;
 @use "src/app/core/components/navbar/navbar-theme" as navbar;
 @use "src/app/core/components/language-switch/language-switch-theme" as languages;
 @use "src/app/feature-modules/view-manager/components/messages/messages-theme" as messages;
@@ -8,4 +9,5 @@
   @include messages.theme($theme, $typography-config);
   @include languages.theme($theme, $typography-config);
   @include chip-multiselect.theme($theme, $typography-config);
+  @include mat.datepicker-theme($theme);
 }

@@ -6,16 +6,12 @@
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
   $primary-palette: map.get($color-config, 'primary');
-  $accent-palette: map.get($color-config, 'accent');
 
-  $primary500: mat.get-color-from-palette($primary-palette, 500);
-  $accent500: mat.get-color-from-palette($accent-palette, 500);
-  $primary500-contrast: mat.get-color-from-palette($primary-palette, 500 -contrast);
-  $primary200: mat.get-color-from-palette($primary-palette, 200);
+  $primary200-contrast: mat.get-color-from-palette($primary-palette, 200-contrast);
 
   .chip-multiselect {
 
-    &__chip-star-button {
+    &__chip-star-button-level {
       background: transparent;
       border: none;
     }
@@ -23,73 +19,75 @@
     &__option-level {
       background: transparent !important;
 
-      &-junior:hover {
+      &-0:hover {
+        color: $tapp-skill-level-0;
+      }
+
+      &-0--selected * {
+        color: $tapp-skill-level-0;
+      }
+
+      &-1:hover {
         color: $tapp-skill-level-1;
       }
 
-      &-junior--selected * {
-        color: $tapp-skill-level-1 ;
+      &-1--selected * {
+        color: $tapp-skill-level-1;
       }
 
-      &-mid:hover {
-        color: $tapp-skill-level-2 ;
+      &-2:hover {
+        color: $tapp-skill-level-2;
       }
 
-      &-mid--selected * {
-        color: $tapp-skill-level-2 ;
-      }
-
-      &-senior:hover {
-        color: $tapp-skill-level-3 ;
-      }
-
-      &-senior--selected * {
-        color: $tapp-skill-level-3 ;
+      &-2--selected * {
+        color: $tapp-skill-level-2;
       }
     }
 
 
     &__chip {
-      &-star-button {
+      &-star-button-level {
 
-        &-junior:hover {
+        &-0:hover {
+          color: $tapp-skill-level-0;
+
+          & ~ .chip-multiselect__chip-star-button-level {
+            color: $tapp-skill-level-contrast;
+          }
+        }
+
+        &-0--selected {
+          color: $tapp-skill-level-0;
+        }
+
+        &-1:hover {
+          color: $tapp-skill-level-1;
+
+          & ~ .chip-multiselect__chip-star-button-level {
+            color: $tapp-skill-level-contrast;
+          }
+        }
+
+        &-1--selected {
           color: $tapp-skill-level-1;
         }
 
-        &-junior--selected {
+        &-2:hover {
+          color: $tapp-skill-level-2;
+        }
+
+        &-2--selected {
+          color: $tapp-skill-level-2;
+        }
+
+        :has(~ &-1--selected),
+        :has(~ &-1:hover){
           color: $tapp-skill-level-1;
         }
 
-        &-mid:hover {
+        :has(~ &-2--selected),
+        :has(~ &-2:hover){
           color: $tapp-skill-level-2;
-        }
-
-        &-mid--selected {
-          color: $tapp-skill-level-2;
-        }
-
-        &-senior:hover {
-          color: $tapp-skill-level-3;
-        }
-
-        &-senior--selected {
-          color: $tapp-skill-level-3;
-        }
-
-        :has(~ &-junior--selected),
-        :has(~ &-junior:hover),
-        {
-          color: $tapp-skill-level-1;
-        }
-
-        :has(~ &-mid--selected),
-        :has(~ &-mid:hover){
-          color: $tapp-skill-level-2;
-        }
-
-        :has(~ &-senior--selected),
-        :has(~ &-senior:hover){
-          color: $tapp-skill-level-3;
         }
       }
     }

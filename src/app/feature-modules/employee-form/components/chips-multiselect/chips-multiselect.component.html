@@ -14,19 +14,20 @@
           *ngFor="let levelName of possibleLevelsNames"
           (click)="onChangeLevel(skill, levelName)"
           [className]="
-            'chip-multiselect__chip-star-button chip-multiselect__chip-star-button-' +
-              levelName | lowercase
+            'chip-multiselect__chip-star-button-level chip-multiselect__chip-star-button-level-' +
+            anyProficiencyLevel[levelName]
           "
           [ngClass]="
             ProficiencyLevel[skill.proficiency] === levelName
               ? [
-                  'chip-multiselect__chip-star-button--selected',
-                  ('chip-multiselect__chip-star-button-' + levelName
-                    | lowercase) + '--selected'
+                  'chip-multiselect__chip-star-button-level--selected',
+                  'chip-multiselect__chip-star-button-level-' +
+                    anyProficiencyLevel[levelName] +
+                    '--selected'
                 ]
               : ''
           ">
-          <mat-icon class="chip-multiselect__chip-star">star_outlined</mat-icon>
+          <mat-icon class="chip-multiselect__chip-star">star_border</mat-icon>
         </button>
       </div>
       <div class="chip-multiselect__chip-content">
@@ -70,14 +71,15 @@
             [checked]="ProficiencyLevel[skill.proficiency] === levelName"
             (click)="$event.stopPropagation(); onChooseLevel(skill, levelName)"
             [className]="
-              'chip-multiselect__option-level-' + levelName | lowercase
+              'chip-multiselect__option-level-' + anyProficiencyLevel[levelName]
             "
             [ngClass]="
               optionLevelButton.checked
                 ? [
                     'chip-multiselect__option-level--selected',
-                    ('chip-multiselect__option-level-' + levelName
-                      | lowercase) + '--selected'
+                    'chip-multiselect__option-level-' +
+                      anyProficiencyLevel[levelName] +
+                      '--selected'
                   ]
                 : ''
             "
