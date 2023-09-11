@@ -11,9 +11,13 @@
       <div class="chip-multiselect__chip-stars">
         <button
           mat-icon-button
-          *ngFor="let level of possibleLevelsNames"
-          class="chip-multiselect__chip-star">
-          <mat-icon>star</mat-icon>
+          *ngFor="let levelName of possibleLevelsNames"
+          (click)="onChangeLevel(skill, levelName)"
+          [className]="
+            'chip-multiselect__chip-star-button chip-multiselect__chip-star-button-' +
+              levelName | lowercase
+          ">
+          <mat-icon class="chip-multiselect__chip-star">star</mat-icon>
         </button>
       </div>
       <div class="chip-multiselect__chip-content">

@@ -151,6 +151,13 @@ export class ChipsMultiselectComponent implements OnInit {
     skill.proficiency = enumValue;
   }
 
+  onChangeLevel(
+    skill: EmployeeSkillInterface,
+    level: ProficiencyLevel | string
+  ): void {
+    const enumValue: ProficiencyLevel = (<any>ProficiencyLevel)[level];
+    skill.proficiency = enumValue;
+  }
+
   protected readonly ProficiencyLevel = ProficiencyLevel;
-  protected readonly String = String;
 }

@@ -15,6 +15,11 @@
 
   .chip-multiselect {
 
+    &__chip-star-button {
+      background: transparent;
+      border: none;
+    }
+
     &__option-level {
       background: transparent !important;
 
