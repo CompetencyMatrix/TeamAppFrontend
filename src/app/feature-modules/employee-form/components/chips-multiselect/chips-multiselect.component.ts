@@ -152,4 +152,5 @@ export class ChipsMultiselectComponent implements OnInit {
   }
 
   protected readonly ProficiencyLevel = ProficiencyLevel;
+  protected readonly String = String;
 }

@@ -50,6 +50,7 @@ $star-size: 1.4rem;
 
   &__option-level {
     border-left: none !important;
+    font-size: 0.9rem;
 
     &-icon {
       ::ng-deep &::before {
@@ -57,11 +58,26 @@ $star-size: 1.4rem;
       }
     }
 
-    &:hover &-icon {
+    &:hover {
+      font-size: 1rem;
+    }
+
+    &--selected {
+      font-size: 1rem;
+      font-weight: bold;
+
+      .chip-multiselect__option-level-icon {
         ::ng-deep &::before {
           content: "star";
         }
       }
-
     }
+
+    &:hover &-icon {
+      ::ng-deep &::before {
+        content: "star";
+      }
+    }
+
   }
+}

@@ -51,10 +51,23 @@
           class="chip-multiselect__option-levels">
           <mat-button-toggle
             class="chip-multiselect__option-level"
+            #optionLevelButton
             *ngFor="let levelName of possibleLevelsNames"
             [value]="levelName"
             [checked]="ProficiencyLevel[skill.proficiency] === levelName"
             (click)="$event.stopPropagation(); onChooseLevel(skill, levelName)"
+            [className]="
+              'chip-multiselect__option-level-' + levelName | lowercase
+            "
+            [ngClass]="
+              optionLevelButton.checked
+                ? [
+                    'chip-multiselect__option-level--selected',
+                    ('chip-multiselect__option-level-' + levelName
+                      | lowercase) + '--selected'
+                  ]
+                : ''
+            "
             ><mat-icon class="chip-multiselect__option-level-icon"></mat-icon>
             {{ levelName }}</mat-button-toggle
           >

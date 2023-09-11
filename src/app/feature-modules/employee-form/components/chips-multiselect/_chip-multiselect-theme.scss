@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @import "@angular/material/theming";
+@import "src/styles/theme/colors";
 
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
@@ -15,18 +16,17 @@
   .chip-multiselect {
 
     &__option-level {
-      background: transparent;
+      background: inherit!important;
 
+      &-junior:hover {
+        color: $tapp-skill-level-1 !important;
+      }
 
-      //::ng-deep &:hover {
-      //    background-color: transparent;
-      //  }
+        &-junior--selected {
+          color: $tapp-skill-level-1 !important;
+        }
     }
 
-
-    //.mat-button-toggle-appearance-standard {
-    //  background-color: transparent !important;
-    //}
   }
 }
 
