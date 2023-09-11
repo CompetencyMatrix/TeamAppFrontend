@@ -20,9 +20,9 @@
           [ngClass]="
             ProficiencyLevel[skill.proficiency] === levelName
               ? [
-                  'chip-multiselect__option-level--selected',
-                  ('chip-multiselect__option-level-' + levelName | lowercase) +
-                    '--selected'
+                  'chip-multiselect__chip-star-button--selected',
+                  ('chip-multiselect__chip-star-button-' + levelName
+                    | lowercase) + '--selected'
                 ]
               : ''
           ">

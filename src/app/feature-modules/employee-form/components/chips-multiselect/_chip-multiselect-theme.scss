@@ -24,27 +24,27 @@
       background: transparent !important;
 
       &-junior:hover {
-        color: $tapp-skill-level-1 !important;
+        color: $tapp-skill-level-1;
       }
 
-      &-junior--selected {
-        color: $tapp-skill-level-1 !important;
+      &-junior--selected * {
+        color: $tapp-skill-level-1 ;
       }
 
       &-mid:hover {
-        color: $tapp-skill-level-2 !important;
+        color: $tapp-skill-level-2 ;
       }
 
-      &-mid--selected {
-        color: $tapp-skill-level-2 !important;
+      &-mid--selected * {
+        color: $tapp-skill-level-2 ;
       }
 
       &-senior:hover {
-        color: $tapp-skill-level-3 !important;
+        color: $tapp-skill-level-3 ;
       }
 
-      &-senior--selected {
-        color: $tapp-skill-level-3 !important;
+      &-senior--selected * {
+        color: $tapp-skill-level-3 ;
       }
     }
 
@@ -53,27 +53,43 @@
       &-star-button {
 
         &-junior:hover {
-          color: $tapp-skill-level-1 !important;
+          color: $tapp-skill-level-1;
         }
 
         &-junior--selected {
-          color: $tapp-skill-level-1 !important;
+          color: $tapp-skill-level-1;
         }
 
         &-mid:hover {
-          color: $tapp-skill-level-2 !important;
+          color: $tapp-skill-level-2;
         }
 
         &-mid--selected {
-          color: $tapp-skill-level-2 !important;
+          color: $tapp-skill-level-2;
         }
 
         &-senior:hover {
-          color: $tapp-skill-level-3 !important;
+          color: $tapp-skill-level-3;
         }
 
         &-senior--selected {
-          color: $tapp-skill-level-3 !important;
+          color: $tapp-skill-level-3;
+        }
+
+        :has(~ &-junior--selected),
+        :has(~ &-junior:hover),
+        {
+          color: $tapp-skill-level-1;
+        }
+
+        :has(~ &-mid--selected),
+        :has(~ &-mid:hover){
+          color: $tapp-skill-level-2;
+        }
+
+        :has(~ &-senior--selected),
+        :has(~ &-senior:hover){
+          color: $tapp-skill-level-3;
         }
       }
     }
