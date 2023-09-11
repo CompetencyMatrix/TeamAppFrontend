@@ -1,9 +1,11 @@
 @use "src/app/core/components/navbar/navbar-theme" as navbar;
 @use "src/app/core/components/language-switch/language-switch-theme" as languages;
 @use "src/app/feature-modules/view-manager/components/messages/messages-theme" as messages;
+@use "src/app/feature-modules/employee-form/components/chips-multiselect/chip-multiselect-theme" as chip-multiselect;
 
 @mixin theme($theme, $typography-config) {
   @include navbar.theme($theme, $typography-config);
   @include messages.theme($theme, $typography-config);
   @include languages.theme($theme, $typography-config);
+  @include chip-multiselect.theme($theme, $typography-config);
 }

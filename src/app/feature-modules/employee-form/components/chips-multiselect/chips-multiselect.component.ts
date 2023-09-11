@@ -152,26 +152,4 @@ export class ChipsMultiselectComponent implements OnInit {
   }
 
   protected readonly ProficiencyLevel = ProficiencyLevel;
-  protected readonly ondragover = ondragover;
 }
-
-// add(event: MatChipInputEvent): void {
-//   console.log('MATCHIP ADD');
-//   console.log(event);
-//   console.log(event.value);
-//   //TODO: tutaj pobierac wartosc proficiency
-//   const value: string = (event.value || '').trim();
-//
-//   // this.updateOrInsertChosenSkills(event.value);
-//   if (value) {
-//     this.chosenSkills.push({
-//       name: value,
-//       proficiency: ProficiencyLevel.JUNIOR,
-//     });
-//   }
-//
-//   this.skillsFormControl.control.setValue([...this.chosenSkills]);
-//
-//   event.chipInput.clear();
-//   this.filteredSkills$ = this.getFilteredObservable();
-// }

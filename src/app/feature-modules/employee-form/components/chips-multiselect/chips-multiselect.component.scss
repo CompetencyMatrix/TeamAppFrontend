@@ -50,20 +50,11 @@ $star-size: 1.4rem;
 
   &__option-level {
     border-left: none !important;
-    background: transparent;
-
-    ::ng-deep &:hover,
-    ::ng-deep &:active {
-      background-color: gold;
-    }
 
     &-icon {
       ::ng-deep &::before {
         content: "star_outlined";
       }
-    }
-
-    &:hover {
     }
 
     &:hover &-icon {
