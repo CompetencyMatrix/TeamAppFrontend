@@ -1,18 +1,23 @@
-@use "@angular/material" as mat;
-@use "src/styles/theme/palette";
+@use '@angular/material' as mat;
+@use 'src/styles/theme/palette';
 
 $tapp-primary-palette: mat.define-palette(palette.$tapp-primary-palette);
-$tapp-accent-palette: mat.define-palette(palette.$tapp-accent-palette, A200, A100, A400);
+$tapp-accent-palette: mat.define-palette(
+  palette.$tapp-accent-palette,
+  A200,
+  A100,
+  A400
+);
 $tapp-warn-palette: mat.define-palette(mat.$red-palette);
 
 $tapp-theme-light: mat.define-light-theme(
-    (
-      color: (
-        primary: $tapp-primary-palette,
-        accent: $tapp-accent-palette,
-        warn: $tapp-warn-palette,
-      ),
-      typography: mat.define-typography-config(),
-      density: 0
-    )
+  (
+    color: (
+      primary: $tapp-primary-palette,
+      accent: $tapp-accent-palette,
+      warn: $tapp-warn-palette,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
 );

@@ -1,6 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { EmployeeInterface } from '../../core/models/employee';
-import { v4 as uuid } from 'uuid';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { MessageService } from '../../core/services/message/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -26,6 +25,7 @@ export class EmployeeManagerComponent implements OnInit {
 
   selectEmployee(newEmployee: EmployeeInterface | undefined): void {
     if (newEmployee === undefined) {
+      //TODO
     } else {
       this.messageService.addByKey('messages.service.employee.select', {
         employee: newEmployee,

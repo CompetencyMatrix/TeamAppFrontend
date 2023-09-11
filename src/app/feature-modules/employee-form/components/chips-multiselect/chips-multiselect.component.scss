@@ -1,4 +1,4 @@
-@import "src/styles/screen-sizes";
+@import 'src/styles/screen-sizes';
 
 $star-size: 1.4rem;
 
@@ -12,8 +12,8 @@ $star-size: 1.4rem;
   }
 
   &__chip {
-    margin-top: 1.5*$star-size !important;
-    margin-right: 1.5*$star-size !important;
+    margin-top: 1.5 * $star-size !important;
+    margin-right: 1.5 * $star-size !important;
     min-width: 4 * $star-size;
 
     &-content {
@@ -28,7 +28,7 @@ $star-size: 1.4rem;
       left: -1rem;
       right: 0;
       margin: 0 auto;
-      top: -1.25*$star-size;
+      top: -1.25 * $star-size;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -39,9 +39,7 @@ $star-size: 1.4rem;
       padding: 0.1rem;
       cursor: pointer;
     }
-
   }
-
 
   &__option-levels {
     border: none;
@@ -53,7 +51,7 @@ $star-size: 1.4rem;
 
     &-icon {
       ::ng-deep &::before {
-        content: "star_outlined";
+        content: 'star_outlined';
       }
     }
 
@@ -67,27 +65,25 @@ $star-size: 1.4rem;
 
       .chip-multiselect__option-level-icon {
         ::ng-deep &::before {
-          content: "star";
+          content: 'star';
         }
       }
     }
 
     &:hover &-icon {
       ::ng-deep &::before {
-        content: "star";
+        content: 'star';
       }
     }
   }
 }
 
 @media (min-width: $tapp-medium-screen) {
- .chip-multiselect {
-
-   &__option-content {
-     display: inline-grid;
-     align-items: center;
-     grid-template-columns: 10rem max-content;
-   }
-   }
-
- }
+  .chip-multiselect {
+    &__option-content {
+      display: inline-grid;
+      align-items: center;
+      grid-template-columns: 10rem max-content;
+    }
+  }
+}

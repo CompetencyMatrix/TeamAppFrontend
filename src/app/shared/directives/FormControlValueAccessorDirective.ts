@@ -21,18 +21,8 @@ export class FormControlValueAccessorDirective<T>
   private valueSubject: Subject<T> = new ReplaySubject<T>();
   readonly value$: Observable<T> = this.valueSubject.asObservable();
 
-  constructor() {}
-
   ngOnDestroy(): void {
     this.valueSubject.complete();
-  }
-
-  valueChange(newValue: T): void {
-    this.onChange(newValue);
-  }
-
-  touchedChange(wasTouched: boolean): void {
-    this.onTouched(wasTouched);
   }
 
   writeValue(obj: any): void {

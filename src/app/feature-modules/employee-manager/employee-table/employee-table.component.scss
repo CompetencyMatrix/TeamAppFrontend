@@ -1,4 +1,3 @@
-
 .employee-table {
   //TODO: is it okay to treat container as an element
   &__container {
@@ -39,7 +38,8 @@
     margin: 0;
     background-color: transparent;
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       color: darkred;
     }
   }

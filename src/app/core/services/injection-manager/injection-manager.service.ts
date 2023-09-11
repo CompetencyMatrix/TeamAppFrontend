@@ -10,8 +10,6 @@ import {
   providedIn: 'root',
 })
 export class InjectionManagerService {
-  constructor() {}
-
   public injectNgControl(): FormControlDirective | FormControlName | NgModel {
     const ngControl: NgControl | null = inject(NgControl, {
       self: true,

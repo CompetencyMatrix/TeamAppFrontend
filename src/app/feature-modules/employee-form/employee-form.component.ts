@@ -1,16 +1,13 @@
 import {
   Component,
   DestroyRef,
-  ElementRef,
   inject,
   OnChanges,
   OnInit,
-  ViewChild,
 } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -24,7 +21,6 @@ import { ProjectService } from '../../core/services/project/project.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EmployeeSkillInterface } from '../../core/models/employeeSkill';
 import { map, Observable, of, startWith } from 'rxjs';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
 import { MatSnackBar } from '@angular/material/snack-bar';

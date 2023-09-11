@@ -1,17 +1,21 @@
-@use "src/styles/theme/palette";
-@use "@angular/material" as mat;
-
+@use 'src/styles/theme/palette';
+@use '@angular/material' as mat;
 
 $tapp-dark-primary-palette: mat.define-palette(palette.$tapp-accent-palette);
-$tapp-dark-accent-palette: mat.define-palette(palette.$tapp-primary-palette, A200, A100, A400);
+$tapp-dark-accent-palette: mat.define-palette(
+  palette.$tapp-primary-palette,
+  A200,
+  A100,
+  A400
+);
 
 $tapp-theme-dark: mat.define-dark-theme(
-    (
-      color: (
-        primary: $tapp-dark-primary-palette,
-        accent: $tapp-dark-accent-palette,
-      ),
-      typography: mat.define-typography-config(),
-      density: 0
-    )
+  (
+    color: (
+      primary: $tapp-dark-primary-palette,
+      accent: $tapp-dark-accent-palette,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
 );

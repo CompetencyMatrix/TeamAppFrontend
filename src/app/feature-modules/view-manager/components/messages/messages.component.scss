@@ -37,7 +37,7 @@
 
   &__content {
     margin: 0;
-    padding: 0.5rem 0.7rem ;
+    padding: 0.5rem 0.7rem;
   }
 
   &__list {
@@ -51,7 +51,7 @@
     padding: 0 1rem;
     border-radius: 2rem;
     overflow: visible;
-    height:initial!important;
+    height: initial !important;
 
     & * {
       word-wrap: break-word;
@@ -70,9 +70,9 @@
     justify-content: space-between;
   }
 
-  &__close-button, &__clear-button {
+  &__close-button,
+  &__clear-button {
     margin-right: 1rem;
     margin-left: 1rem;
   }
-
 }

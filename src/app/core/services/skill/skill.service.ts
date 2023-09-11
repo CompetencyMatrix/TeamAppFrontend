@@ -2,9 +2,6 @@ import { DestroyRef, inject, Injectable } from '@angular/core';
 import { MessageService } from '../message/message.service';
 import { Observable, of } from 'rxjs';
 import { SKILLS } from '../../../mocks/mock-skills';
-import { EmployeeSkillInterface } from '../../models/employeeSkill';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ProficiencyLevel } from '../../enums/proficiency-level-enum';
 
 @Injectable({
   providedIn: 'root',

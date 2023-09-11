@@ -1,4 +1,4 @@
-@import "src/styles/screen-sizes";
+@import 'src/styles/screen-sizes';
 
 .employee-form {
   display: flex;
@@ -32,7 +32,7 @@
 
     &__field {
       &-projects,
-      &-skills{
+      &-skills {
         grid-column: span 2;
         margin: 0 10rem;
       }

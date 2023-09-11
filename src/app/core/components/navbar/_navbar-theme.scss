@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@import "@angular/material/theming";
+@import '@angular/material/theming';
 
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
@@ -9,11 +9,17 @@
 
   $primary500: mat.get-color-from-palette($primary-palette, 500);
   $accent500: mat.get-color-from-palette($accent-palette, 500);
-  $primary500-contrast: mat.get-color-from-palette($primary-palette, 500-contrast);
+  $primary500-contrast: mat.get-color-from-palette(
+    $primary-palette,
+    500-contrast
+  );
   $primary200: mat.get-color-from-palette($primary-palette, 200);
 
   .navbar {
-    background-color: mat.get-color-from-palette($accent-palette, 300)!important;
+    background-color: mat.get-color-from-palette(
+      $accent-palette,
+      300
+    ) !important;
     box-shadow: 0 0.01rem 0.2rem 0 rgb(1, 0, 0) inset;
 
     &__app-title {
@@ -21,38 +27,41 @@
     }
 
     &__navigation-item {
-        &:hover,
-        &:active {
-          color: mat.get-color-from-palette($primary-palette, 700);
-        }
+      &:hover,
+      &:active {
+        color: mat.get-color-from-palette($primary-palette, 700);
+      }
 
       &--active {
-        color: mat.get-color-from-palette($primary-palette, 700)!important;
+        color: mat.get-color-from-palette($primary-palette, 700) !important;
         box-shadow: 0 0.01rem 0.2rem 0 rgb(1, 0, 0) inset;
-
       }
-      }
+    }
 
     &__language-button > * {
       &:hover {
-        background-color: rgba(mat.get-color-from-palette($primary-palette, 300), 0.15);
+        background-color: rgba(
+          mat.get-color-from-palette($primary-palette, 300),
+          0.15
+        );
       }
     }
     &__back-button {
       &:hover {
-        background-color: rgba(mat.get-color-from-palette($primary-palette, 300), 0.15);
+        background-color: rgba(
+          mat.get-color-from-palette($primary-palette, 300),
+          0.15
+        );
       }
     }
-
   }
-  }
+}
 
 //@media only screen and (min-width: 600px) {
 
 @mixin typography($typography-config) {
-//  TODO: Future development
+  //  TODO: Future development
 }
-
 
 @mixin theme($theme, $typography-config) {
   $color-config: mat.get-color-config($theme);
@@ -64,4 +73,3 @@
     @include typography($typography-config);
   }
 }
-
