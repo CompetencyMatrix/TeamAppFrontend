@@ -12,12 +12,24 @@
   as employee-details;
 
 @mixin theme($theme, $typography-config) {
+  @include material-components-theme($theme);
+  @include tapp-components-theme($theme, $typography-config);
+
+}
+
+@mixin tapp-components-theme($theme, $typography-config) {
   @include navbar.theme($theme, $typography-config);
   @include messages.theme($theme, $typography-config);
   @include languages.theme($theme, $typography-config);
   @include chip-multiselect.theme($theme, $typography-config);
   @include employee-table.theme($theme, $typography-config);
   @include employee-details.theme($theme, $typography-config);
-  @include mat.datepicker-theme($theme);
-  @include mat.tabs-theme($theme);
+}
+
+@mixin material-components-theme($theme) {
+@include mat.datepicker-theme($theme);
+@include mat.tabs-theme($theme);
+@include mat.input-theme($theme);
+@include mat.legacy-form-field-theme($theme);
+@include mat.autocomplete-theme($theme);
 }
