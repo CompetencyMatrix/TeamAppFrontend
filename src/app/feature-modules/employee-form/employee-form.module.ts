@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [EmployeeFormComponent, ChipsMultiselectComponent],

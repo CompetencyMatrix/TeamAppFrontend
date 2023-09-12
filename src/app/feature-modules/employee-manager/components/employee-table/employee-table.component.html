@@ -39,22 +39,38 @@
 
     <!--  Skills Column -->
     <ng-container matColumnDef="skills">
-      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
+      <th
+        mat-header-cell
+        class="employee-table__header-cell employee-table__header-cell-skills"
+        *matHeaderCellDef>
         <div>
           <span> Skills </span>
-          <!--          <button mat-icon-button (click)="onExpandSkills()">-->
-          <!--            <mat-icon>chevron_right</mat-icon>-->
-          <!--          </button>-->
+          <button
+            mat-icon-button
+            (click)="onExpandSkills()"
+            class="employee-table__header-cell-skills-button">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </th>
-      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        {{ getSkillsNames(employee.skills).join(', ') }}
+      <td
+        mat-cell
+        class="employee-table__cell employee-table__cell-skills"
+        *matCellDef="let employee">
+        {{ (employee.skills | skillsNames).join(', ') }}
       </td>
     </ng-container>
 
-    <mat-text-column
-      *ngFor="let skill of skillsNames"
-      [name]="skill"></mat-text-column>
+    <ng-container
+      *ngFor="let skillName of skillsNames"
+      [matColumnDef]="skillName">
+      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
+        {{ skillName }}
+      </th>
+      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
+        {{ employee.skills | skillLevel: skillName }}
+      </td>
+    </ng-container>
 
     <!--  Manager Column -->
     <ng-container matColumnDef="manager">

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EmployeeInterface } from '../../../../core/models/employee';
 import { MatTableDataSource } from '@angular/material/table';
-import { EmployeeSkillInterface } from '../../../../core/models/employeeSkill';
 
 @Component({
   selector: 'app-employee-table',
@@ -60,9 +59,5 @@ export class EmployeeTableComponent {
   private selectEmployee(employee: EmployeeInterface | undefined): void {
     this.selectedEmployee = employee;
     this.selectEmployeeEvent.emit(this.selectedEmployee);
-  }
-
-  public getSkillsNames(skills: EmployeeSkillInterface[]): string[] {
-    return skills.map((skill: EmployeeSkillInterface) => skill.name);
   }
 }

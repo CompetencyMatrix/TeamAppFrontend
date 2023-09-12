@@ -34,6 +34,20 @@
     overflow: hidden;
     vertical-align: middle;
     text-align: center;
+
+    &-skills {
+      border-right: rgba(112, 128, 144, 0.5) dashed;
+
+      &-button {
+        position: absolute;
+        top:0.2rem;
+        right: 33.5rem;
+      }
+      &:hover {
+      }
+
+
+    }
   }
 
   &__header-cell {

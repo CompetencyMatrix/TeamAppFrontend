@@ -8,6 +8,5 @@ export interface EmployeeInterface {
   hireDate: Date;
   skills: EmployeeSkillInterface[];
   projects: ProjectInterface[];
-  //TODO: zmien to z backkendem
   manager?: string;
 }
