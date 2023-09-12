@@ -11,8 +11,10 @@
           {{ 'employee.details.projects.deadline' | translate }}:
           {{ project.deadline | date: 'dd-MM-YYYY' }}
         </p>
-        <!--        TODO -->
-        <p>Hours worked: 88</p>
+        <p>
+          {{ 'employee.details.projects.startdate' | translate }}:
+          {{ project.startDate | date: 'dd-MM-YYYY' }}
+        </p>
       </mat-card-content>
     </mat-card>
   </mat-tab>

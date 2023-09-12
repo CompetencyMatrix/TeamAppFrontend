@@ -2,7 +2,8 @@
 
   &__container {
     display: block;
-    width: 100%;
+    width: 95%;
+    margin: 2rem auto;
     overflow-x: auto;
   }
 
@@ -19,6 +20,7 @@
 
   &__row {
     cursor: pointer;
+    padding-top: 2rem;
   }
 
   &__cell,

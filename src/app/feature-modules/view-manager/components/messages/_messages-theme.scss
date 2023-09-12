@@ -20,7 +20,7 @@
         500
       ) !important;
       & .mat-badge-content {
-        background: mat.get-color-from-palette($primary-palette, 600);
+        background: mat.get-color-from-palette($primary-palette, 400);
       }
     }
     &__card {

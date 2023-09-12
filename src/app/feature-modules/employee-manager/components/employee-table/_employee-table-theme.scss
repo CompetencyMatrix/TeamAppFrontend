@@ -5,13 +5,21 @@
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
   $accent-palette: map.get($color-config, 'accent');
+  $primary-palette: map.get($color-config, 'primary');
 
-  $accent100: mat.get-color-from-palette($accent-palette, 100);
+  $primary50: mat.get-color-from-palette($primary-palette, 50);
+  $primary100: mat.get-color-from-palette($primary-palette, 100);
   $accent900: mat.get-color-from-palette($accent-palette, 900);
 
   .employee-table {
     &__header-row {
-      background: $accent100 !important;
+      background: $primary100 !important;
+    }
+
+    &__row {
+      &:hover {
+        background: $primary50;
+      }
     }
 
     &__action-button {
@@ -24,6 +32,7 @@
     }
   }
 }
+
 @mixin typography($typography-config) {
   //  TODO: Future development
 }

@@ -19,4 +19,5 @@
   @include employee-table.theme($theme, $typography-config);
   @include employee-details.theme($theme, $typography-config);
   @include mat.datepicker-theme($theme);
+  @include mat.tabs-theme($theme);
 }
