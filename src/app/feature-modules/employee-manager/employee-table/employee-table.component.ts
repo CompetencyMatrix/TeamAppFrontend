@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EmployeeInterface } from '../../../core/models/employee';
 import { MatTableDataSource } from '@angular/material/table';
+import { EmployeeSkillInterface } from '../../../core/models/employeeSkill';
 
 @Component({
   selector: 'app-employee-table',
@@ -9,12 +10,12 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class EmployeeTableComponent {
   @Input() employees: EmployeeInterface[] = [];
+  @Input() skillsNames: string[] = [];
   selectedEmployee?: EmployeeInterface;
+  skillsExpanded = false;
   @Output() selectEmployeeEvent = new EventEmitter<EmployeeInterface>();
   @Output() deleteEmployeeEvent = new EventEmitter<EmployeeInterface>();
-  // TODO: add projects-time columns names
-  columnsToDisplay: string[] = [
-    'id',
+  baseColumnsToDisplay: string[] = [
     'name',
     'surname',
     'hireDate',
@@ -22,6 +23,7 @@ export class EmployeeTableComponent {
     'manager',
     'actions',
   ];
+  displayedColumns: string[] = this.baseColumnsToDisplay.slice();
 
   // TODO: implement own DataSource
   employeesDataSource: MatTableDataSource<EmployeeInterface> =
@@ -42,11 +44,25 @@ export class EmployeeTableComponent {
     this.deleteEmployeeEvent.emit(employee);
   }
 
+  onExpandSkills(): void {
+    this.displayedColumns.push(...this.skillsNames);
+    this.skillsExpanded = true;
+  }
+
+  onContractSkills(): void {
+    this.displayedColumns = this.baseColumnsToDisplay.slice();
+    this.skillsExpanded = false;
+  }
+
   private unselectEmployee(): void {
     this.selectEmployee(undefined);
   }
   private selectEmployee(employee: EmployeeInterface | undefined): void {
     this.selectedEmployee = employee;
     this.selectEmployeeEvent.emit(this.selectedEmployee);
+  }
+
+  public getSkillsNames(skills: EmployeeSkillInterface[]): string[] {
+    return skills.map((skill: EmployeeSkillInterface) => skill.name);
   }
 }

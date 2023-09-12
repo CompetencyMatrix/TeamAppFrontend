@@ -3,6 +3,7 @@ import { EmployeeInterface } from '../../core/models/employee';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { MessageService } from '../../core/services/message/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SkillService } from '../../core/services/skill/skill.service';
 
 @Component({
   selector: 'app-employee-manager',
@@ -12,14 +13,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class EmployeeManagerComponent implements OnInit {
   destroyRef: DestroyRef = inject(DestroyRef);
   allEmployees: EmployeeInterface[] = [];
+  allSkills: string[] = [];
   selectedEmployee?: EmployeeInterface;
 
   ngOnInit(): void {
-    this.getAllEmployees();
+    this.getData();
   }
 
   constructor(
     private employeeService: EmployeeService,
+    private skillService: SkillService,
     private messageService: MessageService
   ) {}
 
@@ -47,5 +50,17 @@ export class EmployeeManagerComponent implements OnInit {
       .subscribe(
         (employees: EmployeeInterface[]) => (this.allEmployees = employees)
       );
+  }
+
+  private getAllSkills(): void {
+    this.skillService
+      .getSkills()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((skills: string[]) => (this.allSkills = skills));
+  }
+
+  private getData(): void {
+    this.getAllSkills();
+    this.getAllEmployees();
   }
 }

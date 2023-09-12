@@ -3,39 +3,11 @@
 
 <div class="employee-table__container">
   <table class="employee-table" mat-table [dataSource]="employees">
-    <!--  ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        ID
-      </th>
-      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        {{ employee.id }}
-      </td>
-    </ng-container>
-
     <!--  Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Name
-      </th>
-      <td
-        mat-cell
-        class="employee-table__cell"
-        *matCellDef="let employee"
-        (click)="onSelectEmployee(employee)">
-        {{ employee.name }}
-      </td>
-    </ng-container>
+    <mat-text-column name="name"></mat-text-column>
 
     <!--  Surname Column -->
-    <ng-container matColumnDef="surname">
-      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Surname
-      </th>
-      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        {{ employee.surname }}
-      </td>
-    </ng-container>
+    <mat-text-column name="surname"></mat-text-column>
 
     <!--  HireDate Column -->
     <ng-container matColumnDef="hireDate">
@@ -50,18 +22,21 @@
     <!--  Skills Column -->
     <ng-container matColumnDef="skills">
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Skills
+        <div>
+          <span> Skills </span>
+          <!--          <button mat-icon-button (click)="onExpandSkills()">-->
+          <!--            <mat-icon>chevron_right</mat-icon>-->
+          <!--          </button>-->
+        </div>
       </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        {{ employee.skills }}
+        {{ getSkillsNames(employee.skills).join(', ') }}
       </td>
     </ng-container>
 
-    <!--  TODO: time spent in projects *ngFor Column -->
-    <!--  <ng-container matColumnDef="ID">-->
-    <!--    <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>ID</th>-->
-    <!--    <td mat-cell class="employee-table__cell" *matCellDef="let employee">{{ employee.id }}</td>-->
-    <!--  </ng-container>-->
+    <mat-text-column
+      *ngFor="let skill of skillsNames"
+      [name]="skill"></mat-text-column>
 
     <!--  Manager Column -->
     <ng-container matColumnDef="manager">
@@ -97,11 +72,12 @@
     <tr
       mat-header-row
       class="employee-table__header-row"
-      *matHeaderRowDef="columnsToDisplay"></tr>
+      *matHeaderRowDef="displayedColumns"></tr>
     <tr
       mat-row
       class="employee-table__row"
       [class.employee-table__row--selected]="row === selectedEmployee"
-      *matRowDef="let row; columns: columnsToDisplay"></tr>
+      (click)="onSelectEmployee(row)"
+      *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
