@@ -10,8 +10,11 @@ $tapp-mock-typography: mat.define-typography-config();
 
 @include mat.core-theme(light.$tapp-theme-light);
 @include components.theme(light.$tapp-theme-light, $tapp-mock-typography);
+@include mat.all-component-themes(light.$tapp-theme-light);
 
 @media (prefers-color-scheme: dark) {
   @include mat.core-color(dark.$tapp-theme-dark);
   @include components.theme(dark.$tapp-theme-dark, $tapp-mock-typography);
+  @include mat.all-component-themes(light.$tapp-theme-light);
+
 }
