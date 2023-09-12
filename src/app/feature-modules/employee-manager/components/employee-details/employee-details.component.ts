@@ -9,4 +9,8 @@ import { EmployeeInterface } from '../../../../core/models/employee';
 export class EmployeeDetailsComponent {
   @Input() selectedEmployee?: EmployeeInterface;
   protected readonly Boolean = Boolean;
+
+  public onCardBackgroundClicked(): void {
+    this.selectedEmployee = undefined;
+  }
 }

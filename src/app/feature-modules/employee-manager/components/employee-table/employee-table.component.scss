@@ -1,5 +1,5 @@
 .employee-table {
-  //TODO: is it okay to treat container as an element
+
   &__container {
     display: block;
     width: 100%;
@@ -15,6 +15,10 @@
   &__row,
   &__header-row {
     display: table-row;
+  }
+
+  &__row {
+    cursor: pointer;
   }
 
   &__cell,
@@ -50,12 +54,6 @@
   &__action-button {
     padding: 0;
     margin: 0;
-    background-color: transparent;
     border: none;
-
-    &:hover,
-    &:active {
-      color: darkred;
-    }
   }
 }

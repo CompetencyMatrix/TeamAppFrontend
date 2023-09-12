@@ -1,13 +1,24 @@
 .employee-details {
-  position: absolute;
+  position: fixed;
   left: 2rem;
+  //animation: slideIn 0.5s forwards;
   top: 15vh;
   height: 70vh;
   border-radius: 2rem;
   padding: 2rem;
   width: fit-content;
+  z-index: 1500;
 
   &__title {
     padding-bottom: 1rem;
+  }
+
+  &__shadow-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
   }
 }

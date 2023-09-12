@@ -39,3 +39,7 @@
     <app-projects [projects]="selectedEmployee.projects"></app-projects>
   </mat-card-content>
 </mat-card>
+<div
+  *ngIf="selectedEmployee"
+  class="employee-details__shadow-overlay"
+  (click)="onCardBackgroundClicked()"></div>

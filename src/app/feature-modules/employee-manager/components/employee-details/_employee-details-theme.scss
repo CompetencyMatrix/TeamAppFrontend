@@ -17,8 +17,15 @@
   $primary200: mat.get-color-from-palette($accent-palette, 100);
 
   .employee-details {
-    box-shadow: 0 0 100vh 100vw rgba(1, 0, 0, 0.3)!important;
+    box-shadow: 0 0 1.5rem 0 $primary500!important;
+
+    &__shadow-overlay {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
   }
+
+
 }
 
 @mixin typography($typography-config) {

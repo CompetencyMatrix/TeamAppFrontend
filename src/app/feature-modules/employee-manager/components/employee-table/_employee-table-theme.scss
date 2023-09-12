@@ -6,15 +6,24 @@
   $color-config: mat.get-color-config($theme);
   $accent-palette: map.get($color-config, 'accent');
 
-  $accent200: mat.get-color-from-palette($accent-palette, 100);
+  $accent100: mat.get-color-from-palette($accent-palette, 100);
+  $accent900: mat.get-color-from-palette($accent-palette, 900);
 
   .employee-table {
     &__header-row {
-      background: $accent200!important;
+      background: $accent100 !important;
+    }
+
+    &__action-button {
+      background-color: transparent;
+
+      &:hover,
+      &:active {
+        color: $accent900;
+      }
     }
   }
 }
-
 @mixin typography($typography-config) {
   //  TODO: Future development
 }
