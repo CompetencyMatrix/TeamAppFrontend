@@ -6,11 +6,14 @@
   as messages;
 @use 'src/app/feature-modules/employee-form/components/chips-multiselect/chip-multiselect-theme'
   as chip-multiselect;
+@use 'src/app/feature-modules/employee-manager/employee-table/employee-table-theme'
+  as employee-table;
 
 @mixin theme($theme, $typography-config) {
   @include navbar.theme($theme, $typography-config);
   @include messages.theme($theme, $typography-config);
   @include languages.theme($theme, $typography-config);
   @include chip-multiselect.theme($theme, $typography-config);
+  @include employee-table.theme($theme, $typography-config);
   @include mat.datepicker-theme($theme);
 }

@@ -1,13 +1,31 @@
 <!-- TODO: to update table - call renderRows() -->
 <!-- TODO: change array - employees - to DataSource instance -->
 
-<div class="employee-table__container">
+<mat-card class="employee-table__container">
   <table class="employee-table" mat-table [dataSource]="employees">
     <!--  Name Column -->
-    <mat-text-column name="name"></mat-text-column>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
+        Name
+      </th>
+      <td
+        mat-cell
+        class="employee-table__cell"
+        *matCellDef="let employee"
+        (click)="onSelectEmployee(employee)">
+        {{ employee.name }}
+      </td>
+    </ng-container>
 
     <!--  Surname Column -->
-    <mat-text-column name="surname"></mat-text-column>
+    <ng-container matColumnDef="surname">
+      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
+        Surname
+      </th>
+      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
+        {{ employee.surname }}
+      </td>
+    </ng-container>
 
     <!--  HireDate Column -->
     <ng-container matColumnDef="hireDate">
@@ -49,14 +67,12 @@
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th
-        mat-header-cell
-        class="employee-table__header-cell"
-        *matHeaderCellDef></th>
+      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
+        Actions
+      </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        <!--        TODO: action list component -->
         <ul class="employee-table__action-list">
-          <li>
+          <li class="employee-table__action-list-element">
             <button
               type="button"
               class="employee-table__action-button"
@@ -80,4 +96,4 @@
       (click)="onSelectEmployee(row)"
       *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-</div>
+</mat-card>
