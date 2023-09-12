@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @import '@angular/material/theming';
-@import 'src/styles/theme/colors';
+
 
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
@@ -12,14 +12,12 @@
   $accent500: mat.get-color-from-palette($accent-palette, 500);
   $primary500-contrast: mat.get-color-from-palette(
       $primary-palette,
-      500-contrast
+      500 -contrast
   );
   $primary200: mat.get-color-from-palette($accent-palette, 100);
 
-  .employee-table {
-    &__header-row {
-      background: $primary200!important;
-    }
+  .employee-details {
+    box-shadow: 0 0 100vh 100vw rgba(1, 0, 0, 0.3)!important;
   }
 }
 

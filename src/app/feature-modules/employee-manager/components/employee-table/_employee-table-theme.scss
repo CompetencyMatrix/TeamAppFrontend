@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+
+@mixin color($theme) {
+  $color-config: mat.get-color-config($theme);
+  $accent-palette: map.get($color-config, 'accent');
+
+  $accent200: mat.get-color-from-palette($accent-palette, 100);
+
+  .employee-table {
+    &__header-row {
+      background: $accent200!important;
+    }
+  }
+}
+
+@mixin typography($typography-config) {
+  //  TODO: Future development
+}
+
+@mixin theme($theme, $typography-config) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
+
+  @if $typography-config != null {
+    @include typography($typography-config);
+  }
+}

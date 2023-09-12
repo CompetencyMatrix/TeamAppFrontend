@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EmployeeManagerRoutingModule } from './employee-manager-routing.module';
-import { ProjectsComponent } from './projects/projects.component';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { EmployeeManagerComponent } from './employee-manager.component';
-import { EmployeeTableComponent } from './employee-table/employee-table.component';
+import { EmployeeTableComponent } from './components/employee-table/employee-table.component';
 import { MatListModule } from '@angular/material/list';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTabsModule } from '@angular/material/tabs';

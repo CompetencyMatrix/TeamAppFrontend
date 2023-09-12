@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EmployeeInterface } from '../../../core/models/employee';
+import { EmployeeInterface } from '../../../../core/models/employee';
 import { MatTableDataSource } from '@angular/material/table';
-import { EmployeeSkillInterface } from '../../../core/models/employeeSkill';
+import { EmployeeSkillInterface } from '../../../../core/models/employeeSkill';
 
 @Component({
   selector: 'app-employee-table',
