@@ -9,6 +9,7 @@ import { ProficiencyLevel } from '../../../core/enums/proficiency-level-enum';
 export class LevelStarsComponent implements OnInit {
   @Input() proficiency?: ProficiencyLevel;
   @Input() proficiencyName?: string;
+  @Input() displayName = false;
 
   ngOnInit(): void {
     this.getProficiency();

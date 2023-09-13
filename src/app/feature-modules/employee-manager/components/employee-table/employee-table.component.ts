@@ -12,6 +12,7 @@ export class EmployeeTableComponent {
   @Input() skillsNames: string[] = [];
   selectedEmployee?: EmployeeInterface;
   skillsExpanded = false;
+  skillsHovered = false;
   @Output() selectEmployeeEvent = new EventEmitter<EmployeeInterface>();
   @Output() deleteEmployeeEvent = new EventEmitter<EmployeeInterface>();
   baseColumnsToDisplay: string[] = [
@@ -44,7 +45,17 @@ export class EmployeeTableComponent {
   }
 
   onExpandSkills(): void {
-    this.displayedColumns.push(...this.skillsNames);
+    this.displayedColumns = this.displayedColumns.reduce(
+      (accumulator: string[], currentValue: string) => {
+        if (currentValue !== 'skills') {
+          accumulator.push(currentValue);
+        } else {
+          accumulator.push(...this.skillsNames);
+        }
+        return accumulator;
+      },
+      []
+    );
     this.skillsExpanded = true;
   }
 
@@ -60,4 +71,6 @@ export class EmployeeTableComponent {
     this.selectedEmployee = employee;
     this.selectEmployeeEvent.emit(this.selectedEmployee);
   }
+
+  protected readonly console = console;
 }

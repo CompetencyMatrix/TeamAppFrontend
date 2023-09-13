@@ -42,11 +42,21 @@
       <th
         mat-header-cell
         class="employee-table__header-cell employee-table__header-cell-skills"
+        [ngClass]="{
+          'employee-table__header-cell--expand-highlight': skillsHovered
+        }"
         *matHeaderCellDef>
-        <div>
+        <div class="employee-table__header-cell-skills-inner">
+          <button
+            mat-icon-button
+            class="employee-table__header-cell-skills-button--hidden">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
           <span> Skills </span>
           <button
             mat-icon-button
+            (mouseenter)="skillsHovered = true"
+            (mouseleave)="skillsHovered = false"
             (click)="onExpandSkills()"
             class="employee-table__header-cell-skills-button">
             <mat-icon>chevron_right</mat-icon>
@@ -56,6 +66,9 @@
       <td
         mat-cell
         class="employee-table__cell employee-table__cell-skills"
+        [ngClass]="{
+          'employee-table__header-cell--expand-highlight': skillsHovered
+        }"
         *matCellDef="let employee">
         {{ (employee.skills | skillsNames).join(', ') }}
       </td>
