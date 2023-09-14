@@ -78,15 +78,27 @@
 
       &-bottom-bar,
       &-top-bar {
-        background: red;
         min-width: max-content;
         height: 0.8rem;
         padding: 0 -2rem;
         margin: -1rem -2rem 0.6rem -2rem;
+        visibility: hidden;
       }
 
-      &-bottom-bar {
-        visibility: hidden;
+      &:hover,
+      &:hover ~ *,
+      *:has(~ &:hover) {
+        .employee-table__header-cell-skill-top-bar {
+          background: red;
+          cursor: pointer;
+          visibility: visible;
+        }
+      }
+      &:active &-top-bar {
+        background: red;
+
+        cursor: pointer;
+        visibility: visible;
       }
     }
   }
