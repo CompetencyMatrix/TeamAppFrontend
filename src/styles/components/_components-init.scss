@@ -6,13 +6,13 @@
   as messages;
 @use 'src/app/feature-modules/employee-form/components/chips-multiselect/chip-multiselect-theme'
   as chip-multiselect;
+@use 'src/app/feature-modules/employee-form/employee-form-theme' as employee-form;
 @use 'src/app/feature-modules/employee-manager/components/employee-table/employee-table-theme'
   as employee-table;
 @use 'src/app/feature-modules/employee-manager/components/employee-details/employee-details-theme'
   as employee-details;
 
 @mixin theme($theme, $typography-config) {
-  //@include material-components-theme($theme);
   @include tapp-components-theme($theme, $typography-config);
 
 }
@@ -22,14 +22,7 @@
   @include messages.theme($theme, $typography-config);
   @include languages.theme($theme, $typography-config);
   @include chip-multiselect.theme($theme, $typography-config);
+  @include employee-form.theme($theme, $typography-config);
   @include employee-table.theme($theme, $typography-config);
   @include employee-details.theme($theme, $typography-config);
 }
-
-//@mixin material-components-theme($theme) {
-//@include mat.datepicker-theme($theme);
-//@include mat.tabs-theme($theme);
-//@include mat.input-theme($theme);
-//@include mat.legacy-form-field-theme($theme);
-//@include mat.autocomplete-theme($theme);
-//}

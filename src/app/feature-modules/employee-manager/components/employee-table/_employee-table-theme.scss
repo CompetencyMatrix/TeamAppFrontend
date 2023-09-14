@@ -9,6 +9,7 @@
 
   $primary50: mat.get-color-from-palette($primary-palette, 50);
   $primary100: mat.get-color-from-palette($primary-palette, 100);
+  $primary700: mat.get-color-from-palette($primary-palette, 700);
   $accent900: mat.get-color-from-palette($accent-palette, 900);
 
   .employee-table {
@@ -22,6 +23,16 @@
       }
     }
 
+    &__header-cell {
+      &-skill {
+        &-top-bar {
+          &:hover,
+          &:active {
+            background: $primary700;
+          }
+        }
+      }
+    }
     &__action-button {
       background-color: transparent;
 
