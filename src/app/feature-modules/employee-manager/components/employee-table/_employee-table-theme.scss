@@ -23,13 +23,28 @@
       }
     }
 
+    &__header-cell,
+    &__cell {
+      &--expand-highlight {
+        border-right: $primary100 dashed;
+        border-left: $primary100 dashed;
+        box-shadow: 0 0 5rem 0 rgba(mat.get-color-from-palette($primary-palette, 500), 0.25) inset;
+      }
+    }
     &__header-cell {
       &-skill {
-        &-top-bar {
-          &:hover,
-          &:active {
+
+        &:hover,
+        &:hover ~ *,
+        *:has(~ &:hover) {
+          .employee-table__header-cell-skill-top-bar {
             background: $primary700;
           }
+        }
+      }
+
+      &-skills{
+        &-button{
         }
       }
     }

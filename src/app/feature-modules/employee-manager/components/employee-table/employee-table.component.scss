@@ -35,12 +35,6 @@
     vertical-align: middle;
     text-align: center;
 
-    &--expand-highlight {
-      border-right: rgba(112, 128, 144, 0.5) dashed;
-      border-left: rgba(112, 128, 144, 0.5) dashed;
-      box-shadow: 0 0 5rem 0 rgba(255, 188, 77, 0.37) inset;
-    }
-
     &-skills {
 
       &-button {
@@ -79,7 +73,7 @@
       &-bottom-bar,
       &-top-bar {
         min-width: max-content;
-        height: 0.8rem;
+        height: 1.2rem;
         padding: 0 -2rem;
         margin: -1rem -2rem 0.6rem -2rem;
         visibility: hidden;
@@ -87,18 +81,15 @@
 
       &:hover,
       &:hover ~ *,
-      *:has(~ &:hover) {
+      *:has(~ &:hover),
+      &:active,
+      &:active ~ *,
+      *:has(~ &:active) {
         .employee-table__header-cell-skill-top-bar {
-          background: red;
           cursor: pointer;
           visibility: visible;
+          border-radius: 2rem;
         }
-      }
-      &:active &-top-bar {
-        background: red;
-
-        cursor: pointer;
-        visibility: visible;
       }
     }
   }
