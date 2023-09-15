@@ -50,13 +50,14 @@ export class EmployeeTableComponent {
         if (currentValue !== 'skills') {
           accumulator.push(currentValue);
         } else {
-          accumulator.push(...this.skillsNames);
+          accumulator.push(...this.getSkillNamesInOrder());
         }
         return accumulator;
       },
       []
     );
     this.skillsExpanded = true;
+    this.skillsHovered = false;
   }
 
   onContractSkills(): void {
@@ -70,6 +71,12 @@ export class EmployeeTableComponent {
   private selectEmployee(employee: EmployeeInterface | undefined): void {
     this.selectedEmployee = employee;
     this.selectEmployeeEvent.emit(this.selectedEmployee);
+  }
+
+  private getSkillNamesInOrder(): string[] {
+    return this.skillsNames.sort((name_1: string, name_2: string) =>
+      name_1.toLowerCase().localeCompare(name_2.toLowerCase())
+    );
   }
 
   protected readonly console = console;
