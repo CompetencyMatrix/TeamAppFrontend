@@ -15,14 +15,14 @@
           (click)="onChangeLevel(skill, levelName)"
           [className]="
             'chip-multiselect__chip-star-button-level chip-multiselect__chip-star-button-level-' +
-            anyProficiencyLevel[levelName]
+            getProficiencyLevel(levelName)
           "
           [ngClass]="
-            ProficiencyLevel[skill.proficiency] === levelName
+            skill.proficiency === getProficiencyLevel(levelName)
               ? [
                   'chip-multiselect__chip-star-button-level--selected',
                   'chip-multiselect__chip-star-button-level-' +
-                    anyProficiencyLevel[levelName] +
+                    getProficiencyLevel(levelName) +
                     '--selected'
                 ]
               : ''
@@ -68,17 +68,17 @@
             #optionLevelButton
             *ngFor="let levelName of possibleLevelsNames"
             [value]="levelName"
-            [checked]="ProficiencyLevel[skill.proficiency] === levelName"
+            [checked]="skill.proficiency === getProficiencyLevel(levelName)"
             (click)="$event.stopPropagation(); onChooseLevel(skill, levelName)"
             [className]="
-              'chip-multiselect__option-level-' + anyProficiencyLevel[levelName]
+              'chip-multiselect__option-level-' + getProficiencyLevel(levelName)
             "
             [ngClass]="
               optionLevelButton.checked
                 ? [
                     'chip-multiselect__option-level--selected',
                     'chip-multiselect__option-level-' +
-                      anyProficiencyLevel[levelName] +
+                      getProficiencyLevel(levelName) +
                       '--selected'
                   ]
                 : ''

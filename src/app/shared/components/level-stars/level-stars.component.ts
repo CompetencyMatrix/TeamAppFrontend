@@ -22,4 +22,15 @@ export class LevelStarsComponent implements OnInit {
       }
     }
   }
+
+  getLevels(): number[] {
+    if (this.hasAnyProficiency()) {
+      return Array.from(Array(this.proficiency! + 1).keys());
+    }
+    return [];
+  }
+
+  hasAnyProficiency(): boolean {
+    return this.proficiency != undefined;
+  }
 }

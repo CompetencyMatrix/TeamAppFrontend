@@ -104,8 +104,6 @@ export class ChipsMultiselectComponent implements OnInit {
       : false;
   }
   private _filterWithName(skillName: string): EmployeeSkillInterface[] {
-    console.log('FilterName: skillName ' + JSON.stringify(skillName));
-    console.log('FilterName: value observable: ');
     console.log(this.valueAccessor.value$);
 
     return this.allSkills.filter((skill: EmployeeSkillInterface) =>
@@ -125,8 +123,6 @@ export class ChipsMultiselectComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log('SELECTED autocomplete: ' + JSON.stringify(event.option.value));
-    //TODO: tutaj tez pobierz level
     this._chooseSkill(event.option.value);
     this.skillsFormControl.control.setValue([...this.chosenSkills]);
 
@@ -147,7 +143,7 @@ export class ChipsMultiselectComponent implements OnInit {
   ): void {
     // const proficiencyLevel: ProficiencyLevel = level as ProficiencyLevel;
 
-    const enumValue: ProficiencyLevel = (<any>ProficiencyLevel)[level];
+    const enumValue: ProficiencyLevel = this.getProficiencyLevel(level);
     skill.proficiency = enumValue;
   }
 
@@ -155,10 +151,11 @@ export class ChipsMultiselectComponent implements OnInit {
     skill: EmployeeSkillInterface,
     level: ProficiencyLevel | string
   ): void {
-    const enumValue: ProficiencyLevel = (<any>ProficiencyLevel)[level];
+    const enumValue: ProficiencyLevel = this.getProficiencyLevel(level);
     skill.proficiency = enumValue;
   }
 
-  protected readonly ProficiencyLevel = ProficiencyLevel;
-  protected readonly anyProficiencyLevel = <any>ProficiencyLevel;
+  getProficiencyLevel(level: string | ProficiencyLevel): ProficiencyLevel {
+    return typeof level === 'string' ? (<any>ProficiencyLevel)[level] : level;
+  }
 }

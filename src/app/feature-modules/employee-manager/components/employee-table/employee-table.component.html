@@ -88,7 +88,11 @@
         <div class="employee-table__header-cell-skill-bottom-bar"></div>
       </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        {{ employee.skills | skillLevel: skillName }}
+        <!--        {{ employee.skills | skillLevel: skillName }}-->
+        <app-level-stars
+          [proficiency]="
+            employee.skills | skillLevel: skillName
+          "></app-level-stars>
       </td>
     </ng-container>
 
