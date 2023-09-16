@@ -9,4 +9,10 @@
   </div>
   <div *ngIf="displayName" class="level__name">{{ proficiencyName }}</div>
 </div>
-<mat-icon *ngIf="!hasAnyProficiency()">not_interested</mat-icon>
+<div>
+  <mat-icon *ngIf="!hasAnyProficiency()">not_interested</mat-icon>
+</div>
+
+<!--<mat-icon *ngFor="let skill of getLevels()" class="level__star-icon"-->
+<!--  >star_border</mat-icon-->
+<!--&gt;<mat-icon *ngIf="!hasAnyProficiency()">not_interested</mat-icon>-->

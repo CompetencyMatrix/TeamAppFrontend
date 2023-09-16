@@ -15,6 +15,25 @@ export const EMPLOYEES: EmployeeInterface[] = [
         name: SKILLS[2],
         proficiency: ProficiencyLevel.MID,
       },
+      { name: SKILLS[3], proficiency: ProficiencyLevel.SENIOR },
+      {
+        name: SKILLS[1],
+        proficiency: ProficiencyLevel.SENIOR,
+      },
+      { name: SKILLS[4], proficiency: ProficiencyLevel.JUNIOR },
+      {
+        name: SKILLS[5],
+        proficiency: ProficiencyLevel.JUNIOR,
+      },
+      {
+        name: SKILLS[6],
+        proficiency: ProficiencyLevel.SENIOR,
+      },
+      { name: SKILLS[7], proficiency: ProficiencyLevel.JUNIOR },
+      {
+        name: SKILLS[8],
+        proficiency: ProficiencyLevel.JUNIOR,
+      },
     ],
     projects: [PROJECTS[4], PROJECTS[3]],
     manager: 'Marcello',

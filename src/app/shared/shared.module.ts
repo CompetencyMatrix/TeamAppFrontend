@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { LevelStarsComponent } from './components/level-stars/level-stars.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
-import { EmployeeSkillComponent } from './components/employee-skill/employee-skill.component';
 
 @NgModule({
-  declarations: [LevelStarsComponent, EmployeeSkillComponent],
+  declarations: [LevelStarsComponent],
   imports: [MatIconModule, NgForOf, NgIf, NgClass],
-  exports: [LevelStarsComponent, EmployeeSkillComponent],
+  exports: [LevelStarsComponent],
 })
 export class SharedModule {}
