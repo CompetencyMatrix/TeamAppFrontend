@@ -71,7 +71,8 @@
     <app-chips-multiselect
       class="employee-form__field-skills"
       formControlName="skills"
-      [allSkills]="allSkills"></app-chips-multiselect>
+      [allSkills]="allSkills"
+      [possibleLevelsNames]="getPossibleLevelsNames()"></app-chips-multiselect>
 
     <mat-form-field class="employee-form__field employee-form__field-projects">
       <mat-label> {{ 'employee.form.projects' | translate }}: </mat-label>

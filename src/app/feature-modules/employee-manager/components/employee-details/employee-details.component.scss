@@ -2,8 +2,8 @@
 
 .employee-details {
   position: fixed;
-  top: 15vh;
-  height: 70vh;
+  top: 15%;
+  height: 70%;
   border-radius: 2rem;
   padding: 2rem;
   width: 80vw;
@@ -12,6 +12,16 @@
 
   &__title {
     padding-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  &__content {
+    height: 80%;
+  }
+
+  &__field {
+    font-size: 1rem;
   }
 
   &__shadow-overlay {

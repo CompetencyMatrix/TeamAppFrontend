@@ -4,6 +4,7 @@ import { EmployeeService } from '../../core/services/employee/employee.service';
 import { MessageService } from '../../core/services/message/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SkillService } from '../../core/services/skill/skill.service';
+import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
 
 @Component({
   selector: 'app-employee-manager',
@@ -50,6 +51,10 @@ export class EmployeeManagerComponent implements OnInit {
       .subscribe(
         (employees: EmployeeInterface[]) => (this.allEmployees = employees)
       );
+  }
+
+  public getPossibleLevelsNames(): (ProficiencyLevel | string)[] {
+    return this.skillService.getPossibleLevelsNames();
   }
 
   private getAllSkills(): void {

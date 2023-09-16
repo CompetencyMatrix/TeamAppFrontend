@@ -70,7 +70,7 @@
           'employee-table__header-cell--expand-highlight': skillsHovered
         }"
         *matCellDef="let employee">
-        {{ (employee.skills | skillsNames).join(', ') }}
+        {{ getEmployeeSkillsNames(employee).join(', ') }}
       </td>
     </ng-container>
 
@@ -89,10 +89,9 @@
       </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
         <!--        {{ employee.skills | skillLevel: skillName }}-->
+        <!--          TODO: to w serwisie robic-->
         <app-level-stars
-          [proficiency]="
-            employee.skills | skillLevel: skillName
-          "></app-level-stars>
+          [proficiency]="getSkillLevel(employee, skillName)"></app-level-stars>
       </td>
     </ng-container>
 

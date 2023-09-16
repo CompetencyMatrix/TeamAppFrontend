@@ -4,6 +4,8 @@ import { EMPLOYEES } from '../../../mocks/mock-employees';
 import { Observable, of } from 'rxjs';
 import { MessageService } from '../message/message.service';
 import { v4 as uuid } from 'uuid';
+import { ProficiencyLevel } from '../../enums/proficiency-level-enum';
+import { EmployeeSkillInterface } from '../../models/employeeSkill';
 
 @Injectable({
   providedIn: 'root',

@@ -26,6 +26,7 @@ import { FormControlValueAccessorDirective } from '../../../../shared/directives
 })
 export class ChipsMultiselectComponent implements OnInit {
   @Input() allSkills: EmployeeSkillInterface[] = [];
+  @Input() possibleLevelsNames: (string | ProficiencyLevel)[] = [];
   @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
   skillsFormControl: FormControlDirective | FormControlName | NgModel =
     this.injectionManager.injectNgControl();
@@ -33,8 +34,7 @@ export class ChipsMultiselectComponent implements OnInit {
   filteredSkills$?: Observable<EmployeeSkillInterface[]>;
   announcer: LiveAnnouncer = inject(LiveAnnouncer);
   destroyRef: DestroyRef = inject(DestroyRef);
-  possibleLevelsNames: (string | ProficiencyLevel)[] =
-    this._getPossibleLevelsNames();
+
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
@@ -59,12 +59,6 @@ export class ChipsMultiselectComponent implements OnInit {
     console.log(this.valueAccessor.value$);
 
     this.filteredSkills$ = this._getFilteredObservable();
-  }
-
-  private _getPossibleLevelsNames(): (ProficiencyLevel | string)[] {
-    return Object.values(ProficiencyLevel).filter(
-      (lvl: string | ProficiencyLevel) => isNaN(Number(lvl))
-    );
   }
 
   private _getFilteredObservable():

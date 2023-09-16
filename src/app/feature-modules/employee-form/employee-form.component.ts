@@ -128,7 +128,9 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
           }))
       );
   }
-
+  public getPossibleLevelsNames(): (ProficiencyLevel | string)[] {
+    return this.skillService.getPossibleLevelsNames();
+  }
   //TODO: rewrite
   private getOtherEmployees(): void {
     if (this.employeeToEdit === undefined) {

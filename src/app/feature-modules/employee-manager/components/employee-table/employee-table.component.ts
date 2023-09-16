@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EmployeeInterface } from '../../../../core/models/employee';
 import { MatTableDataSource } from '@angular/material/table';
+import { EmployeeService } from '../../../../core/services/employee/employee.service';
+import { ProficiencyLevel } from '../../../../core/enums/proficiency-level-enum';
+import { EmployeeSkillInterface } from '../../../../core/models/employeeSkill';
 
 @Component({
   selector: 'app-employee-table',
@@ -25,9 +28,24 @@ export class EmployeeTableComponent {
   ];
   displayedColumns: string[] = this.baseColumnsToDisplay.slice();
 
+  constructor() {}
   // TODO: implement own DataSource
   employeesDataSource: MatTableDataSource<EmployeeInterface> =
     new MatTableDataSource(this.employees);
+
+  getEmployeeSkillsNames(employee: EmployeeInterface): string[] {
+    return employee.skills.map((skill: EmployeeSkillInterface) => skill.name);
+  }
+
+  getSkillLevel(
+    employee: EmployeeInterface,
+    skillName: string
+  ): ProficiencyLevel | undefined {
+    const skill: EmployeeSkillInterface | undefined = employee.skills.find(
+      (skill: EmployeeSkillInterface) => skill.name === skillName
+    );
+    return skill ? skill.proficiency : undefined;
+  }
 
   onSelectEmployee(employee: EmployeeInterface): void {
     if (
@@ -78,6 +96,4 @@ export class EmployeeTableComponent {
       name_1.toLowerCase().localeCompare(name_2.toLowerCase())
     );
   }
-
-  protected readonly console = console;
 }

@@ -12,14 +12,16 @@ export class LevelStarsComponent implements OnInit {
   @Input() displayName = false;
 
   ngOnInit(): void {
-    this.getProficiency();
+    this.initProficiency();
   }
 
-  getProficiency(): void {
+  initProficiency(): void {
     if (this.proficiency === undefined) {
       if (this.proficiencyName != undefined) {
         this.proficiency = (<any>ProficiencyLevel)[this.proficiencyName];
       }
+    } else {
+      this.proficiencyName = (<any>ProficiencyLevel)[this.proficiency];
     }
   }
 

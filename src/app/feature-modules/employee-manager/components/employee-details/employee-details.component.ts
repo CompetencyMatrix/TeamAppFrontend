@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { EmployeeInterface } from '../../../../core/models/employee';
+import { ProficiencyLevel } from '../../../../core/enums/proficiency-level-enum';
 
 @Component({
   selector: 'app-employee-details',
@@ -8,9 +9,17 @@ import { EmployeeInterface } from '../../../../core/models/employee';
 })
 export class EmployeeDetailsComponent {
   @Input() selectedEmployee?: EmployeeInterface;
+  @Input() possibleSkillLevelsNames: (string | ProficiencyLevel)[] = [];
   protected readonly Boolean = Boolean;
 
-  public onCardBackgroundClicked(): void {
+  public onExitDetails(): void {
     this.selectedEmployee = undefined;
+  }
+  //
+  // public onEditEmployee(): void {
+  //   this.selectedEmployee = undefined;
+  // }
+  getProficiencyLevel(level: string | ProficiencyLevel): ProficiencyLevel {
+    return typeof level === 'string' ? (<any>ProficiencyLevel)[level] : level;
   }
 }

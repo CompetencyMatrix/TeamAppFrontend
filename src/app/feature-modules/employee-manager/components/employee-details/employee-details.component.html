@@ -1,45 +1,61 @@
 <mat-card
   *ngIf="selectedEmployee"
   xmlns="http://www.w3.org/1999/html"
+  xmlns="http://www.w3.org/1999/html"
+  xmlns="http://www.w3.org/1999/html"
   class="employee-details">
-  <mat-card-title class="employee-details__title">
-    {{
-      'employee.details.title'
-        | translate
-          : {
-              person:
-                [selectedEmployee.name, selectedEmployee.surname]
-                  .filter(Boolean)
-                  .join(' ') | uppercase
-            }
-    }}
-  </mat-card-title>
-  <mat-card-content>
-    <div class="employee-details__field">
-      <p>{{ 'employee.details.id' | translate }}: {{ selectedEmployee.id }}</p>
-    </div>
-    <div class="employee-details__field">
-      <p>
-        {{ 'employee.details.hire.date' | translate }}:
-        {{ selectedEmployee.hireDate | date: 'dd-MMM-YYYY' }}
-      </p>
-    </div>
-    <div class="employee-details__field">
-      <p>
-        {{ 'employee.details.manager' | translate }}:
-        {{ selectedEmployee.manager }}
-      </p>
-    </div>
-    <div class="employee-details__field">
-      <p>
-        {{ 'employee.details.skills' | translate }}:
-        {{ selectedEmployee.skills }}
-      </p>
-    </div>
+  <mat-card-header>
+    <mat-card-title class="employee-details__title">
+      {{ [selectedEmployee.name, selectedEmployee.surname].join(' ') }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="employee-details__content">
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.id' | translate }}:</span>
+      <span> {{ selectedEmployee.id }} </span>
+    </p>
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.name' | translate }}:</span>
+      <span>{{ selectedEmployee.name }} </span>
+    </p>
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.surname' | translate }}: </span>
+      <span>{{ selectedEmployee.surname }}</span>
+    </p>
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.hire.date' | translate }}: </span>
+      <span>{{ selectedEmployee.hireDate | date: 'dd-MM-YYYY' }}</span>
+    </p>
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.manager' | translate }}: </span>
+      <span> {{ selectedEmployee.manager }}</span>
+    </p>
+    <p class="employee-details__field">
+      <span>{{ 'employee.details.skills' | translate }}</span>
+      <mat-list role="list">
+        <mat-list-item
+          *ngFor="let levelName of possibleSkillLevelsNames.reverse()"
+          role="listitem">
+          <app-level-stars
+            [proficiency]="getProficiencyLevel(levelName)"
+            [displayName]="true"></app-level-stars
+        ></mat-list-item>
+      </mat-list>
+    </p>
     <app-projects [projects]="selectedEmployee.projects"></app-projects>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button type="button" class="">
+      <!--      (click)="editEmployee()"-->
+      <mat-icon>edit</mat-icon>
+      {{ 'messages.clear.button' | translate }}
+    </button>
+    <button mat-raised-button class="" (click)="onExitDetails()">
+      <mat-icon>edit</mat-icon>Close
+    </button>
+  </mat-card-actions>
 </mat-card>
 <div
   *ngIf="selectedEmployee"
   class="employee-details__shadow-overlay"
-  (click)="onCardBackgroundClicked()"></div>
+  (click)="onExitDetails()"></div>
