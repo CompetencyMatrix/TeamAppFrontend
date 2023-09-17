@@ -7,15 +7,15 @@ import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-import { ProjectsComponent } from './components/projects/projects.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ProjectComponent } from './components/project/project.component';
 
 @NgModule({
   declarations: [
     LevelStarsComponent,
     EmployeeDetailsComponent,
-    ProjectsComponent,
+    ProjectComponent,
   ],
   imports: [
     MatIconModule,
@@ -30,6 +30,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatTabsModule,
     MatGridListModule,
   ],
-  exports: [LevelStarsComponent, EmployeeDetailsComponent, ProjectsComponent],
+  exports: [LevelStarsComponent, EmployeeDetailsComponent, ProjectComponent],
 })
 export class SharedModule {}

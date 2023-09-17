@@ -51,4 +51,6 @@ export class EmployeeDetailsComponent implements OnInit {
     );
     return skillNamesByLevelMap;
   }
+
+  protected readonly window = window;
 }
