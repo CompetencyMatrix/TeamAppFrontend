@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EmployeeInterface } from '../../../core/models/employee';
 import { ProficiencyLevel } from '../../../core/enums/proficiency-level-enum';
 import { EmployeeSkillInterface } from '../../../core/models/employeeSkill';
@@ -11,6 +11,9 @@ import { EmployeeSkillInterface } from '../../../core/models/employeeSkill';
 export class EmployeeDetailsComponent implements OnInit {
   @Input() selectedEmployee?: EmployeeInterface;
   @Input() possibleSkillLevelsNames: (string | ProficiencyLevel)[] = [];
+  @Output() unselectEmployeeEvent = new EventEmitter<void>();
+  @Output() editEmployeeEvent = new EventEmitter<EmployeeInterface>();
+
   public skillNamesByLevelMap: Map<ProficiencyLevel, string[]> = new Map();
 
   ngOnInit(): void {
@@ -19,11 +22,12 @@ export class EmployeeDetailsComponent implements OnInit {
 
   public onExitDetails(): void {
     this.selectedEmployee = undefined;
+    this.unselectEmployeeEvent.emit();
   }
-  //
-  // public onEditEmployee(): void {
-  //   this.selectedEmployee = undefined;
-  // }
+
+  public onEditEmployee(): void {
+    this.editEmployeeEvent.emit(this.selectedEmployee);
+  }
   getProficiencyLevel(level: string | ProficiencyLevel): ProficiencyLevel {
     return typeof level === 'string' ? (<any>ProficiencyLevel)[level] : level;
   }

@@ -5,6 +5,7 @@ import { MessageService } from '../../core/services/message/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SkillService } from '../../core/services/skill/skill.service';
 import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-manager',
@@ -24,9 +25,13 @@ export class EmployeeManagerComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private skillService: SkillService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private readonly router: Router
   ) {}
 
+  unselectEmployee(): void {
+    this.selectEmployee(undefined);
+  }
   selectEmployee(newEmployee: EmployeeInterface | undefined): void {
     if (newEmployee === undefined) {
       //TODO
@@ -36,6 +41,10 @@ export class EmployeeManagerComponent implements OnInit {
       });
     }
     this.selectedEmployee = newEmployee;
+  }
+
+  editEmployee(employeeToEdit: EmployeeInterface): void {
+    this.router.navigate(['/employee/' + employeeToEdit.id]);
   }
 
   deleteEmployee(employeeToDelete: EmployeeInterface): void {

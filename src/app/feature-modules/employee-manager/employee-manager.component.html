@@ -8,6 +8,6 @@
 <app-employee-details
   *ngIf="selectedEmployee"
   [selectedEmployee]="selectedEmployee"
-  [possibleSkillLevelsNames]="
-    getPossibleLevelsNamesReversedCopy()
-  "></app-employee-details>
+  [possibleSkillLevelsNames]="getPossibleLevelsNamesReversedCopy()"
+  (unselectEmployeeEvent)="unselectEmployee()"
+  (editEmployeeEvent)="editEmployee($event)"></app-employee-details>

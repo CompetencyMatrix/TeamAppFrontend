@@ -65,8 +65,7 @@
     <app-projects [projects]="selectedEmployee.projects"></app-projects>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button type="button" class="">
-      <!--      (click)="editEmployee()"-->
+    <button mat-flat-button type="button" class="" (click)="onEditEmployee()">
       <mat-icon>edit</mat-icon>
       {{ 'messages.clear.button' | translate }}
     </button>

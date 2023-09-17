@@ -48,14 +48,7 @@ export class EmployeeTableComponent {
   }
 
   onSelectEmployee(employee: EmployeeInterface): void {
-    if (
-      this.selectedEmployee === undefined ||
-      this.selectedEmployee != employee
-    ) {
-      this.selectEmployee(employee);
-    } else {
-      this.unselectEmployee();
-    }
+    this.selectEmployee(employee);
   }
 
   onDeleteEmployee(employee: EmployeeInterface): void {
@@ -83,9 +76,6 @@ export class EmployeeTableComponent {
     this.skillsExpanded = false;
   }
 
-  private unselectEmployee(): void {
-    this.selectEmployee(undefined);
-  }
   private selectEmployee(employee: EmployeeInterface | undefined): void {
     this.selectedEmployee = employee;
     this.selectEmployeeEvent.emit(this.selectedEmployee);
