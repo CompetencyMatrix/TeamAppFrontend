@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { MessageService } from '../message/message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { EmployeeInterface } from '../../models/employee';
 import { environment } from '../../../../environments/environment';
+import { ProficiencyLevel } from '../../enums/proficiency-level-enum';
+import { SkillInterface } from '../../models/skill';
+import { EmployeeSkillInterface } from '../../models/employeeSkill';
 
 @Injectable({
   providedIn: 'root',
@@ -25,14 +28,43 @@ export class EmployeeService {
 
   getEmployees(): Observable<EmployeeInterface[]> {
     return this.httpClient.get<EmployeeInterface[]>(this.employeesApiUrl).pipe(
+      map((employees: EmployeeInterface[]) => {
+        employees.map((employee: EmployeeInterface) => {
+          employee.skills = employee.skills.map(
+            (skill: EmployeeSkillInterface) => {
+              skill.level = this.getProficiencyLevel(skill.level);
+              return skill;
+            }
+          );
+          return employee;
+        });
+        return employees;
+      }),
       tap(_ => this.log('messages.service.employee.fetched.employees')),
       catchError(this.handleError<EmployeeInterface[]>('getEmployees', []))
     );
   }
 
+  getProficiencyLevel(level: string | ProficiencyLevel): ProficiencyLevel {
+    return typeof level === 'string' ? (<any>ProficiencyLevel)[level] : level;
+  }
+
+  getProficiencyLevelName(level: string | ProficiencyLevel): ProficiencyLevel {
+    return typeof level === 'string' ? level : (<any>ProficiencyLevel)[level];
+  }
+
   getEmployeeById(id: string): Observable<EmployeeInterface> {
     const employeeUrl = `${this.employeesApiUrl}/${id}`;
     return this.httpClient.get<EmployeeInterface>(employeeUrl).pipe(
+      map((employee: EmployeeInterface) => {
+        employee.skills = employee.skills.map(
+          (skill: EmployeeSkillInterface) => {
+            skill.level = this.getProficiencyLevel(skill.level);
+            return skill;
+          }
+        );
+        return employee;
+      }),
       tap(_ =>
         // TODO: add here message and to language json
         this.log('messages.service.employee.fetched.employee', { id: id })
@@ -53,7 +85,15 @@ export class EmployeeService {
     return this.httpClient
       .post<EmployeeInterface>(
         this.employeesApiUrl,
-        submittedEmployee,
+        {
+          ...submittedEmployee,
+          skills: submittedEmployee.skills.map(
+            (skill: EmployeeSkillInterface) => {
+              skill.level = this.getProficiencyLevelName(skill.level);
+              return skill;
+            }
+          ),
+        },
         this.httpOptions
       )
       .pipe(
@@ -66,8 +106,23 @@ export class EmployeeService {
   }
 
   updateEmployee(submittedEmployee: EmployeeInterface): Observable<any> {
+    console.log('UPDATE');
+    console.log(JSON.stringify(submittedEmployee));
+
     return this.httpClient
-      .put(this.employeesApiUrl, submittedEmployee, this.httpOptions)
+      .put<EmployeeInterface>(
+        `${this.employeesApiUrl}/${submittedEmployee.id}`,
+        {
+          ...submittedEmployee,
+          skills: submittedEmployee.skills.map(
+            (skill: EmployeeSkillInterface) => {
+              skill.level = this.getProficiencyLevelName(skill.level);
+              return skill;
+            }
+          ),
+        },
+        this.httpOptions
+      )
       .pipe(
         tap(_ =>
           // TODO: add here message and to language json

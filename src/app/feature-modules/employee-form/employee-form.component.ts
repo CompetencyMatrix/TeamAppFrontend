@@ -75,8 +75,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         this.updateEmployee(this.getFormData());
       }
       // this.employeeForm.reset();
-      this.goBack();
-      this.openSnackBar('Form submitted successfully', 'Ok');
     }
   }
 
@@ -232,16 +230,22 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   private updateEmployee(employeeToUpdate: EmployeeInterface): void {
     this.employeeService
-      .updateEmployee(employeeToUpdate)
+      .updateEmployee(employeeToUpdate as EmployeeInterface)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe(() => {
+        this.goBack();
+        this.openSnackBar('Employee added successfully', 'Ok');
+      });
   }
 
   private addEmployee(employeeToAdd: EmployeeInterface): void {
     this.employeeService
       .addNewEmployee(employeeToAdd)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe(() => {
+        this.goBack();
+        this.openSnackBar('Employee added successfully', 'Ok');
+      });
   }
 
   private getFormData(): EmployeeInterface {
