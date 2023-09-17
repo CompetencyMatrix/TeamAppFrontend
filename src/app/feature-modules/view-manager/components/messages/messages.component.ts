@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MessageService } from '../../../../core/services/message/message.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-messages',

@@ -12,67 +12,97 @@ import { map, Observable, startWith } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControlDirective, FormControlName, NgModel } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  injectNgControl,
-  NoopValueAccessorDirective,
-} from '../../../../core/directives/NoopValueAccesorDirective';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { ProficiencyLevel } from '../../../../core/enums/proficiency-level-enum';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { InjectionManagerService } from '../../../../core/services/injection-manager/injection-manager.service';
+import { FormControlValueAccessorDirective } from '../../../../shared/directives/FormControlValueAccessorDirective';
 
 @Component({
   selector: 'app-chips-multiselect',
-  hostDirectives: [NoopValueAccessorDirective],
+  hostDirectives: [FormControlValueAccessorDirective],
   templateUrl: './chips-multiselect.component.html',
   styleUrls: ['./chips-multiselect.component.scss'],
 })
 export class ChipsMultiselectComponent implements OnInit {
   @Input() allSkills: EmployeeSkillInterface[] = [];
-  possibleLevels: (string | ProficiencyLevel)[] = Object.values(
-    ProficiencyLevel
-  ).filter((lvl: string | ProficiencyLevel) => isNaN(Number(lvl)));
-
-  chosenSkills: EmployeeSkillInterface[] = [];
-  filteredSkills?: Observable<EmployeeSkillInterface[]>;
+  @Input() possibleLevelsNames: (string | ProficiencyLevel)[] = [];
   @ViewChild('skillsInput') skillsInput?: ElementRef<HTMLInputElement>;
   skillsFormControl: FormControlDirective | FormControlName | NgModel =
-    injectNgControl();
-  announcer = inject(LiveAnnouncer);
+    this.injectionManager.injectNgControl();
+  chosenSkills: EmployeeSkillInterface[] = [];
+  filteredSkills$?: Observable<EmployeeSkillInterface[]>;
+  announcer: LiveAnnouncer = inject(LiveAnnouncer);
   destroyRef: DestroyRef = inject(DestroyRef);
+
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  constructor() {
-    this.filteredSkills = this.getFilteredObservable();
+  constructor(
+    private injectionManager: InjectionManagerService,
+    private valueAccessor: FormControlValueAccessorDirective<
+      EmployeeSkillInterface[]
+    >
+  ) {
+    console.log('Constructor');
+    this.filteredSkills$ = this._getFilteredObservable();
   }
 
   ngOnInit(): void {
-    this.filteredSkills = this.getFilteredObservable();
-    this.chosenSkills = this.chosenSkills === null ? [] : this.chosenSkills;
-  }
-
-  @Input()
-  set initChosenSkills(skills: EmployeeSkillInterface[] | undefined) {
-    this.chosenSkills = skills === undefined ? [] : skills;
-  }
-
-  add(event: MatChipInputEvent): void {
-    console.log(event.value);
-    //TODO: tutaj pobierac wartosc proficiency
-    const value: string = (event.value || '').trim();
-
-    // this.updateOrInsertChosenSkills(event.value);
-    if (value) {
-      this.chosenSkills.push({
-        name: value,
-        proficiency: ProficiencyLevel.JUNIOR,
+    console.log('INIT');
+    console.log(this.valueAccessor.value$);
+    this.valueAccessor.value$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((value: EmployeeSkillInterface[]) => {
+        console.log('INSUB' + value);
+        this.chosenSkills = value ? value : [];
       });
+    console.log(this.valueAccessor.value$);
+
+    this.filteredSkills$ = this._getFilteredObservable();
+  }
+
+  private _getFilteredObservable():
+    | Observable<EmployeeSkillInterface[]>
+    | undefined {
+    if (!this.skillsFormControl.control) {
+      return undefined;
+    } else {
+      return this.skillsFormControl.control.valueChanges?.pipe(
+        takeUntilDestroyed(this.destroyRef),
+        startWith(null),
+        map((typedName: string | null) =>
+          this._filterOutAlreadyChosen(
+            typedName ? this._filterWithName(typedName) : this.allSkills.slice()
+          )
+        )
+      );
     }
+  }
 
-    this.skillsFormControl.control.setValue([...this.chosenSkills]);
+  private _filterOutAlreadyChosen(
+    skills: EmployeeSkillInterface[]
+  ): EmployeeSkillInterface[] {
+    return this.chosenSkills
+      ? skills.filter(
+          (skill: EmployeeSkillInterface) =>
+            !this._isSkillNameChosen(skill.name)
+        )
+      : skills;
+  }
 
-    event.chipInput.clear();
-    this.filteredSkills = this.getFilteredObservable();
+  private _isSkillNameChosen(skillName: string): boolean {
+    return this.chosenSkills
+      ? this.chosenSkills.find(
+          (chosenSkill: EmployeeSkillInterface) => chosenSkill.name == skillName
+        ) != undefined
+      : false;
+  }
+  private _filterWithName(skillName: string): EmployeeSkillInterface[] {
+    console.log(this.valueAccessor.value$);
+
+    return this.allSkills.filter((skill: EmployeeSkillInterface) =>
+      skill.name.toLowerCase().includes(skillName)
+    );
   }
 
   remove(skill: EmployeeSkillInterface): void {
@@ -83,46 +113,43 @@ export class ChipsMultiselectComponent implements OnInit {
 
       this.announcer.announce(`Removed ${skill}`);
     }
-    this.skillsFormControl.control.setValue([...this.chosenSkills]);
-    this.filteredSkills = this.getFilteredObservable();
+    this.filteredSkills$ = this._getFilteredObservable();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log(event.option.value);
-    //TODO: tutaj tez pobierz level
-    this.chosenSkills.push({
-      name: event.option.viewValue,
-      proficiency: ProficiencyLevel.JUNIOR,
-    });
-
+    this._chooseSkill(event.option.value);
     this.skillsFormControl.control.setValue([...this.chosenSkills]);
 
     if (this.skillsInput) {
       this.skillsInput.nativeElement.value = '';
     }
-    this.filteredSkills = this.getFilteredObservable();
+    this.filteredSkills$ = this._getFilteredObservable();
   }
 
-  private getFilteredObservable():
-    | Observable<EmployeeSkillInterface[]>
-    | undefined {
-    if (!this.skillsFormControl.control) {
-      return undefined;
-    } else {
-      return this.skillsFormControl.control.valueChanges?.pipe(
-        takeUntilDestroyed(this.destroyRef),
-        startWith(null),
-        map((typedName: string | null) =>
-          typedName ? this._filterWithName(typedName) : this.allSkills.slice()
-        )
-      );
+  private _chooseSkill(chosenSkill: EmployeeSkillInterface): void {
+    if (!this._isSkillNameChosen(chosenSkill.name)) {
+      this.chosenSkills.push(chosenSkill);
     }
   }
-  private _filterWithName(skillName: string): EmployeeSkillInterface[] {
-    console.log(skillName);
+  public onChooseLevel(
+    skill: EmployeeSkillInterface,
+    level: ProficiencyLevel | string
+  ): void {
+    // const proficiencyLevel: ProficiencyLevel = level as ProficiencyLevel;
 
-    return this.allSkills.filter((skill: EmployeeSkillInterface) =>
-      skill.name.toLowerCase().includes(skillName)
-    );
+    const enumValue: ProficiencyLevel = this.getProficiencyLevel(level);
+    skill.proficiency = enumValue;
+  }
+
+  onChangeLevel(
+    skill: EmployeeSkillInterface,
+    level: ProficiencyLevel | string
+  ): void {
+    const enumValue: ProficiencyLevel = this.getProficiencyLevel(level);
+    skill.proficiency = enumValue;
+  }
+
+  getProficiencyLevel(level: string | ProficiencyLevel): ProficiencyLevel {
+    return typeof level === 'string' ? (<any>ProficiencyLevel)[level] : level;
   }
 }

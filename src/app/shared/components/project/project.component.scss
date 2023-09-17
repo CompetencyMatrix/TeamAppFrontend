@@ -1,0 +1,20 @@
+.project {
+  border-style: solid;
+  border-radius: 6px;
+  padding: 4px;
+  margin: 8px 0;
+
+  &__property {
+    &-title {
+      font-weight: bold;
+      padding-right: 1rem;
+    }
+  }
+
+
+  &-deadline {
+    height: 5rem;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+  }
+}

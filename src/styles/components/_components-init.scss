@@ -1,9 +1,30 @@
-@use "src/app/core/components/navbar/navbar-theme" as navbar;
-@use "src/app/core/components/language-switch/language-switch-theme" as languages;
-@use "src/app/feature-modules/view-manager/components/messages/messages-theme" as messages;
+@use 'src/app/core/components/navbar/navbar-theme' as navbar;
+@use 'src/app/core/components/language-switch/language-switch-theme' as
+  languages;
+@use 'src/app/shared/components/level-stars/level-stars-theme' as
+  level-stars;
+@use 'src/app/feature-modules/view-manager/components/messages/messages-theme'
+  as messages;
+@use 'src/app/feature-modules/employee-form/components/chips-multiselect/chip-multiselect-theme'
+  as chip-multiselect;
+@use 'src/app/feature-modules/employee-form/employee-form-theme' as employee-form;
+@use 'src/app/feature-modules/employee-manager/components/employee-table/employee-table-theme'
+  as employee-table;
+@use 'src/app/shared/components/employee-details/employee-details-theme'
+  as employee-details;
 
 @mixin theme($theme, $typography-config) {
+  @include tapp-components-theme($theme, $typography-config);
+
+}
+
+@mixin tapp-components-theme($theme, $typography-config) {
   @include navbar.theme($theme, $typography-config);
-  @include  messages.theme($theme, $typography-config);
-  @include  languages.theme($theme, $typography-config);
+  @include messages.theme($theme, $typography-config);
+  @include languages.theme($theme, $typography-config);
+  @include chip-multiselect.theme($theme, $typography-config);
+  @include employee-form.theme($theme, $typography-config);
+  @include employee-table.theme($theme, $typography-config);
+  @include employee-details.theme($theme, $typography-config);
+  @include level-stars.theme($theme, $typography-config);
 }

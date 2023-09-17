@@ -1,0 +1,114 @@
+.employee-table {
+
+  &__container {
+    display: block;
+    width: 95%;
+    margin: 2rem auto;
+    overflow-x: auto;
+  }
+
+  width: 100%;
+  max-width: 100%;
+  display: table;
+  border-collapse: collapse;
+  margin: 0;
+
+  &__row,
+  &__header-row {
+    display: table-row;
+  }
+
+  &__row {
+    cursor: pointer;
+    padding-top: 2rem;
+  }
+
+  &__cell,
+  &__header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 1rem;
+    line-break: unset;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+    text-align: center;
+
+    &-skills {
+
+      &-button {
+        padding: 0;
+        margin: 0;
+
+        &--hidden {
+          visibility: hidden;
+        }
+
+      }
+
+    }
+  }
+
+  &__header-cell {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.3rem;
+
+    &-skills {
+
+      &-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    &-skill {
+      &-name {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+
+      &-bottom-bar,
+      &-top-bar {
+        min-width: max-content;
+        height: 1.2rem;
+        padding: 0 -2rem;
+        margin: -1rem -2rem 0.6rem -2rem;
+        visibility: hidden;
+      }
+
+      &:hover,
+      &:hover ~ *,
+      *:has(~ &:hover),
+      &:active,
+      &:active ~ *,
+      *:has(~ &:active) {
+        .employee-table__header-cell-skill-top-bar {
+          cursor: pointer;
+          visibility: visible;
+          border-radius: 2rem;
+        }
+      }
+    }
+  }
+
+  &__action-list {
+    list-style: none;
+    padding-inline-start: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    &-element {
+    }
+  }
+
+  &__action-button {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+}

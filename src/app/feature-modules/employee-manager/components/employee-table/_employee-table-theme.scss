@@ -1,0 +1,75 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+
+@mixin color($theme) {
+  $color-config: mat.get-color-config($theme);
+  $accent-palette: map.get($color-config, 'accent');
+  $primary-palette: map.get($color-config, 'primary');
+
+  $primary50: mat.get-color-from-palette($primary-palette, 50);
+  $primary100: mat.get-color-from-palette($primary-palette, 100);
+  $primary700: mat.get-color-from-palette($primary-palette, 700);
+  $accent900: mat.get-color-from-palette($accent-palette, 900);
+
+  .employee-table {
+    &__header-row {
+      background: $primary100 !important;
+    }
+
+    &__row {
+      &:hover {
+        background: $primary50;
+      }
+    }
+
+    &__header-cell,
+    &__cell {
+      &--expand-highlight {
+        border-right: $primary100 dashed;
+        border-left: $primary100 dashed;
+        box-shadow: 0 0 5rem 0 rgba(mat.get-color-from-palette($primary-palette, 500), 0.25) inset;
+      }
+    }
+    &__header-cell {
+      &-skill {
+
+        &:hover,
+        &:hover ~ *,
+        *:has(~ &:hover) {
+          .employee-table__header-cell-skill-top-bar {
+            background: $primary700;
+          }
+        }
+      }
+
+      &-skills{
+        &-button{
+        }
+      }
+    }
+    &__action-button {
+      background-color: transparent;
+
+      &:hover,
+      &:active {
+        color: $accent900;
+      }
+    }
+  }
+}
+
+@mixin typography($typography-config) {
+  //  TODO: Future development
+}
+
+@mixin theme($theme, $typography-config) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
+
+  @if $typography-config != null {
+    @include typography($typography-config);
+  }
+}

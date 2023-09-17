@@ -1,8 +1,13 @@
 <app-employee-table
   [employees]="allEmployees"
+  [skillsNames]="allSkills"
   (selectEmployeeEvent)="selectEmployee($event)"
   (deleteEmployeeEvent)="deleteEmployee($event)">
 </app-employee-table>
 
 <app-employee-details
-  [selectedEmployee]="selectedEmployee"></app-employee-details>
+  *ngIf="selectedEmployee"
+  [selectedEmployee]="selectedEmployee"
+  [possibleSkillLevelsNames]="getPossibleLevelsNamesReversedCopy()"
+  (unselectEmployeeEvent)="unselectEmployee()"
+  (editEmployeeEvent)="editEmployee($event)"></app-employee-details>

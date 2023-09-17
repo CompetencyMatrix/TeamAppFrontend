@@ -1,18 +1,8 @@
 <!-- TODO: to update table - call renderRows() -->
 <!-- TODO: change array - employees - to DataSource instance -->
 
-<div class="employee-table__container">
+<mat-card class="employee-table__container">
   <table class="employee-table" mat-table [dataSource]="employees">
-    <!--  ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        ID
-      </th>
-      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        {{ employee.id }}
-      </td>
-    </ng-container>
-
     <!--  Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
@@ -49,19 +39,62 @@
 
     <!--  Skills Column -->
     <ng-container matColumnDef="skills">
-      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Skills
+      <th
+        mat-header-cell
+        class="employee-table__header-cell employee-table__header-cell-skills"
+        [ngClass]="{
+          'employee-table__header-cell--expand-highlight': skillsHovered
+        }"
+        *matHeaderCellDef>
+        <div class="employee-table__header-cell-skills-inner">
+          <button
+            mat-icon-button
+            class="employee-table__header-cell-skills-button--hidden">
+            <mat-icon>compare_arrows</mat-icon>
+          </button>
+          <span> Skills </span>
+          <button
+            mat-icon-button
+            (mouseenter)="skillsHovered = true"
+            (mouseleave)="skillsHovered = false"
+            (click)="onExpandSkills()"
+            class="employee-table__header-cell-skills-button">
+            <mat-icon>compare_arrows</mat-icon>
+          </button>
+        </div>
       </th>
-      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        {{ employee.skills }}
+      <td
+        mat-cell
+        class="employee-table__cell employee-table__cell-skills"
+        [ngClass]="{
+          'employee-table__header-cell--expand-highlight': skillsHovered
+        }"
+        *matCellDef="let employee">
+        {{ getEmployeeSkillsNames(employee).join(', ') }}
       </td>
     </ng-container>
 
-    <!--  TODO: time spent in projects *ngFor Column -->
-    <!--  <ng-container matColumnDef="ID">-->
-    <!--    <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>ID</th>-->
-    <!--    <td mat-cell class="employee-table__cell" *matCellDef="let employee">{{ employee.id }}</td>-->
-    <!--  </ng-container>-->
+    <ng-container
+      *ngFor="let skillName of skillsNames"
+      [matColumnDef]="skillName">
+      <th
+        mat-header-cell
+        class="employee-table__header-cell employee-table__header-cell-skill"
+        *matHeaderCellDef>
+        <div
+          class="employee-table__header-cell-skill-top-bar"
+          (click)="onContractSkills()"></div>
+        <p class="employee-table__header-cell-skill-name">{{ skillName }}</p>
+        <div class="employee-table__header-cell-skill-bottom-bar"></div>
+      </th>
+      <td
+        mat-cell
+        class="employee-table__cell employee-table__cell-skill"
+        *matCellDef="let employee">
+        <app-level-stars
+          [proficiency]="getSkillLevel(employee, skillName)"></app-level-stars>
+      </td>
+    </ng-container>
 
     <!--  Manager Column -->
     <ng-container matColumnDef="manager">
@@ -74,14 +107,12 @@
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th
-        mat-header-cell
-        class="employee-table__header-cell"
-        *matHeaderCellDef></th>
+      <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
+        Actions
+      </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        <!--        TODO: action list component -->
         <ul class="employee-table__action-list">
-          <li>
+          <li class="employee-table__action-list-element">
             <button
               type="button"
               class="employee-table__action-button"
@@ -97,12 +128,12 @@
     <tr
       mat-header-row
       class="employee-table__header-row"
-      *matHeaderRowDef="columnsToDisplay"></tr>
+      *matHeaderRowDef="displayedColumns"></tr>
     <tr
       mat-row
       class="employee-table__row"
       [class.employee-table__row--selected]="row === selectedEmployee"
-      *matRowDef="let row; columns: columnsToDisplay"></tr>
-    <!--    (click)="onSelectEmployee(row)"-->
+      (click)="onSelectEmployee(row)"
+      *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-</div>
+</mat-card>

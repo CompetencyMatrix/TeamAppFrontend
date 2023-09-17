@@ -1,0 +1,40 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+@import 'src/styles/theme/levels_colors';
+
+@mixin color($theme) {
+  .level {
+    &--0 {
+      color: $tapp-skill-level-0;
+    }
+
+    &--1 {
+      color: $tapp-skill-level-1;
+    }
+
+    &--2 {
+      color: $tapp-skill-level-2;
+    }
+
+
+    &__name {
+      color: black;
+    }
+  }
+}
+
+@mixin typography($typography-config) {
+  //  TODO: Future development
+}
+
+@mixin theme($theme, $typography-config) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
+
+  @if $typography-config != null {
+    @include typography($typography-config);
+  }
+}

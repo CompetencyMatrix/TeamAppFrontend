@@ -7,8 +7,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ViewManagerModule } from './feature-modules/view-manager/view-manager.module';
+import { SharedModule } from './shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -31,6 +31,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     MatNativeDateModule,
     ViewManagerModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

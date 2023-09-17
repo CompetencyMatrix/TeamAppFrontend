@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@import "@angular/material/theming";
+@import '@angular/material/theming';
 
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
@@ -9,22 +9,21 @@
 
   $primary500: mat.get-color-from-palette($primary-palette, 500);
 
-
   .languages {
     &__button {
-
-      &--selected{
-        background-color: mat.get-color-from-palette($primary-palette, 200)!important;
+      &--selected {
+        background-color: mat.get-color-from-palette(
+          $primary-palette,
+          200
+        ) !important;
       }
     }
   }
-
 }
 
 @mixin typography($typography-config) {
   //  TODO: Future development
 }
-
 
 @mixin theme($theme, $typography-config) {
   $color-config: mat.get-color-config($theme);
@@ -36,5 +35,3 @@
     @include typography($typography-config);
   }
 }
-
-

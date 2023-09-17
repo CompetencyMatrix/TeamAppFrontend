@@ -1,16 +1,13 @@
 import {
   Component,
   DestroyRef,
-  ElementRef,
   inject,
   OnChanges,
   OnInit,
-  ViewChild,
 } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -23,6 +20,7 @@ import { SkillService } from '../../core/services/skill/skill.service';
 import { ProjectService } from '../../core/services/project/project.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EmployeeSkillInterface } from '../../core/models/employeeSkill';
+import { map, Observable, of, startWith } from 'rxjs';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -36,6 +34,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   employeeToEdit?: EmployeeInterface;
   otherEmployees: EmployeeInterface[] = [];
   allProjects: ProjectInterface[] = [];
+  filteredOtherEmployees: Observable<EmployeeInterface[]>;
   allSkills: EmployeeSkillInterface[] = [];
   private pathEmployeeId: string | null = null;
 
@@ -53,6 +52,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     private _snackBar: MatSnackBar
   ) {
     this.employeeForm = this.buildForm();
+    this.filteredOtherEmployees = this.getInitialFilteredOtherEmployees();
   }
 
   ngOnInit(): void {
@@ -61,8 +61,10 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     //TODO: rethink - how often do we need to get data - how to react to different lifecycle events
+
     this.getInitialData();
   }
+
 
   onSubmit(): void {
     // Check in case submit button 'disabled' attribute was changed manually
@@ -116,6 +118,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       );
   }
 
+  //TODO: rename get junior skills
   private getSkills(): void {
     this.skillService
       .getSkills()
@@ -123,11 +126,17 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       .subscribe(
         (skills: string[]) =>
           (this.allSkills = skills.map((skillName: string) => {
-            return { name: skillName, proficiency: ProficiencyLevel.JUNIOR };
+            return {
+              name: skillName,
+              proficiency: ProficiencyLevel.JUNIOR,
+            } as EmployeeSkillInterface;
           }))
       );
   }
-
+  public getPossibleLevelsNames(): (ProficiencyLevel | string)[] {
+    return this.skillService.getPossibleLevelsNames();
+  }
+  //TODO: rewrite
   private getOtherEmployees(): void {
     if (this.employeeToEdit === undefined) {
       this.employeeService
@@ -169,7 +178,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   private initializeForm(): void {
-    if (this.employeeToEdit != undefined) {
+    if (this.employeeToEdit !== undefined) {
       this.employeeForm.patchValue(this.employeeToEdit);
     } else {
       this.employeeForm.reset();
@@ -186,6 +195,39 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.getOtherEmployees();
     this.getSkills();
     this.getProjects();
+  }
+
+  private getInitialFilteredOtherEmployees(): Observable<EmployeeInterface[]> {
+    const managerControl: AbstractControl | null =
+      this.employeeForm.get('manager');
+
+    return managerControl === null
+      ? of([])
+      : managerControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterManagerByName(value || ''))
+        );
+  }
+
+  private _filterManagerByName(value: string): EmployeeInterface[] {
+    const filterValue: string = value.toLowerCase();
+
+    return this.otherEmployees.filter((employee: EmployeeInterface) =>
+      employee.name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  public managerAutocompleteDisplayFunction(managerId: string): string {
+    const foundEmployee: EmployeeInterface | undefined =
+      this.otherEmployees.find(
+        (employee: EmployeeInterface) => employee.id === managerId
+      );
+    return foundEmployee === undefined ? '' : foundEmployee.name;
+  }
+
+  public managerAutocompleteDisplayFunctionWrapper() {
+    return (managerId: string) =>
+      this.managerAutocompleteDisplayFunction(managerId);
   }
 
   private updateEmployee(employeeToUpdate: EmployeeInterface): void {

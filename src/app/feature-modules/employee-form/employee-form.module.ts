@@ -13,6 +13,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { ChipsMultiselectComponent } from './components/chips-multiselect/chips-multiselect.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [EmployeeFormComponent, ChipsMultiselectComponent],
@@ -29,6 +33,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatAutocompleteModule,
     MatChipsModule,
     MatIconModule,
+    MatRadioModule,
+    MatButtonToggleModule,
+    MatCardModule,
   ],
 })
 export class EmployeeFormModule {}

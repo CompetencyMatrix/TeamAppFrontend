@@ -8,9 +8,9 @@
       "new.employee.button": "New Employee"
     },
     "details": {
-      "title": "{{person}}'s Details",
       "id": "ID",
-      "name": "Employee name",
+      "name": "Name",
+      "surname": "Surname",
       "hire.date": "Hire Date",
       "manager": "Manager",
       "skills": "Skills",

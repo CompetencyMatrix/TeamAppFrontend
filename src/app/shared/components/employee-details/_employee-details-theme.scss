@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+
+
+@mixin color($theme) {
+  $color-config: mat.get-color-config($theme);
+  $primary-palette: map.get($color-config, 'primary');
+  $accent-palette: map.get($color-config, 'accent');
+
+  $primary500: mat.get-color-from-palette($primary-palette, 500);
+  $accent50: mat.get-color-from-palette($accent-palette, 50);
+  $primary500-contrast: mat.get-color-from-palette(
+      $primary-palette,
+      500-contrast
+  );
+
+  .employee-details {
+    box-shadow: 0 0 1.5rem 0 $primary500!important;
+    background: $accent50!important;
+
+    &__shadow-overlay {
+      background-color: rgba(0,0,0, 0.3);
+    }
+
+  }
+
+
+}
+
+@mixin typography($typography-config) {
+  //  TODO: Future development
+}
+
+@mixin theme($theme, $typography-config) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
+
+  @if $typography-config != null {
+    @include typography($typography-config);
+  }
+}

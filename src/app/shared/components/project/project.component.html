@@ -1,0 +1,22 @@
+<mat-card *ngIf="project" class="project">
+  <mat-card-content class="project__content">
+    <div class="project__name">
+      <span class="project__property-title"
+        >{{ 'employee.details.projects.name' | translate }}:</span
+      >
+      <span>{{ project.name }}</span>
+    </div>
+    <div class="project__deadline">
+      <span class="project__property-title"
+        >{{ 'employee.details.projects.deadline' | translate }}:</span
+      >
+      <span>{{ project.deadline | date: 'dd-MM-YYYY' }}</span>
+    </div>
+    <div>
+      <span class="project__property-title"
+        >{{ 'employee.details.projects.startdate' | translate }}:</span
+      >
+      <span>{{ project.startDate | date: 'dd-MM-YYYY' }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

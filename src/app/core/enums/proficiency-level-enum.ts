@@ -1,6 +1,6 @@
 //TODO: how passing it by RESTAPI works
 export enum ProficiencyLevel {
-  JUNIOR,
-  MID,
-  SENIOR,
+  JUNIOR = 0,
+  MID = 1,
+  SENIOR = 2,
 }

@@ -1,9 +1,89 @@
-.chip-multiselect{
+@import 'src/styles/screen-sizes';
+
+$star-size: 1.4rem;
+
+.chip-multiselect {
   &__mock-input {
     display: none;
   }
 
   &__field {
     width: 100%;
+  }
+
+  &__chip {
+    margin-top: 1.5 * $star-size !important;
+    margin-right: 1.5 * $star-size !important;
+    min-width: 4 * $star-size;
+
+    &-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-stars {
+      position: absolute;
+      left: -1rem;
+      right: 0;
+      margin: 0 auto;
+      top: -1.25 * $star-size;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    &-star-button-level {
+      width: $star-size;
+      padding: 0.1rem;
+      cursor: pointer;
+    }
+  }
+
+  &__option-levels {
+    border: none;
+  }
+
+  &__option-level {
+    border-left: none !important;
+    font-size: 0.9rem;
+
+    &-icon {
+      ::ng-deep &::before {
+        content: 'star_outlined';
+      }
+    }
+
+    &:hover {
+      font-size: 1rem;
+    }
+
+    &--selected {
+      font-size: 1rem;
+      font-weight: bold;
+
+      .chip-multiselect__option-level-icon {
+        ::ng-deep &::before {
+          content: 'star';
+        }
+      }
+    }
+
+    &:hover &-icon {
+      ::ng-deep &::before {
+        content: 'star';
+      }
+    }
+  }
+}
+
+@media (min-width: $tapp-medium-screen) {
+  .chip-multiselect {
+    &__option-content {
+      display: inline-grid;
+      align-items: center;
+      grid-template-columns: 10rem max-content;
+    }
   }
 }

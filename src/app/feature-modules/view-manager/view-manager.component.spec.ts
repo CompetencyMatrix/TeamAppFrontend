@@ -8,7 +8,7 @@ describe('ViewManagerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ViewManagerComponent]
+      declarations: [ViewManagerComponent],
     });
     fixture = TestBed.createComponent(ViewManagerComponent);
     component = fixture.componentInstance;

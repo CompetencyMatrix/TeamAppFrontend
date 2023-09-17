@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@import "@angular/material/theming";
+@import '@angular/material/theming';
 
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
@@ -8,13 +8,20 @@
   $accent-palette: map.get($color-config, 'accent');
 
   $primary100: mat.get-color-from-palette($primary-palette, 100);
-  $primary100-contrast: mat.get-color-from-palette($primary-palette, 100-contrast);
+  $primary100-contrast: mat.get-color-from-palette(
+    $primary-palette,
+    100-contrast
+  );
 
   .messages-window {
     &__toggle-button {
-      background-color: mat.get-color-from-palette($accent-palette, 500)!important;
+      background-color: mat.get-color-from-palette(
+        $primary-palette,
+        300
+      ) !important;
       & .mat-badge-content {
-        background: mat.get-color-from-palette($primary-palette, 600);
+        background: mat.get-color-from-palette($accent-palette, 900);
+        color: mat.get-color-from-palette($primary-palette,900-contrast);
       }
     }
     &__card {
@@ -26,17 +33,22 @@
       color: $primary100-contrast;
       background-color: $primary100;
       border-color: $primary100-contrast;
-      box-shadow: 0 0.14rem 0.28rem 0 rgba(0.9,0,0.20);
+      box-shadow: 0 0.14rem 0.28rem 0 rgba(0.9, 0, 0.2);
     }
 
-
     &__content {
-      background-color: mat.get-color-from-palette($primary-palette, 900-contrast);
+      background-color: mat.get-color-from-palette(
+        $primary-palette,
+        900-contrast
+      );
       box-shadow: 0 0.01rem 0.5rem 0 rgb(1, 0, 0) inset;
     }
 
     &__message {
-      background-color: mat.get-color-from-palette($primary-palette, 50)!important;
+      background-color: mat.get-color-from-palette(
+        $primary-palette,
+        50
+      ) !important;
       color: $primary100-contrast;
       box-shadow: 0 0.01rem 0.2rem 0 rgb(1, 0, 0) inset;
     }
@@ -45,8 +57,12 @@
       color: $primary100-contrast;
     }
 
-    &__close-button, &__clear-button {
-      background-color: mat.get-color-from-palette($accent-palette, 400)!important;
+    &__close-button,
+    &__clear-button {
+      background-color: mat.get-color-from-palette(
+        $accent-palette,
+        400
+      ) !important;
     }
   }
 }
@@ -54,7 +70,6 @@
 @mixin typography($typography-config) {
   //  TODO: Future development
 }
-
 
 @mixin theme($theme, $typography-config) {
   $color-config: mat.get-color-config($theme);
@@ -66,4 +81,3 @@
     @include typography($typography-config);
   }
 }
-

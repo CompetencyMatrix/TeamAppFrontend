@@ -1,0 +1,131 @@
+<mat-card *ngIf="selectedEmployee" class="employee-details">
+  <mat-card-header class="employee-details__header">
+    <mat-card-title class="employee-details__title">
+      {{ [selectedEmployee.name, selectedEmployee.surname].join(' ') }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="employee-details__content">
+    <div class="employee-details__field">
+      <span class="employee-details__field-title">
+        {{ 'employee.details.id' | translate }}:</span
+      >
+      <span> {{ selectedEmployee.id }} </span>
+    </div>
+    <div class="employee-details__field">
+      <span class="employee-details__field-title">
+        {{ 'employee.details.name' | translate }}:</span
+      >
+      <span>{{ selectedEmployee.name }} </span>
+    </div>
+    <div class="employee-details__field">
+      <span class="employee-details__field-title">
+        {{ 'employee.details.surname' | translate }}:
+      </span>
+      <span>{{ selectedEmployee.surname }}</span>
+    </div>
+    <div class="employee-details__field">
+      <span class="employee-details__field-title">
+        {{ 'employee.details.hire.date' | translate }}:
+      </span>
+      <span>{{ selectedEmployee.hireDate | date: 'dd-MM-YYYY' }}</span>
+    </div>
+    <div class="employee-details__field">
+      <span class="employee-details__field-title">
+        {{ 'employee.details.manager' | translate }}:
+      </span>
+      <span> {{ selectedEmployee.manager }}</span>
+    </div>
+    <div class="employee-details__field">
+      <span class="employee-details__field-title employee-details__skills-title"
+        >{{ 'employee.details.skills' | translate }}:</span
+      >
+      <div class="employee-details__skills-container">
+        <mat-grid-list
+          cols="4"
+          rowHeight="2:1"
+          gutterSize="10"
+          class="employee-details__skills">
+          <ng-container *ngFor="let levelName of possibleSkillLevelsNames">
+            <ng-container
+              *ngIf="
+                skillNamesByLevelMap.get(getProficiencyLevel(levelName))!
+                  .length !== 0
+              ">
+              <mat-grid-tile colspan="1">
+                <app-level-stars
+                  class="employee-details__skills-level-name"
+                  [proficiency]="getProficiencyLevel(levelName)"
+                  [displayName]="true"></app-level-stars
+              ></mat-grid-tile>
+              <mat-grid-tile colspan="3">
+                <div class="employee-details__skills-names">
+                  {{
+                    skillNamesByLevelMap
+                      .get(getProficiencyLevel(levelName))
+                      ?.join(', ')
+                  }}
+                </div>
+              </mat-grid-tile>
+            </ng-container>
+          </ng-container>
+        </mat-grid-list>
+      </div>
+      <div class="employee-details-mobile__skills-container">
+        <ng-container *ngFor="let levelName of possibleSkillLevelsNames">
+          <ng-container
+            *ngIf="
+              skillNamesByLevelMap.get(getProficiencyLevel(levelName))!
+                .length !== 0
+            ">
+            <app-level-stars
+              class="employee-details__skills-level-name"
+              [proficiency]="getProficiencyLevel(levelName)"
+              [displayName]="true"></app-level-stars>
+            <div class="employee-details-mobile__skills-names">
+              {{
+                skillNamesByLevelMap
+                  .get(getProficiencyLevel(levelName))
+                  ?.join(', ')
+              }}
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="employee-details__field">
+      <span class="employee-details__field-title"
+        >{{ 'employee.details.projects.title' | translate }}:</span
+      >
+      <mat-tab-group mat-stretch-tabs class="employee-details__projects">
+        <mat-tab
+          *ngFor="let project of selectedEmployee.projects"
+          class="employee-details__project-tab">
+          <div *matTabLabel class="employee-details__project-name">
+            {{ project.name }}
+          </div>
+          <app-project
+            *matTabContent
+            [project]="project"
+            class="employee-details__project"></app-project>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="employee-details__actions">
+    <button
+      mat-stroked-button
+      type="button"
+      class=""
+      (click)="onEditEmployee()">
+      <mat-icon>edit</mat-icon>
+      {{ 'employee.details.edit' | translate }}
+    </button>
+    <button mat-stroked-button class="" (click)="onExitDetails()">
+      <mat-icon>close</mat-icon>{{ 'employee.details.close' | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>
+<div
+  *ngIf="selectedEmployee"
+  class="employee-details__shadow-overlay"
+  (click)="onExitDetails()"></div>
