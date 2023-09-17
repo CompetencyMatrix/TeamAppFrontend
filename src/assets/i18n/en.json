@@ -1,6 +1,10 @@
 {
   "teamapp": {
-    "title": "TeamApp"
+    "title": "TeamApp",
+    "navbar" : {
+      "employees": "Employees",
+      "dashboard": "Dashboard"
+    }
   },
   "employee": {
     "list": {
@@ -17,8 +21,11 @@
       "projects": {
         "title": "Projects",
         "name": "Name",
-        "deadline": "Deadline"
-      }
+        "deadline": "Deadline",
+        "startdate": "Start"
+      },
+      "edit": "Edit",
+      "close": "Close"
     },
     "form": {
       "edit.title": "Edit {{person}}'s Details",
@@ -38,6 +45,7 @@
   "messages": {
     "title": "Messages",
     "clear.button": "Clear messages",
+    "close.button": "Close",
     "service": {
       "skill": {
         "fetched.skills": "SkillService: fetched Skills."
@@ -52,5 +60,11 @@
         "select": "Employee-Manager: Selected Employee: {{employee.name}} {{employee.surname}}"
       }
     }
+  },
+  "table": {
+    "column": {
+      "actions": "Actions"
+    }
   }
+
 }

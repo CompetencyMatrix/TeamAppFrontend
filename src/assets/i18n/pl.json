@@ -1,6 +1,10 @@
 {
   "teamapp": {
-    "title": "TeamApp"
+    "title": "TeamApp",
+    "navbar" : {
+      "employees": "Pracownicy",
+      "dashboard": "Panel Główny"
+    }
   },
   "employee": {
     "list": {
@@ -17,8 +21,11 @@
       "projects": {
         "title": "Projekty",
         "name": "Nazwa",
-        "deadline": "Termin"
-      }
+        "deadline": "Termin",
+        "startdate": "Rozpoczęcię"
+      },
+      "edit": "Edytuj",
+      "close": "Zamknij"
     },
     "form": {
       "edit.title": "{{person}} - Edycja Danych",
@@ -38,6 +45,7 @@
   "messages": {
     "title": "Wiadomości",
     "clear.button": "Wyczyść wiadomości",
+    "close.button": "Zamknij",
     "service": {
       "skill": {
         "fetched.skills": "SerwisUmiejętności: pobrano umiejętności."
@@ -51,6 +59,11 @@
         "edit": "Zarządca-Pracowników: Edytowanie Pracownika {{employee.name}} {{employee.surname}}",
         "select": "Zarządca-Pracowników: Wybrano pracownika {{employee.name}} {{employee.surname}}"
       }
+    }
+  },
+  "table": {
+    "column": {
+      "actions": "Akcje"
     }
   }
 }

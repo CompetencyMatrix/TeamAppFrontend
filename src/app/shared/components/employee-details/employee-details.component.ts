@@ -44,7 +44,7 @@ export class EmployeeDetailsComponent implements OnInit {
                   (skill: EmployeeSkillInterface) =>
                     skill.proficiency == this.getProficiencyLevel(skillName)
                 )
-                .map((skill: EmployeeSkillInterface) => skill.name)
+                .map((skill: EmployeeSkillInterface) => skill.skill.name)
             : []
         );
       }

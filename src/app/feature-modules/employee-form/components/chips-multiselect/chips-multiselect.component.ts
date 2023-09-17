@@ -85,7 +85,7 @@ export class ChipsMultiselectComponent implements OnInit {
     return this.chosenSkills
       ? skills.filter(
           (skill: EmployeeSkillInterface) =>
-            !this._isSkillNameChosen(skill.name)
+            !this._isSkillNameChosen(skill.skill.name)
         )
       : skills;
   }
@@ -93,7 +93,8 @@ export class ChipsMultiselectComponent implements OnInit {
   private _isSkillNameChosen(skillName: string): boolean {
     return this.chosenSkills
       ? this.chosenSkills.find(
-          (chosenSkill: EmployeeSkillInterface) => chosenSkill.name == skillName
+          (chosenSkill: EmployeeSkillInterface) =>
+            chosenSkill.skill.name == skillName
         ) != undefined
       : false;
   }
@@ -101,7 +102,7 @@ export class ChipsMultiselectComponent implements OnInit {
     console.log(this.valueAccessor.value$);
 
     return this.allSkills.filter((skill: EmployeeSkillInterface) =>
-      skill.name.toLowerCase().includes(skillName)
+      skill.skill.name.toLowerCase().includes(skillName)
     );
   }
 
@@ -127,7 +128,7 @@ export class ChipsMultiselectComponent implements OnInit {
   }
 
   private _chooseSkill(chosenSkill: EmployeeSkillInterface): void {
-    if (!this._isSkillNameChosen(chosenSkill.name)) {
+    if (!this._isSkillNameChosen(chosenSkill.skill.name)) {
       this.chosenSkills.push(chosenSkill);
     }
   }

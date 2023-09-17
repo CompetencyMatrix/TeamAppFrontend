@@ -8,5 +8,5 @@ export interface EmployeeInterface {
   hireDate: Date;
   skills: EmployeeSkillInterface[];
   projects: ProjectInterface[];
-  manager?: string;
+  managerId?: string;
 }

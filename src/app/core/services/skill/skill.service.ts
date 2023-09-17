@@ -3,6 +3,7 @@ import { MessageService } from '../message/message.service';
 import { Observable, of } from 'rxjs';
 import { SKILLS } from '../../../mocks/mock-skills';
 import { ProficiencyLevel } from '../../enums/proficiency-level-enum';
+import { SkillInterface } from '../../models/skill';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class SkillService {
   destroyRef: DestroyRef = inject(DestroyRef);
   constructor(private messageService: MessageService) {}
 
-  getSkills(): Observable<string[]> {
+  getSkills(): Observable<SkillInterface[]> {
     const skills = of(SKILLS);
     this.messageService.addByKey('messages.service.skill.fetched.skills');
     return skills;

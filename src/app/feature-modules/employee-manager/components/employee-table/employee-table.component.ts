@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeService } from '../../../../core/services/employee/employee.service';
 import { ProficiencyLevel } from '../../../../core/enums/proficiency-level-enum';
 import { EmployeeSkillInterface } from '../../../../core/models/employeeSkill';
+import { SkillInterface } from '../../../../core/models/skill';
 
 @Component({
   selector: 'app-employee-table',
@@ -34,7 +35,9 @@ export class EmployeeTableComponent {
     new MatTableDataSource(this.employees);
 
   getEmployeeSkillsNames(employee: EmployeeInterface): string[] {
-    return employee.skills.map((skill: EmployeeSkillInterface) => skill.name);
+    return employee.skills.map(
+      (skill: EmployeeSkillInterface) => skill.skill.name
+    );
   }
 
   getSkillLevel(
@@ -42,7 +45,7 @@ export class EmployeeTableComponent {
     skillName: string
   ): ProficiencyLevel | undefined {
     const skill: EmployeeSkillInterface | undefined = employee.skills.find(
-      (skill: EmployeeSkillInterface) => skill.name === skillName
+      (skill: EmployeeSkillInterface) => skill.skill.name === skillName
     );
     return skill ? skill.proficiency : undefined;
   }

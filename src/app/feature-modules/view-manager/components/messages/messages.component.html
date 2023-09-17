@@ -10,7 +10,7 @@
     [matBadgeHidden]="messageService.messages.length === 0"
     aria-hidden="false"
     >messages</mat-icon
-  >Logs
+  >{{ 'messages.title' | translate }}
 </button>
 <mat-card *ngIf="isChatOpen" class="messages-window__card">
   <mat-card-header class="messages-window__header">
@@ -41,7 +41,8 @@
       mat-raised-button
       class="messages-window__close-button"
       (click)="closeChatWindow()">
-      <mat-icon>close</mat-icon>Close
+      <mat-icon>close</mat-icon>
+      {{ 'messages.close.button' | translate }}
     </button>
   </mat-card-actions>
 </mat-card>
