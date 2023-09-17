@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     DatePipe,
     MatListModule,
     MatTabsModule,
+    MatGridListModule,
   ],
   exports: [LevelStarsComponent, EmployeeDetailsComponent, ProjectsComponent],
 })

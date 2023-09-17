@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [EmployeeManagerComponent, EmployeeTableComponent],
@@ -23,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     SharedModule,
     TranslateModule,
+    MatCardModule,
   ],
   exports: [],
 })

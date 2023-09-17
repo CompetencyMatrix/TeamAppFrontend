@@ -53,8 +53,8 @@ export class EmployeeManagerComponent implements OnInit {
       );
   }
 
-  public getPossibleLevelsNames(): (ProficiencyLevel | string)[] {
-    return this.skillService.getPossibleLevelsNames();
+  public getPossibleLevelsNamesReversedCopy(): (ProficiencyLevel | string)[] {
+    return [...this.skillService.getPossibleLevelsNames()].reverse();
   }
 
   private getAllSkills(): void {

@@ -9,18 +9,18 @@
   $accent-palette: map.get($color-config, 'accent');
 
   $primary500: mat.get-color-from-palette($primary-palette, 500);
-  $accent500: mat.get-color-from-palette($accent-palette, 500);
+  $accent50: mat.get-color-from-palette($accent-palette, 50);
   $primary500-contrast: mat.get-color-from-palette(
       $primary-palette,
-      500 -contrast
+      500-contrast
   );
-  $primary200: mat.get-color-from-palette($accent-palette, 100);
 
   .employee-details {
     box-shadow: 0 0 1.5rem 0 $primary500!important;
+    background: $accent50!important;
 
     &__shadow-overlay {
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0,0,0, 0.3);
     }
 
   }
