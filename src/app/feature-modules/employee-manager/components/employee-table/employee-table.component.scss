@@ -32,7 +32,7 @@
     width: auto;
     white-space: nowrap;
     overflow: hidden;
-    vertical-align: sub;
+    vertical-align: middle;
     text-align: center;
 
     &-skills {
@@ -91,6 +91,12 @@
           border-radius: 2rem;
         }
       }
+    }
+  }
+
+  &__cell {
+    &-skill {
+      padding-top: 0;
     }
   }
 

@@ -87,9 +87,10 @@
         <p class="employee-table__header-cell-skill-name">{{ skillName }}</p>
         <div class="employee-table__header-cell-skill-bottom-bar"></div>
       </th>
-      <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        <!--        {{ employee.skills | skillLevel: skillName }}-->
-        <!--          TODO: to w serwisie robic-->
+      <td
+        mat-cell
+        class="employee-table__cell employee-table__cell-skill"
+        *matCellDef="let employee">
         <app-level-stars
           [proficiency]="getSkillLevel(employee, skillName)"></app-level-stars>
       </td>
