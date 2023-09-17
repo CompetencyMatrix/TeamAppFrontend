@@ -6,7 +6,7 @@
     <!--  Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Name
+        {{ 'employee.details.name' | translate }}
       </th>
       <td
         mat-cell
@@ -20,7 +20,7 @@
     <!--  Surname Column -->
     <ng-container matColumnDef="surname">
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Surname
+        {{ 'employee.details.surname' | translate }}
       </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
         {{ employee.surname }}
@@ -30,7 +30,7 @@
     <!--  HireDate Column -->
     <ng-container matColumnDef="hireDate">
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Hire Date
+        {{ 'employee.details.hire.date' | translate }}
       </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
         {{ employee.hireDate | date }}
@@ -52,7 +52,9 @@
             class="employee-table__header-cell-skills-button--hidden">
             <mat-icon>compare_arrows</mat-icon>
           </button>
-          <span> Skills </span>
+          <span>
+            {{ 'employee.details.skills' | translate }}
+          </span>
           <button
             mat-icon-button
             (mouseenter)="skillsHovered = true"
@@ -99,7 +101,7 @@
     <!--  Manager Column -->
     <ng-container matColumnDef="manager">
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Manager
+        {{ 'employee.details.manager' | translate }}
       </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
         {{ employee.manager }}
@@ -108,7 +110,7 @@
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
-        Actions
+        {{ 'table.column.actions' | translate }}
       </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
         <ul class="employee-table__action-list">
