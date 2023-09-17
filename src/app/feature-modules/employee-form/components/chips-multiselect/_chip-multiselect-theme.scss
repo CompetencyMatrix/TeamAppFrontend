@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @import '@angular/material/theming';
-@import 'src/styles/theme/colors';
+@import 'src/styles/theme/levels_colors';
 
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);

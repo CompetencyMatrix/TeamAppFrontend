@@ -1,0 +1,56 @@
+<mat-card *ngIf="selectedEmployee" class="employee-details">
+  <mat-card-header>
+    <mat-card-title class="employee-details__title">
+      {{ [selectedEmployee.name, selectedEmployee.surname].join(' ') }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="employee-details__content">
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.id' | translate }}:</span>
+      <span> {{ selectedEmployee.id }} </span>
+    </p>
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.name' | translate }}:</span>
+      <span>{{ selectedEmployee.name }} </span>
+    </p>
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.surname' | translate }}: </span>
+      <span>{{ selectedEmployee.surname }}</span>
+    </p>
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.hire.date' | translate }}: </span>
+      <span>{{ selectedEmployee.hireDate | date: 'dd-MM-YYYY' }}</span>
+    </p>
+    <p class="employee-details__field">
+      <span> {{ 'employee.details.manager' | translate }}: </span>
+      <span> {{ selectedEmployee.manager }}</span>
+    </p>
+    <p class="employee-details__field">
+      <span>{{ 'employee.details.skills' | translate }}</span>
+      <mat-list role="list">
+        <mat-list-item
+          *ngFor="let levelName of possibleSkillLevelsNames.reverse()"
+          role="listitem">
+          <app-level-stars
+            [proficiency]="getProficiencyLevel(levelName)"
+            [displayName]="true"></app-level-stars
+        ></mat-list-item>
+      </mat-list>
+    </p>
+    <app-projects [projects]="selectedEmployee.projects"></app-projects>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button type="button" class="">
+      <!--      (click)="editEmployee()"-->
+      <mat-icon>edit</mat-icon>
+      {{ 'messages.clear.button' | translate }}
+    </button>
+    <button mat-raised-buttons class="" (click)="onExitDetails()">
+      <mat-icon>edit</mat-icon>Close
+    </button>
+  </mat-card-actions>
+</mat-card>
+<div
+  *ngIf="selectedEmployee"
+  class="employee-details__shadow-overlay"
+  (click)="onExitDetails()"></div>

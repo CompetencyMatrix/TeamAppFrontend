@@ -1,4 +1,3 @@
-@use '@angular/material' as mat;
 @use 'src/app/core/components/navbar/navbar-theme' as navbar;
 @use 'src/app/core/components/language-switch/language-switch-theme' as
   languages;
@@ -11,7 +10,7 @@
 @use 'src/app/feature-modules/employee-form/employee-form-theme' as employee-form;
 @use 'src/app/feature-modules/employee-manager/components/employee-table/employee-table-theme'
   as employee-table;
-@use 'src/app/feature-modules/employee-manager/components/employee-details/employee-details-theme'
+@use 'src/app/shared/components/employee-details/employee-details-theme'
   as employee-details;
 
 @mixin theme($theme, $typography-config) {
