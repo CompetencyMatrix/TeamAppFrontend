@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SkillService } from '../../core/services/skill/skill.service';
 import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
 import { Router } from '@angular/router';
+import { SkillInterface } from '../../core/models/skill';
 
 @Component({
   selector: 'app-employee-manager',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 export class EmployeeManagerComponent implements OnInit {
   destroyRef: DestroyRef = inject(DestroyRef);
   allEmployees: EmployeeInterface[] = [];
-  allSkills: string[] = [];
+  allSkills: SkillInterface[] = [];
   selectedEmployee?: EmployeeInterface;
 
   ngOnInit(): void {
@@ -70,9 +71,13 @@ export class EmployeeManagerComponent implements OnInit {
     this.skillService
       .getSkills()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((skills: string[]) => (this.allSkills = skills));
+      .subscribe((skills: SkillInterface[]) => (this.allSkills = skills));
   }
 
+  public getAllSkillsNames(): string[] {
+    //   TODO: its bad practice to use function calls in html -> to change
+    return this.allSkills.map((skill: SkillInterface) => skill.name);
+  }
   private getData(): void {
     this.getAllSkills();
     this.getAllEmployees();

@@ -1,6 +1,6 @@
 <app-employee-table
   [employees]="allEmployees"
-  [skillsNames]="allSkills"
+  [skillsNames]="getAllSkillsNames()"
   (selectEmployeeEvent)="selectEmployee($event)"
   (deleteEmployeeEvent)="deleteEmployee($event)">
 </app-employee-table>

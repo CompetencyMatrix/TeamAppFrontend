@@ -24,6 +24,7 @@ import { map, Observable, of, startWith } from 'rxjs';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ProficiencyLevel } from '../../core/enums/proficiency-level-enum';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SkillInterface } from '../../core/models/skill';
 
 @Component({
   selector: 'app-employee-form',
@@ -119,10 +120,10 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       .getSkills()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-        (skills: string[]) =>
-          (this.allSkills = skills.map((skillName: string) => {
+        (skills: SkillInterface[]) =>
+          (this.allSkills = skills.map((skill: SkillInterface) => {
             return {
-              name: skillName,
+              skill: skill,
               proficiency: ProficiencyLevel.JUNIOR,
             } as EmployeeSkillInterface;
           }))
