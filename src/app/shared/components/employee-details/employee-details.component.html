@@ -41,14 +41,24 @@
       >
       <mat-grid-list cols="4" rowHeight="2:1">
         <ng-container *ngFor="let levelName of possibleSkillLevelsNames">
-          <mat-grid-tile colspan="1">
-            <app-level-stars
-              [proficiency]="getProficiencyLevel(levelName)"
-              [displayName]="true"></app-level-stars
-          ></mat-grid-tile>
-          <mat-grid-tile colspan="3">
-            <span>{{ selectedEmployee.skills }}</span>
-          </mat-grid-tile>
+          <ng-container
+            *ngIf="
+              skillNamesByLevelMap.get(getProficiencyLevel(levelName))!
+                .length !== 0
+            ">
+            <mat-grid-tile colspan="1">
+              <app-level-stars
+                [proficiency]="getProficiencyLevel(levelName)"
+                [displayName]="true"></app-level-stars
+            ></mat-grid-tile>
+            <mat-grid-tile colspan="3">
+              <span>{{
+                skillNamesByLevelMap
+                  .get(getProficiencyLevel(levelName))
+                  ?.join(', ')
+              }}</span>
+            </mat-grid-tile>
+          </ng-container>
         </ng-container>
       </mat-grid-list>
     </p>

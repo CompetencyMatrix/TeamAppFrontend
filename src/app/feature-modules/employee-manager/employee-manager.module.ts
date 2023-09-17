@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EmployeeManagerRoutingModule } from './employee-manager-routing.module';
-import { ProjectsComponent } from '../../shared/components/projects/projects.component';
 import { EmployeeManagerComponent } from './employee-manager.component';
 import { EmployeeTableComponent } from './components/employee-table/employee-table.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -26,6 +25,5 @@ import { MatCardModule } from '@angular/material/card';
     TranslateModule,
     MatCardModule,
   ],
-  exports: [],
 })
 export class EmployeeManagerModule {}

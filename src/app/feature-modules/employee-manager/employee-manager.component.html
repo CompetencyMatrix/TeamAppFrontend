@@ -6,6 +6,7 @@
 </app-employee-table>
 
 <app-employee-details
+  *ngIf="selectedEmployee"
   [selectedEmployee]="selectedEmployee"
   [possibleSkillLevelsNames]="
     getPossibleLevelsNamesReversedCopy()

@@ -10,6 +10,7 @@ export class LevelStarsComponent implements OnInit {
   @Input() proficiency?: ProficiencyLevel;
   @Input() proficiencyName?: string;
   @Input() displayName = false;
+  @Input() chosenStar: string = 'star_border';
 
   ngOnInit(): void {
     this.initProficiency();
