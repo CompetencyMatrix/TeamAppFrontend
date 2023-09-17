@@ -66,7 +66,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.getInitialData();
   }
 
-
   onSubmit(): void {
     // Check in case submit button 'disabled' attribute was changed manually
     if (this.employeeForm.valid) {
@@ -129,7 +128,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
           (this.allSkills = skills.map((skill: SkillInterface) => {
             return {
               skill: skill,
-              proficiency: ProficiencyLevel.JUNIOR,
+              level: ProficiencyLevel.JUNIOR,
             } as EmployeeSkillInterface;
           }))
       );
@@ -257,7 +256,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   private isAddingNewEmployee(): boolean {
-    //TODO: move to config - 'add_employee-_id_indicator'
-    return this.pathEmployeeId === 'new';
+    return this.pathEmployeeId === null;
   }
 }

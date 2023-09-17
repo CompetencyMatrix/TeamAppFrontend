@@ -47,7 +47,7 @@ export class EmployeeTableComponent {
     const skill: EmployeeSkillInterface | undefined = employee.skills.find(
       (skill: EmployeeSkillInterface) => skill.skill.name === skillName
     );
-    return skill ? skill.proficiency : undefined;
+    return skill ? skill.level : undefined;
   }
 
   onSelectEmployee(employee: EmployeeInterface): void {

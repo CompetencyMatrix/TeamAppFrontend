@@ -139,7 +139,7 @@ export class ChipsMultiselectComponent implements OnInit {
     // const proficiencyLevel: ProficiencyLevel = level as ProficiencyLevel;
 
     const enumValue: ProficiencyLevel = this.getProficiencyLevel(level);
-    skill.proficiency = enumValue;
+    skill.level = enumValue;
   }
 
   onChangeLevel(
@@ -147,7 +147,7 @@ export class ChipsMultiselectComponent implements OnInit {
     level: ProficiencyLevel | string
   ): void {
     const enumValue: ProficiencyLevel = this.getProficiencyLevel(level);
-    skill.proficiency = enumValue;
+    skill.level = enumValue;
   }
 
   getProficiencyLevel(level: string | ProficiencyLevel): ProficiencyLevel {

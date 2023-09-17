@@ -1,4 +1,10 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { EmployeeInterface } from '../../core/models/employee';
 import { EmployeeService } from '../../core/services/employee/employee.service';
 import { MessageService } from '../../core/services/message/message.service';
@@ -13,15 +19,12 @@ import { SkillInterface } from '../../core/models/skill';
   templateUrl: './employee-manager.component.html',
   styleUrls: ['./employee-manager.component.scss'],
 })
-export class EmployeeManagerComponent implements OnInit {
+export class EmployeeManagerComponent implements OnInit, OnChanges {
   destroyRef: DestroyRef = inject(DestroyRef);
   allEmployees: EmployeeInterface[] = [];
   allSkills: SkillInterface[] = [];
   selectedEmployee?: EmployeeInterface;
-
-  ngOnInit(): void {
-    this.getData();
-  }
+  possibleLevelsNames: (string | ProficiencyLevel)[] = [];
 
   constructor(
     private employeeService: EmployeeService,
@@ -29,6 +32,16 @@ export class EmployeeManagerComponent implements OnInit {
     private messageService: MessageService,
     private readonly router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.getData();
+    this.possibleLevelsNames = this.getPossibleLevelsNamesReversed();
+  }
+
+  ngOnChanges(): void {
+    this.getData();
+    this.possibleLevelsNames = this.getPossibleLevelsNamesReversed();
+  }
 
   unselectEmployee(): void {
     this.selectEmployee(undefined);
@@ -68,8 +81,8 @@ export class EmployeeManagerComponent implements OnInit {
       );
   }
 
-  public getPossibleLevelsNamesReversedCopy(): (ProficiencyLevel | string)[] {
-    return [...this.skillService.getPossibleLevelsNames()].reverse();
+  public getPossibleLevelsNamesReversed(): (ProficiencyLevel | string)[] {
+    return this.skillService.getPossibleLevelsNames().reverse();
   }
 
   private getAllSkills(): void {

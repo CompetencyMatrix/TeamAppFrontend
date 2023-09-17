@@ -41,16 +41,18 @@ export class EmployeeDetailsComponent implements OnInit {
           this.selectedEmployee
             ? this.selectedEmployee.skills
                 .filter(
-                  (skill: EmployeeSkillInterface) =>
-                    skill.proficiency == this.getProficiencyLevel(skillName)
+                  (skill: EmployeeSkillInterface) => skill.level === skillName
                 )
                 .map((skill: EmployeeSkillInterface) => skill.skill.name)
             : []
         );
       }
     );
+    console.log(JSON.stringify('skillNamesByLevelMap'));
+    console.log(JSON.stringify(skillNamesByLevelMap));
+    console.log(JSON.stringify('possibleSkillLevelsNames'));
+    console.log(JSON.stringify(this.possibleSkillLevelsNames));
+    console.log(JSON.stringify(this.selectedEmployee?.skills[0].level));
     return skillNamesByLevelMap;
   }
-
-  protected readonly window = window;
 }

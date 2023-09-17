@@ -18,7 +18,7 @@
             getProficiencyLevel(levelName)
           "
           [ngClass]="
-            skill.proficiency === getProficiencyLevel(levelName)
+            skill.level === getProficiencyLevel(levelName)
               ? [
                   'chip-multiselect__chip-star-button-level--selected',
                   'chip-multiselect__chip-star-button-level-' +
@@ -68,7 +68,7 @@
             #optionLevelButton
             *ngFor="let levelName of possibleLevelsNames"
             [value]="levelName"
-            [checked]="skill.proficiency === getProficiencyLevel(levelName)"
+            [checked]="skill.level === getProficiencyLevel(levelName)"
             (click)="$event.stopPropagation(); onChooseLevel(skill, levelName)"
             [className]="
               'chip-multiselect__option-level-' + getProficiencyLevel(levelName)

@@ -4,13 +4,14 @@ import { MessageService } from '../message/message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { EmployeeInterface } from '../../models/employee';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeeService {
   // TODO: move to some config file
-  private employeesApiUrl = 'http://localhost:8080/api/employees';
+  private employeesApiUrl = `${environment.apiBaseUrl}/employees`;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -75,7 +76,7 @@ export class EmployeeService {
           })
         ),
         catchError(
-          this.handleError<any>(`updateHero id=${submittedEmployee.id}`)
+          this.handleError<any>(`updateEmployee id=${submittedEmployee.id}`)
         )
       );
   }

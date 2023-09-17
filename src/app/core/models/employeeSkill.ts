@@ -3,5 +3,5 @@ import { SkillInterface } from './skill';
 
 export interface EmployeeSkillInterface {
   skill: SkillInterface;
-  proficiency: ProficiencyLevel;
+  level: ProficiencyLevel;
 }

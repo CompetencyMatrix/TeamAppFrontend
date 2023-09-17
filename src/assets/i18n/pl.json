@@ -48,7 +48,10 @@
     "close.button": "Zamknij",
     "service": {
       "skill": {
-        "fetched.skills": "SerwisUmiejętności: pobrano umiejętności."
+        "fetched": {
+          "skills": "SerwisUmiejętności: pobrano umiejętności.",
+          "levels":  "SerwisUmiejętności: pobrano poziomy umiejętności."
+        }
       },
       "project": {
         "fetched.projects": "SerwisProjektów: pobrano projekty."

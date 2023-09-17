@@ -48,7 +48,10 @@
     "close.button": "Close",
     "service": {
       "skill": {
-        "fetched.skills": "SkillService: fetched Skills."
+        "fetched": {
+          "skills": "SkillService: fetched Skills.",
+        "levels":  "SkillService: fetched possible skills levels."
+        }
       },
       "project": {
         "fetched.projects": "ProjectService: fetched projects."
