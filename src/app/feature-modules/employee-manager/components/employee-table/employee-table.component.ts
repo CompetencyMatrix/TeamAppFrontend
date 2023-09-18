@@ -24,7 +24,7 @@ export class EmployeeTableComponent {
     'surname',
     'hireDate',
     'skills',
-    'manager',
+    'managerId',
     'actions',
   ];
   displayedColumns: string[] = this.baseColumnsToDisplay.slice();
@@ -37,6 +37,12 @@ export class EmployeeTableComponent {
   getEmployeeSkillsNames(employee: EmployeeInterface): string[] {
     return employee.skills.map(
       (skill: EmployeeSkillInterface) => skill.skill.name
+    );
+  }
+
+  getEmployeeById(id: string): EmployeeInterface | undefined {
+    return this.employees.find(
+      (employee: EmployeeInterface) => employee.id == id
     );
   }
 

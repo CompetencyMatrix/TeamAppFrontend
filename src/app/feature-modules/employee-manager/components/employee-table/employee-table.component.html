@@ -99,12 +99,12 @@
     </ng-container>
 
     <!--  Manager Column -->
-    <ng-container matColumnDef="manager">
+    <ng-container matColumnDef="managerId">
       <th mat-header-cell class="employee-table__header-cell" *matHeaderCellDef>
         {{ 'employee.details.manager' | translate }}
       </th>
       <td mat-cell class="employee-table__cell" *matCellDef="let employee">
-        {{ employee.manager }}
+        {{ getEmployeeById(employee.managerId)?.name }}
       </td>
     </ng-container>
 
@@ -119,7 +119,7 @@
               type="button"
               class="employee-table__action-button"
               title="delete employee"
-              (click)="onDeleteEmployee(employee)">
+              (click)="$event.stopPropagation(); onDeleteEmployee(employee)">
               <mat-icon>delete</mat-icon>
             </button>
           </li>

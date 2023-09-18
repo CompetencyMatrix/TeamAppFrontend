@@ -138,7 +138,6 @@ export class EmployeeService {
 
   deleteEmployee(id: string): Observable<EmployeeInterface> {
     const employeeUrl = `${this.employeesApiUrl}/${id}`;
-
     return this.httpClient
       .delete<EmployeeInterface>(employeeUrl, this.httpOptions)
       .pipe(
