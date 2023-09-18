@@ -26,21 +26,24 @@ export class LoginComponent {
       password: '',
     });
     if (this.authService.userValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
   onSubmit(): void {
     const username = this.loginForm.controls['username'].value;
     const password = this.loginForm.controls['password'].value;
+    console.log(username);
+    console.log(password);
     this.authService
       .login(username, password)
       .pipe(first())
       .subscribe({
         next: () => {
-          const returnUrl =
-            this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
-          this.router.navigate([returnUrl]);
+          this.router.navigate(['/dashboard'], { relativeTo: this.route });
+          // const returnUrl =
+          //   this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+          // this.router.navigate([returnUrl]);
         },
         error: err => {
           this.error = err;

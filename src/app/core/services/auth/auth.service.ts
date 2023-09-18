@@ -38,6 +38,8 @@ export class AuthService {
           user.authdata = window.btoa(`${username}:${password}`);
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);
+          console.log(username);
+          console.log(password);
           return user;
         })
       );
