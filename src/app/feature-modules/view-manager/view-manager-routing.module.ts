@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: ViewManagerComponent,
-    canActivate: [AuthGuard],
+    canActivate: [],
     children: [
       { path: '', redirectTo: appRoutesNames.DASHBOARD, pathMatch: 'full' },
       {

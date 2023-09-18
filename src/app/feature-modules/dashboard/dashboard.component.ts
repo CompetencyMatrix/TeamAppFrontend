@@ -11,6 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DashboardComponent implements OnInit {
   destroyRef: DestroyRef = inject(DestroyRef);
   employees: EmployeeInterface[] = [];
+  newEmployees: EmployeeInterface[] = [];
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -22,9 +23,12 @@ export class DashboardComponent implements OnInit {
     this.employeeService
       .getEmployees()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        (employees: EmployeeInterface[]) =>
-          (this.employees = employees.slice(1, 5))
-      );
+      .subscribe((employees: EmployeeInterface[]) => {
+        this.employees = employees
+          .sort((e1, e2) => e1.skills.length - e2.skills.length)
+          .slice(1, 5);
+        this.newEmployees = employees.slice(1, 5);
+        // sort((e1, e2) => e1.hireDate - e2.hireDate)
+      });
   }
 }

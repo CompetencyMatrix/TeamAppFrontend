@@ -1,8 +1,33 @@
-<h2>Top Employees</h2>
-<div class="heroes-menu">
-  <a
-    routerLink="/employee/{{ employee.id }}"
-    *ngFor="let employee of employees">
-    {{ employee.name }}
-  </a>
-</div>
+<mat-card style="margin: 2rem">
+  <mat-card-header>
+    <mat-card-title>
+      <h2 style="text-align: center">Top Employees of the month</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="heroes-menu">
+      <a
+        routerLink="/employee/{{ employee.id }}"
+        *ngFor="let employee of employees">
+        {{ employee.name }}
+      </a>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card style="margin: 2rem">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>New employess on board</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="heroes-menu">
+      <a
+        routerLink="/employee/{{ employee.id }}"
+        *ngFor="let employee of newEmployees">
+        {{ employee.name }}
+      </a>
+    </div>
+  </mat-card-content>
+</mat-card>

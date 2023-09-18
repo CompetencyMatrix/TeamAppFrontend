@@ -8,7 +8,6 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { environment } from '../../../environments/environment';
-
 @Injectable()
 export class BasicAuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
@@ -17,15 +16,10 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('INTERCEP');
     const user = this.authService.userValue;
     const isLoggedIn = user?.authdata;
     const isApiUrl = request.url.startsWith(environment.apiBaseUrl);
-    console.log(user?.authdata);
-    console.log(request.url.startsWith(environment.apiBaseUrl));
     if (isLoggedIn && isApiUrl) {
-      console.log('user');
-      console.log(user);
       request = request.clone({
         setHeaders: {
           Authorization: `Basic ${user?.authdata}`,

@@ -34,18 +34,16 @@ export class AuthService {
         password,
       })
       .pipe(
-        map((user: User) => {
+        map(user => {
           user.authdata = window.btoa(`${username}:${password}`);
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);
-          console.log(username);
-          console.log(password);
           return user;
         })
       );
   }
 
-  logout(): void {
+  logout() {
     localStorage.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/login']);

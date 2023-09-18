@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ViewManagerModule } from '../view-manager/view-manager.module';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -13,6 +14,7 @@ import { ViewManagerModule } from '../view-manager/view-manager.module';
     DashboardRoutingModule,
     TranslateModule,
     ViewManagerModule,
+    MatCardModule,
   ],
 })
 export class DashboardModule {}
