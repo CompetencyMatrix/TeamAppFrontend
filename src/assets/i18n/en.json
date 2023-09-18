@@ -68,6 +68,14 @@
     "column": {
       "actions": "Actions"
     }
+  },
+  "login" : {
+    "form" : {
+      "title": "Hello, who are you?",
+      "button": "Log in",
+      "label.username": "Username",
+      "label.password": "Password"
+    }
   }
 
 }

@@ -3,11 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { appRoutesNames } from '../../../config/appRoutesNames';
 import { PageNotFoundComponent } from '../../core/components/page-not-found/page-not-found.component';
 import { ViewManagerComponent } from './view-manager.component';
+import { AuthGuard } from '../../core/guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: 'login',
+    loadChildren: () => import('../auth/auth.module').then(m => m.AuthModule),
+  },
+  {
     path: '',
     component: ViewManagerComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: appRoutesNames.DASHBOARD, pathMatch: 'full' },
       {
